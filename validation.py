@@ -41,10 +41,15 @@ def start_option():
     Asks users whether they want to login or register
     """
     print("\nHow would you like to proceed?\n")
-    account_option = input("1 - Login\n2 - Register\nYour Input : ")
-    if account_option == "1":
-        login()
-    elif account_option == "2":
-        register()
-    else:
-        raise Exception("Invalid Input")
+    proceed = False
+    while not proceed:
+        account_option = input("1 - Login\n2 - Register\nYour Input : ")
+        if account_option == "1":
+            proceed = True
+            login()
+        elif account_option == "2":
+            proceed = True
+            register()
+        else:
+            print("Invalid Input")
+    
