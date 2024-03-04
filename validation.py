@@ -26,7 +26,7 @@ def register_check():
     while not username_entry:
         username = input("Please enter your username\nEnter 'x' to abort\n")
         if username == "x":
-            print("Cancelled")
+            start_option()
             break
         elif not username.isalpha():
             print("Username must contain only alphabetic characters")
@@ -43,7 +43,7 @@ def register_check():
     while username_entry and not password_entry:
         password = input("Please enter your password\nEnter 'x' to abort\n")
         if password == "x":
-            print("Cancelled")
+            start_option()
             break
         elif len(password.split(" "))>1:
             print("Password must not contain spaces")
@@ -64,7 +64,7 @@ def login_check():
     while not username_entry:
         username = input("Please enter your username\nEnter 'x' to abort\n")
         if username == "x":
-            print("Cancelled!")
+            start_option()
             break
         elif check_username(username):
             print(f"Welcome to Arena, {username.capitalize()}")
@@ -75,8 +75,8 @@ def login_check():
 
     while username_entry and not password_entry:
         password = input("Please enter your password\nEnter 'x' to abort\n")
-        if username == "x":
-            print("Cancelled!")
+        if password == "x":
+            start_option()
             break
         elif check_password(player_username,password):
             #load_character(player_username,password)
@@ -92,13 +92,15 @@ def start_option():
     print("\nHow would you like to proceed?\n")
     proceed = False
     while not proceed:
-        account_option = input("1 - Login\n2 - Register\nYour Input : ")
+        account_option = input("1 - Login\n2 - Register\n3 - Exit Game\nYour Input : ")
         if account_option == "1":
             proceed = True
             login_check()
         elif account_option == "2":
             proceed = True
             register_check()
+        elif account_option == "3":
+            break
         else:
             print("Invalid Input")
     
