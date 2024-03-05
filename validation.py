@@ -23,6 +23,7 @@ def register_check():
     username_entry = False
     password_entry = False
     player_username = ""
+    # Check Username - Register
     while not username_entry:
         username = input("Please enter your username\nEnter 'x' to abort\n")
         if username == "x":
@@ -39,7 +40,7 @@ def register_check():
         else:
             username_entry = True
             player_username = username
-
+    # Check Password - Register
     while username_entry and not password_entry:
         password = input("Please enter your password\nEnter 'x' to abort\n")
         if password == "x":
@@ -61,6 +62,7 @@ def login_check():
     username_entry = False
     password_entry = False
     player_username = ""
+    #Check Username - Login
     while not username_entry:
         username = input("Please enter your username\nEnter 'x' to abort\n")
         if username == "x":
@@ -73,6 +75,7 @@ def login_check():
         else:
             print("Wrong Username")
 
+    # Check Password - Login
     while username_entry and not password_entry:
         password = input("Please enter your password\nEnter 'x' to abort\n")
         if password == "x":
