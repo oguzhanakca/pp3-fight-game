@@ -1,6 +1,9 @@
 from sheets import *
 from game_objects import *
 
+def screen_spaces():
+    print("\n----------------------------------------------------\n")
+
 def check_username(username):
     """
     Checks if username exists in sheet
@@ -25,30 +28,38 @@ def register_check():
     player_username = ""
     # Check Username - Register
     while not username_entry:
+        screen_spaces()
         username = input("Please enter your username\nEnter 'x' to abort\n")
         if username == "x":
             start_option()
             break
         elif not username.isalpha():
+            screen_spaces()
             print("Username must contain only alphabetic characters")
         elif len(username.split(" "))>1:
+            screen_spaces()
             print("Username must not contain spaces")
         elif len(username)>15 or len(username)<5:
+            screen_spaces()
             print("Username length must be between 5 and 15 characters")
         elif check_username(username):
+            screen_spaces()
             print("Username already exists")
         else:
             username_entry = True
             player_username = username
     # Check Password - Register
     while username_entry and not password_entry:
+        screen_spaces()
         password = input("Please enter your password\nEnter 'x' to abort\n")
         if password == "x":
             start_option()
             break
         elif len(password.split(" "))>1:
+            screen_spaces()
             print("Password must not contain spaces")
         elif len(password)>15 or len(password)<5:
+            screen_spaces()
             print("Password length must be between 5 and 15 characters")
         else:
             password_entry = True
@@ -64,19 +75,23 @@ def login_check():
     player_username = ""
     #Check Username - Login
     while not username_entry:
+        screen_spaces()
         username = input("Please enter your username\nEnter 'x' to abort\n")
         if username == "x":
             start_option()
             break
         elif check_username(username):
+            screen_spaces()
             print(f"Welcome to Arena, {username.capitalize()}")
             player_username = username
             username_entry = True
         else:
+            screen_spaces()
             print("Wrong Username")
 
     # Check Password - Login
     while username_entry and not password_entry:
+        screen_spaces()
         password = input("Please enter your password\nEnter 'x' to abort\n")
         if password == "x":
             start_option()
@@ -86,6 +101,7 @@ def login_check():
             password_entry = True
             print("Correct Password")
         else:
+            screen_spaces()
             print("Wrong Password!")
 
 def start_option():
@@ -95,6 +111,7 @@ def start_option():
     print("\nHow would you like to proceed?\n")
     proceed = False
     while not proceed:
+        screen_spaces()
         account_option = input("1 - Login\n2 - Register\n3 - Exit Game\nYour Input : ")
         if account_option == "1":
             proceed = True
@@ -105,5 +122,6 @@ def start_option():
         elif account_option == "3":
             break
         else:
+            screen_spaces()
             print("Invalid Input")
     
