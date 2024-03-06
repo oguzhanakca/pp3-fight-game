@@ -1,4 +1,4 @@
-from validation import start_option
+from game import start_option
 
 def welcome():
     """
