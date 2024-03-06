@@ -25,15 +25,18 @@ def start_option():
             new_line_spaces()
             player_username = register_check()
         elif account_option == "3":
+            print("See you later !")
             break
         else:
             new_line_spaces()
             print("Invalid Input")
         
-    if player_username == "x":
-        start_option()
-    else:
-        load_character(player_username)
+    if player_username:
+        if player_username == "x":
+            start_option()
+        else:
+            load_character(player_username)
+    
 
 def load_character(username):
     """
