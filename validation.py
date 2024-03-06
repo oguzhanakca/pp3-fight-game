@@ -1,5 +1,6 @@
 from sheets import *
 from game_objects import *
+from game import load_character
 
 def screen_spaces():
     print("\n----------------------------------------------------\n")
@@ -97,7 +98,7 @@ def login_check():
             start_option()
             break
         elif check_password(player_username,password):
-            #load_character(player_username,password)
+            load_character(player_username)
             password_entry = True
             print("Correct Password")
         else:
