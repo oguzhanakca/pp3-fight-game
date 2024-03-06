@@ -61,7 +61,7 @@ def load_menu(player):
         menu_input = input("Your Input : ")
         if menu_input == 1:
             valid_input = True
-            load_shop(player)
+            shop_menu(player)
         elif menu_input == 2:
             valid_input = True
             load_hunt(player)
@@ -72,10 +72,41 @@ def load_menu(player):
         else:
             print("Invalid Input")
 
-def load_shop(player):
+def shop_menu(player):
     """
-    Displays weapons and armors that players can buy
+    Asks players which shop they want to visit
     """
+    new_line_spaces()
+    shop_process = False
+    print("Which shop do you want to visit?\n")
+    print("1 - Weapon Shop\n2 - Armor Shop\n3 - Leave Shop\n")
+    shop_input = input("Your input : ")
+    while not shop_process:
+        if shop_input == "1":
+            shop_process = True
+            load_weapon_shop(player)
+        elif shop_input == "2":
+            shop_process = True
+            load_armor_shop(player)
+        if shop_input == "3":
+            shop_process = True
+            load_menu(player)
+        else:
+            print("Wrong Input")
+
+def load_weapon_shop(player):
+    """
+    Shows the weapons players can buy
+    """
+    new_line_spaces()
+    print(f"Your current gold : {player.gold}")
+
+
+def load_armor_shop():
+    """
+    Shows the armors players can buy
+    """
+
 
 def load_hunt(player):
     """
