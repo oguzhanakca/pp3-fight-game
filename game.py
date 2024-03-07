@@ -58,16 +58,17 @@ def load_menu(player):
         new_line_spaces()
         print("\nWhat would you like to do?")
         print("\n1 - Visit Shop\n2 - Hunt\n3 - Stats\n4 - Exit Game\n")
-        menu_input = input("Your Input : ")
-        if menu_input == 1:
+        menu_input = input("\nYour Input : ")
+        if menu_input == "1":
             valid_input = True
             shop_menu(player)
-        elif menu_input == 2:
+        elif menu_input == "2":
             valid_input = True
             load_hunt(player)
-        elif menu_input == 3:
+        elif menu_input == "3":
+            valid_input = True
             load_stats(player)
-        elif menu_input == 4:
+        elif menu_input == "4":
             break
         else:
             print("Invalid Input")
@@ -99,7 +100,18 @@ def load_weapon_shop(player):
     Shows the weapons players can buy
     """
     new_line_spaces()
-    print(f"Your current gold : {player.gold}")
+    print(f"Your current gold : {player.gold}\n")
+    for row in range(1,8):
+        print(f"{weapons.cell(row, 1).value.capitalize()} - {weapons.cell(row, 2).value.capitalize()}\t{weapons.cell(row, 3).value.capitalize()}\t{weapons.cell(row, 4).value.capitalize()}\t{weapons.cell(row, 5).value.capitalize()}\n")
+    print("7 - Leave shop")
+    print(player.weapon)
+    weapon_shop_input = input("Your input : ")
+    if player.weapon != "None":
+        player_weapon_row = weapons.find(player.weapon).row
+        player_weapon_id = int(weapons.cell(player_weapon_row,1))
+        print(player_weapon_id)
+
+    
 
 
 def load_armor_shop():
