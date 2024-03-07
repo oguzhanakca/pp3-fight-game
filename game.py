@@ -32,7 +32,7 @@ def start_option():
             print("Invalid Input")
         
     if player_username:
-        if player_username == "x":
+        if player_username == "x" or player_username == "reg":
             start_option()
         else:
             load_character(player_username)
@@ -56,6 +56,7 @@ def load_menu(player):
     valid_input = False
     while not valid_input:
         new_line_spaces()
+        print(f"Welcome to Arena, {player.name}")
         print("\nWhat would you like to do?")
         print("\n1 - Visit Shop\n2 - Hunt\n3 - Stats\n4 - Exit Game\n")
         menu_input = input("\nYour Input : ")
@@ -89,7 +90,7 @@ def shop_menu(player):
         elif shop_input == "2":
             shop_process = True
             load_armor_shop(player)
-        if shop_input == "3":
+        elif shop_input == "3":
             shop_process = True
             load_menu(player)
         else:
@@ -97,12 +98,13 @@ def shop_menu(player):
 
 def load_weapon_shop(player):
     """
-    Shows the weapons players can buy
+    Shows the weapons player can buy
     """
     new_line_spaces()
+    all_weapons = weapons.get_all_values()
     print(f"Your current gold : {player.gold}\n")
-    for row in range(1,8):
-        print(f"{weapons.cell(row, 1).value.capitalize()} - {weapons.cell(row, 2).value.capitalize()}\t{weapons.cell(row, 3).value.capitalize()}\t{weapons.cell(row, 4).value.capitalize()}\t{weapons.cell(row, 5).value.capitalize()}\n")
+    for i in range(0,7):
+        print(f"{all_weapons[i][0].capitalize()} - {all_weapons[i][1].capitalize()}\t{all_weapons[i][2].capitalize()}\t{all_weapons[i][3].capitalize()}\t{all_weapons[i][4].capitalize()}\n")
     print("7 - Leave shop")
     # weapon_shop_input = input("Your input : ")
     # # Check if Player's weapon is better than the weapon they want to buy
@@ -116,7 +118,7 @@ def load_weapon_shop(player):
 
 def load_armor_shop():
     """
-    Shows the armors players can buy
+    Shows the armors player can buy
     """
 
 

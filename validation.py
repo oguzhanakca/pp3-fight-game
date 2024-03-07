@@ -52,7 +52,8 @@ def register_check():
         else:
             password_entry = True
             create_new_user(player_username,password)
-            return player_username
+            print("Your account has created. Please log in.")
+            return "reg"
 
     
 def login_check():
@@ -68,7 +69,6 @@ def login_check():
         if username == "x":
             return "x"
         elif check_username(username):
-            print(f"Welcome to Arena, {username.capitalize()}")
             player_username = username
             username_entry = True
         else:
