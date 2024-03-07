@@ -104,12 +104,12 @@ def load_weapon_shop(player):
     for row in range(1,8):
         print(f"{weapons.cell(row, 1).value.capitalize()} - {weapons.cell(row, 2).value.capitalize()}\t{weapons.cell(row, 3).value.capitalize()}\t{weapons.cell(row, 4).value.capitalize()}\t{weapons.cell(row, 5).value.capitalize()}\n")
     print("7 - Leave shop")
-    print(player.weapon)
-    weapon_shop_input = input("Your input : ")
-    if player.weapon != "None":
-        player_weapon_row = weapons.find(player.weapon).row
-        player_weapon_id = int(weapons.cell(player_weapon_row,1))
-        print(player_weapon_id)
+    # weapon_shop_input = input("Your input : ")
+    # # Check if Player's weapon is better than the weapon they want to buy
+    # # if player.weapon != "None":
+    # #     player_weapon_row = weapons.find(player.weapon).row
+    # #     player_weapon_id = int(weapons.cell(player_weapon_row,1))
+
 
     
 
