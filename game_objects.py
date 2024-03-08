@@ -9,6 +9,16 @@ class Player:
         self.armor = armor
         self.gold = gold
 
+class Weapon:
+    """
+    The class that shows player's current weapon
+    """
+    def __init__(self,id,name,crit_rate,price):
+        self.id = id
+        self.name = name
+        self.crit_rate = crit_rate
+        self.price = price
+
 class Enemy:
     """
     The class that contains enemy data
