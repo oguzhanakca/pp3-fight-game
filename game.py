@@ -43,13 +43,23 @@ def load_character(username):
     Create Player's character with the data from sheets
     """
     # Get player data from sheets
+    new_line_spaces()
+    print("Loading Character ...")
     player_row = accounts.find(username).row
     player_health,player_weapon,player_armor,player_gold = [int(accounts.cell(player_row,3).value),accounts.cell(player_row,4).value,accounts.cell(player_row,5).value,accounts.cell(player_row,6).value]
     #Create Player
     player = Player(username.capitalize(),player_health,player_weapon,player_armor,player_gold)
-    load_menu(player)
+    #Create Player's Weapon
+    equipped_weapon = player_weapon
+    if equipped_weapon != "None":
+        print("Loading Weapon ...")
+        weapon_row = weapons.find(equipped_weapon).row
+        equipped_weapon = Weapon(int(weapons.cell(weapon_row,1)),weapons.cell(weapon_row,2),int(weapons.cell(weapon_row,3)),int(weapons.cell(weapon_row,4)),int(weapons.cell(weapon_row,5)))
+        print("Weapon Loading completed.")
+    print("Character Loading completed.")
+    load_menu(player,equipped_weapon)
 
-def load_menu(player):
+def load_menu(player,weapon):
     """
     Displays navigation menu that players decide what to do
     """
@@ -62,7 +72,7 @@ def load_menu(player):
         menu_input = input("\nYour Input : ")
         if menu_input == "1":
             valid_input = True
-            shop_menu(player)
+            shop_menu(player,weapon)
         elif menu_input == "2":
             valid_input = True
             load_hunt(player)
@@ -74,7 +84,7 @@ def load_menu(player):
         else:
             print("Invalid Input")
 
-def shop_menu(player):
+def shop_menu(player,weapon):
     """
     Asks players which shop they want to visit
     """
@@ -86,7 +96,7 @@ def shop_menu(player):
     while not shop_process:
         if shop_input == "1":
             shop_process = True
-            load_weapon_shop(player)
+            load_weapon_shop(player,weapon)
         elif shop_input == "2":
             shop_process = True
             load_armor_shop(player)
@@ -96,19 +106,67 @@ def shop_menu(player):
         else:
             print("Wrong Input")
 
-def load_weapon_shop(player):
+def load_weapon_shop(player,weapon):
     """
     Shows the weapons player can buy
     """
     new_line_spaces()
+    print("Weapon Shop loading ...")
     all_weapons = weapons.get_all_values()
-    print(f"Your current gold : {player.gold}\n")
-    for i in range(0,7):
-        print(f"{all_weapons[i][0].capitalize()} - {all_weapons[i][1].capitalize()}\t{all_weapons[i][2].capitalize()}\t{all_weapons[i][3].capitalize()}\t{all_weapons[i][4].capitalize()}\n")
-    print("7 - Leave shop")
-    # weapon_shop_input = input("Your input : ")
-    # # Check if Player's weapon is better than the weapon they want to buy
-    # # if player.weapon != "None":
+    shop_process = False
+    weapon_input_check = True
+    while shop_process:
+        print(f"Your current gold : {player.gold}\n")
+        print(f"Your current weapon : {weapon.name}\n")
+        player_has_weapon = weapon != "None"
+        # Print all weapons
+        for i in range(0,7):
+            print(f"{all_weapons[i][0].capitalize()} - {all_weapons[i][1].capitalize()}\t{all_weapons[i][2].capitalize()}\t{all_weapons[i][3].capitalize()}\t{all_weapons[i][4].capitalize()}\n")
+        print("7 - Leave shop")
+        print("Enter the id number.")
+        weapon_shop_input = input("Your input : ")
+        try:
+            weapon_number = int(weapon_shop_input)
+        except ValueError:
+            weapon_input_check = False
+            print("Please enter a number")
+        if weapon_input_check:
+            if weapon_number in range(1,7):
+                # Check if Player's weapon better than selected weapon
+                if player_has_weapon:
+                    compare_weapons = weapon.id >= weapon_number
+                    if compare_weapons:
+                        print("The weapon you choose is better or the same as the weapon you have.\nDo you still want to change your weapon?\nY/N\n")
+                        check_input = input("Your input : ").lower()
+                        check_process = False
+                        while not check_process:
+                            if check_input == "y" or check_input == "n":
+                                if check_input == "y":
+                                    required_gold = int(weapon.cell(weapon_number+1,5))
+                                    check_result = player.gold >= required_gold
+                                    if check_result :
+                                        player.gold -= required_gold
+                                        # update player weapon and stats of weapon
+                            else:
+                                print("Wrong Input")
+                    else:
+                        validate_purchase(weapon_number)
+                        update_player_weapon(weapon_number)
+            else:
+                print("Please enter a number matching he Id")
+                
+    def update_player_weapon():
+        """
+        Updates the weapon and gold of player after a purchase
+        """
+
+    def validate_purchase(item):
+        """
+        Checks if player has enough gold for purchase
+        """
+        
+            
+
     # #     player_weapon_row = weapons.find(player.weapon).row
     # #     player_weapon_id = int(weapons.cell(player_weapon_row,1))
 
