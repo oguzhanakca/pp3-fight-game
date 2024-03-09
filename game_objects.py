@@ -13,11 +13,11 @@ class Weapon:
     """
     The class that shows player's current weapon
     """
-    def __init__(self,id,name,crit_rate,price):
+    def __init__(self,id,name,damage,crit_rate):
         self.id = id
         self.name = name
+        self.damage = damage
         self.crit_rate = crit_rate
-        self.price = price
 
 class Enemy:
     """
