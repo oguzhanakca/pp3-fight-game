@@ -26,7 +26,7 @@ def create_new_user(username,password):
     new_user_row = [username.lower(),password,10,"None","None",0]
     accounts.append_row(new_user_row)
 
-def update_sheet_weapon(player):
+def update_player_sheet(player,shop_type):
     """
     Updates player's weapon in the sheet after player purchases a weapon
     """
