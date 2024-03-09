@@ -85,7 +85,18 @@ def login_check():
         else:
             print("Wrong Password!")
 
-
+def validate_weapon_purchase(player,weapon_id):
+    """
+    Checks if player has enough gold for the item and finishes purchase
+    """
+    required_gold = int(weapons.cell(weapon_id+1,5).value)
+    check_result = player.gold >= required_gold
+    if check_result:
+        player.gold -= required_gold
+        print("Purchase successful!")
+    else:
+        print("Not enough gold!")
+    return check_result
 
 
 

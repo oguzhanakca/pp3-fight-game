@@ -145,6 +145,7 @@ def load_weapon_shop(player,weapon):
                                 if check_input == "y":
                                     purchase_result = validate_weapon_purchase(player,weapon_id)
                                     if purchase_result:
+                                        update_sheet_gold(player)
                                         update_player_weapon(player,weapon_id,weapon)
                                         check_process = True
                                 else:
@@ -153,13 +154,14 @@ def load_weapon_shop(player,weapon):
                             else:
                                 print("Wrong Input")
                     else:
-                        validate_weapon_purchase(player,weapon_id)
+                        purchase_result = validate_weapon_purchase(player,weapon_id)
+                        update_sheet_gold(player)
                         update_player_weapon(player,weapon_id,weapon)
                 else:
                     purchase_result = validate_weapon_purchase(player,weapon_id)
                     if purchase_result:
+                        update_sheet_gold(player)
                         update_player_weapon(player,weapon_id,weapon)
-                        
             elif weapon_id == 7:
                 load_menu(player,weapon)
             else:
@@ -180,39 +182,7 @@ def update_player_weapon(player,weapon_id,weapon):
     player.weapon = weapon.name
     update_sheet_weapon(player)
 
-def update_sheet_weapon(player):
-    """
-    Updates player's weapon in the sheet after player purchases a weapon
-    """
-    account_username = player.name.lower()
-    account_row = accounts.find(account_username).row
-    accounts.update_cell(account_row, 4, player.weapon)
 
-def update_sheet_gold(player):
-    """
-    Updates player's gold in the sheet after player purchases something
-    """
-    account_username = player.name.lower()
-    account_row = accounts.find(account_username).row
-    accounts.update_cell(account_row, 6, player.gold)
-
-def validate_weapon_purchase(player,weapon_id):
-    """
-    Checks if player has enough gold for the item and finishes purchase
-    """
-    required_gold = int(weapons.cell(weapon_id+1,5).value)
-    check_result = player.gold >= required_gold
-    if check_result:
-        player.gold -= required_gold
-        update_sheet_gold(player)
-        print("Purchase successful!")
-    else:
-        print("Not enough gold!")
-    return check_result
-            
-
-
-    
 
 
 def load_armor_shop():
