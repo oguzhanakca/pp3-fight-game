@@ -48,7 +48,7 @@ def load_character(username):
     player_row = accounts.find(username).row
     player_health,player_weapon,player_armor,player_gold = [int(accounts.cell(player_row,3).value),accounts.cell(player_row,4).value,accounts.cell(player_row,5).value,accounts.cell(player_row,6).value]
     #Create Player
-    player = Player(username.capitalize(),player_health,player_weapon,player_armor,player_gold)
+    player = Player(username.capitalize(),int(player_health),player_weapon,player_armor,int(player_gold))
     #Create Player's Weapon
     equipped_weapon = player_weapon
     if equipped_weapon != "None":
@@ -115,9 +115,9 @@ def load_weapon_shop(player,weapon):
     all_weapons = weapons.get_all_values()
     shop_process = False
     weapon_input_check = True
-    while shop_process:
+    while not shop_process:
         print(f"Your current gold : {player.gold}\n")
-        print(f"Your current weapon : {weapon.name}\n")
+        print(f"Your current weapon : {weapon}\n")
         player_has_weapon = weapon != "None"
         # Print all weapons
         for i in range(0,7):
@@ -142,33 +142,48 @@ def load_weapon_shop(player,weapon):
                         while not check_process:
                             if check_input == "y" or check_input == "n":
                                 if check_input == "y":
-                                    required_gold = int(weapon.cell(weapon_number+1,5))
-                                    check_result = player.gold >= required_gold
-                                    if check_result :
-                                        player.gold -= required_gold
+                                    purchase_result = validate_weapon_purchase(player,weapon_number)
+                                    if purchase_result:
+                                        update_player_weapon()
+                                        update_sheet_weapon()
                                         # update player weapon and stats of weapon
                             else:
                                 print("Wrong Input")
                     else:
-                        validate_purchase(weapon_number)
+                        validate_weapon_purchase(player,weapon_number)
                         update_player_weapon(weapon_number)
+                else:
+                    purchase_result = validate_weapon_purchase(player,weapon_number)
+                    print(purchase_result)
             else:
-                print("Please enter a number matching he Id")
+                print("Please enter a number matching the Id")
                 
-    def update_player_weapon():
-        """
-        Updates the weapon and gold of player after a purchase
-        """
+                
+def update_player_weapon():
+    """
+    Updates the weapon and gold of player after a purchase
+    """
 
-    def validate_purchase(item):
-        """
-        Checks if player has enough gold for purchase
-        """
-        
+def update_sheet_weapon():
+    """
+    Updates player's weapon in the sheet after player purchases a weapon
+    """
+def update_sheet_gold():
+    """
+    Updates player's gold in the sheet after player purchases something
+    """
+
+def validate_weapon_purchase(player,weapon_id):
+    """
+    Checks if player has enough gold for the item
+    """
+    required_gold = int(weapons.cell(weapon_id+1,5).value)
+    check_result = player.gold >= required_gold
+    if check_result:
+        player.gold -= required_gold
+    print(player.gold)    
+    return check_result
             
-
-    # #     player_weapon_row = weapons.find(player.weapon).row
-    # #     player_weapon_id = int(weapons.cell(player_weapon_row,1))
 
 
     

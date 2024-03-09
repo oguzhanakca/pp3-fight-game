@@ -15,5 +15,7 @@ def test():
     """
     test function
     """
+    b = 4
+    return True
 #test()
 welcome()
