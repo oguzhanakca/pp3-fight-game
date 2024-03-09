@@ -54,7 +54,7 @@ def load_character(username):
     if equipped_weapon != "None":
         print("Loading Weapon ...")
         weapon_row = weapons.find(equipped_weapon).row
-        equipped_weapon = Weapon(int(weapons.cell(weapon_row,1).value),weapons.cell(weapon_row,2).value,int(weapons.cell(weapon_row,3).value),int(weapons.cell(weapon_row,4)).value)
+        equipped_weapon = Weapon(int(weapons.cell(weapon_row,1).value),weapons.cell(weapon_row,2).value,int(weapons.cell(weapon_row,3).value),int(weapons.cell(weapon_row,4).value))
         print("Weapon Loading completed.")
     print("Character Loading completed.")
     load_menu(player,equipped_weapon)
@@ -117,8 +117,8 @@ def load_weapon_shop(player,weapon):
     weapon_input_check = True
     while not shop_process:
         print(f"Your current gold : {player.gold}\n")
-        print(f"Your current weapon : {weapon}\n")
         player_has_weapon = weapon != "None"
+        print(f"Your current weapon : {weapon.name if player_has_weapon else weapon}\n")
         # Print all weapons
         for i in range(0,7):
             print(f"{all_weapons[i][0].capitalize()} - {all_weapons[i][1].capitalize()}\t{all_weapons[i][2].capitalize()}\t{all_weapons[i][3].capitalize()}\t{all_weapons[i][4].capitalize()}\n")
@@ -132,31 +132,36 @@ def load_weapon_shop(player,weapon):
             print("Please enter a number")
         if weapon_input_check:
             if weapon_id in range(1,7):
-                # Check if Player's weapon better than selected weapon
                 if player_has_weapon:
+                    # Check if Player's weapon better than selected weapon
                     compare_weapons = weapon.id >= weapon_id
                     if compare_weapons:
-                        print("The weapon you choose is better or the same as the weapon you have.\nDo you still want to change your weapon?\nY/N\n")
+                        print("The weapon you choose is worse or the same as the weapon you have.\nDo you still want to change your weapon?\nY/N\n")
                         check_input = input("Your input : ").lower()
                         check_process = False
+                        # Validate option
                         while not check_process:
                             if check_input == "y" or check_input == "n":
                                 if check_input == "y":
                                     purchase_result = validate_weapon_purchase(player,weapon_id)
                                     if purchase_result:
                                         update_player_weapon(player,weapon_id,weapon)
-                                        update_sheet_weapon()
-                                        # update player weapon and stats of weapon
+                                        check_process = True
+                                else:
+                                    check_process = True
+                                    print("Purchase cancelled!")
                             else:
                                 print("Wrong Input")
                     else:
                         validate_weapon_purchase(player,weapon_id)
-                        update_player_weapon(weapon_id)
+                        update_player_weapon(player,weapon_id,weapon)
                 else:
                     purchase_result = validate_weapon_purchase(player,weapon_id)
                     if purchase_result:
                         update_player_weapon(player,weapon_id,weapon)
-                        update_sheet_weapon()
+                        
+            elif weapon_id == 7:
+                load_menu(player,weapon)
             else:
                 print("Please enter a number matching the Id")
                 
@@ -173,16 +178,23 @@ def update_player_weapon(player,weapon_id,weapon):
         weapon.damage = int(weapons.cell(weapon_id+1,3).value)
         weapon.crit_rate = int(weapons.cell(weapon_id+1,4).value)
     player.weapon = weapon.name
-    update_sheet_weapon()
+    update_sheet_weapon(player)
 
-def update_sheet_weapon():
+def update_sheet_weapon(player):
     """
     Updates player's weapon in the sheet after player purchases a weapon
     """
-def update_sheet_gold():
+    account_username = player.name.lower()
+    account_row = accounts.find(account_username).row
+    accounts.update_cell(account_row, 4, player.weapon)
+
+def update_sheet_gold(player):
     """
     Updates player's gold in the sheet after player purchases something
     """
+    account_username = player.name.lower()
+    account_row = accounts.find(account_username).row
+    accounts.update_cell(account_row, 6, player.gold)
 
 def validate_weapon_purchase(player,weapon_id):
     """
