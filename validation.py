@@ -96,6 +96,8 @@ def validate_balance(player,weapon_id,shop_type):
     required_gold = 0
     if shop_type == "weapon":
         required_gold = int(weapons.cell(weapon_id+1,5).value)
+    else:
+        required_gold = int(armors.cell(weapon_id+1,6).value)
     check_result = player.gold >= required_gold
     if check_result:
         player.gold -= required_gold
@@ -105,4 +107,18 @@ def validate_balance(player,weapon_id,shop_type):
     return check_result
 
 
-
+def validate_shop_question(player,item_id,shop_type,check_input):
+    check_process = False
+    while not check_process:
+        if check_input == "y" or check_input == "n":
+            if check_input == "y":
+                check_process = True
+                purchase_result = validate_balance(player,item_id,shop_type)
+                if purchase_result:
+                    update_sheet_gold(player)
+                    return True
+            else:
+                check_process = True
+                print("Purchase cancelled!")
+        else:
+            print("Wrong Input")

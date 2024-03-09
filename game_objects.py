@@ -19,6 +19,17 @@ class Weapon:
         self.damage = damage
         self.crit_rate = crit_rate
 
+class Armor:
+    """
+    The class that shows player's current armor
+    """
+    def __init__(self,id,name,defence,evasion,health):
+        self.id = id
+        self.name = name
+        self.defence = defence
+        self.evasion = evasion
+        self.health = health
+
 class Enemy:
     """
     The class that contains enemy data
