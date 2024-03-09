@@ -145,10 +145,10 @@ def load_weapon_shop(player,weapon):
                             if check_input == "y" or check_input == "n":
                                 if check_input == "y":
                                     purchase_result = validate_weapon_purchase(player,weapon_id)
+                                    check_process = True
                                     if purchase_result:
                                         update_sheet_gold(player)
                                         update_player_weapon(player,weapon_id,weapon)
-                                        check_process = True
                                 else:
                                     check_process = True
                                     print("Purchase cancelled!")
@@ -156,8 +156,9 @@ def load_weapon_shop(player,weapon):
                                 print("Wrong Input")
                     else:
                         purchase_result = validate_weapon_purchase(player,weapon_id)
-                        update_sheet_gold(player)
-                        update_player_weapon(player,weapon_id,weapon)
+                        if purchase_result:
+                            update_sheet_gold(player)
+                            update_player_weapon(player,weapon_id,weapon)
                 else:
                     purchase_result = validate_weapon_purchase(player,weapon_id)
                     if purchase_result:
