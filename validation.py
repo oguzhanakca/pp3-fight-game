@@ -65,7 +65,8 @@ def login_check():
     player_username = ""
     #Check Username - Login
     while not username_entry:
-        username = input("Please enter your username\nEnter 'x' to abort\n")
+        print("Please enter your username\nEnter 'x' to abort")
+        username = input("Your username : ")
         if username == "x":
             return "x"
         elif check_username(username):
@@ -73,10 +74,13 @@ def login_check():
             username_entry = True
         else:
             print("Wrong Username")
+    
+    print("----------------------------------------------------")
 
     # Check Password - Login
     while username_entry and not password_entry:
-        password = input("Please enter your password\nEnter 'x' to abort\n")
+        print("Please enter your password\nEnter 'x' to abort")
+        password = input("Your password : ")
         if password == "x":
             return "x"
         elif check_password(player_username,password):

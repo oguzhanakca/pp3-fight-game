@@ -3,7 +3,7 @@ from validation import *
 from game_objects import *
 
 def new_line_spaces():
-    print("\n----------------------------------------------------\n")
+    print("----------------------------------------------------")
 
 def start_option():
     """
@@ -69,7 +69,7 @@ def load_menu(player,weapon):
         print(f"Welcome to Arena, {player.name}")
         print("\nWhat would you like to do?")
         print("\n1 - Visit Shop\n2 - Hunt\n3 - Stats\n4 - Exit Game\n")
-        menu_input = input("\nYour Input : ")
+        menu_input = input("Your Input : ")
         if menu_input == "1":
             valid_input = True
             shop_menu(player,weapon)
@@ -80,7 +80,8 @@ def load_menu(player,weapon):
             valid_input = True
             load_stats(player)
         elif menu_input == "4":
-            break
+            valid_input = True
+            print("See you later !")
         else:
             print("Invalid Input")
 
@@ -102,7 +103,7 @@ def shop_menu(player,weapon):
             load_armor_shop(player)
         elif shop_input == "3":
             shop_process = True
-            load_menu(player)
+            load_menu(player,weapon)
         else:
             print("Wrong Input")
 
@@ -110,18 +111,18 @@ def load_weapon_shop(player,weapon):
     """
     Shows the weapons player can buy
     """
-    new_line_spaces()
-    print("Weapon Shop loading ...")
+    
     all_weapons = weapons.get_all_values()
     shop_process = False
     weapon_input_check = True
     while not shop_process:
-        print(f"Your current gold : {player.gold}\n")
+        new_line_spaces()
+        print(f"Your current gold : {player.gold}")
         player_has_weapon = weapon != "None"
         print(f"Your current weapon : {weapon.name if player_has_weapon else weapon}\n")
         # Print all weapons
         for i in range(0,7):
-            print(f"{all_weapons[i][0].capitalize()} - {all_weapons[i][1].capitalize()}\t{all_weapons[i][2].capitalize()}\t{all_weapons[i][3].capitalize()}\t{all_weapons[i][4].capitalize()}\n")
+            print(f"{all_weapons[i][0].capitalize()} - {all_weapons[i][1].capitalize()}\t{all_weapons[i][2].capitalize()}\t{all_weapons[i][3].capitalize()}\t{all_weapons[i][4].capitalize()}")
         print("7 - Leave shop")
         print("Enter the id number.")
         weapon_shop_input = input("Your input : ")
