@@ -108,7 +108,7 @@ class Combat:
         evasion_roll = random.randint(0,99)<defender.evasion
         if evasion_roll: print(f"{defender.name} dodged attack.")
         else:
-            damage = attacker.damage-defender.defence
+            damage = random.randint(attacker.damage,attacker.damage+2)-defender.defence
             if damage <= 0:
                 print(f"{attacker.name} dealt no damage to {defender.name}. {defender.name} defence is too strong!")
             else:
@@ -133,7 +133,7 @@ class Combat:
             evasion_roll = random.randint(0,99)<defender.evasion
             if evasion_roll: print(f"{defender.name} dodged the special attack.")
             else:
-                damage = attacker.damage-defender.defence
+                damage = random.randint(attacker.damage,attacker.damage+2)-defender.defence
                 if damage <= 0:
                     print(f"{attacker.name} dealt no damage to {defender.name}. {defender.name} defence is too strong!")
                 else:
@@ -164,7 +164,7 @@ class Combat:
         if combat_end:
             if player_dead: print(f"You have been killed by {enemy_combat.name}")
             if enemy_dead:
-                player.gold += enemy_combat.gold_drop
+                player.gold += random.randint(enemy_combat.gold_drop-2,enemy_combat.gold_drop+2)
                 print(f"You have killed {enemy_combat.name}")
                 print(f"You have earned {enemy_combat.gold_drop} gold.")
         return combat_end
