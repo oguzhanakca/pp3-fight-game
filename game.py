@@ -83,7 +83,7 @@ def load_menu(player,weapon,armor,stats):
             shop_menu(player,weapon,armor,stats)
         elif menu_input == "2":
             valid_input = True
-            enter_arena(player,stats)
+            enter_arena(player,weapon,armor,stats)
         elif menu_input == "3":
             valid_input = True
             show_stats(player,weapon,armor,stats)
@@ -137,9 +137,9 @@ def load_shop(player,weapon,armor,stats,shop_type):
         print("Enter the id number.")
         shop_input = input("Your input : ")
         # Check if user entered a numeric value
-        try:
+        if shop_input.isdigit():
             item_id = int(shop_input)
-        except ValueError:
+        else:
             print("Please enter a number")
             continue
         cancel_input = item_id == 7 if shop_type == "weapon" else item_id == 5
@@ -175,6 +175,58 @@ def load_shop(player,weapon,armor,stats,shop_type):
         else:
             print("Please enter a number matching the Id")
 
+
+def enter_arena(player,weapon,armor,stats):
+    """
+    Displays the list of enemies
+    """
+
+    print("Welcome to the Arena")
+    all_enemies = enemies.get_all_values()
+    # Print enemy names
+    display_enemies(all_enemies)
+    print("Please enter the enemy id you want to face.")
+    arena_process = False
+    while not arena_process:
+        enemy_id = input("Your input : ")
+        if enemy_id.isdigit():
+            if int(enemy_id) in range(1,8):
+                arena_process = True
+                # Create Enemy
+                enemy = Enemy(all_enemies[enemy_id][1],int(all_enemies[enemy_id][2]),int(all_enemies[enemy_id][3]),int(all_enemies[enemy_id][4]),int(all_enemies[enemy_id][5]),int(all_enemies[enemy_id][6]),int(all_enemies[enemy_id][7]))
+                initiate_combat(player,weapon,armor,stats,enemy)
+            elif enemy_id == "8": load_menu(player,weapon,armor,stats)
+            else: print("Wrong Input")
+        else:
+            print("Wrong Input")
+    
+def show_stats(player,weapon,armor,stats):
+    """
+    Displays player's stats
+    """
+    new_line_spaces()
+    stats.view_stats()
+    print("1 - Go back to menu")
+    stats_input = input("Your input : ")
+    if stats_input == "1":
+        load_menu(player,weapon,armor,stats)
+    else:
+        print("Wrong Input")
+
+def initiate_combat(player,weapon,armor,stats,enemy):
+    """
+    Handles combat
+    """
+    #Create player and enemy
+    player_combat = Player_Combat(player.name,stats.damage(),stats.crit_rate(),stats.health(),stats.evasion(),stats.defence())
+    enemy_combat = Enemy_Combat(enemy.name,enemy.damage,enemy.defence,enemy.health,enemy.gold_drop)
+    #Create combat
+    combat = Combat(player_combat,enemy_combat)
+
+
+
+
+
 def display_shop_items(shop_items,shop_type):
     """
     Prints shop content
@@ -187,6 +239,14 @@ def display_shop_items(shop_items,shop_type):
         for i in range(0,5):
                 print(f"{shop_items[i][0].capitalize()} - {shop_items[i][1].capitalize()}\t{shop_items[i][2].capitalize()}\t{shop_items[i][3].capitalize()}\t{shop_items[i][4].capitalize()}\t{shop_items[i][5].capitalize()}")
         print("5 - Leave shop")
+
+def display_enemies(all_enemies):
+    """
+    Prints all enemies
+    """
+    for i in range(0,9):
+        print(f"{all_enemies[i][0].capitalize()} - {all_enemies[i][1].capitalize()}")
+    print("8 - Go back to menu")
                 
 def update_player_weapon(player,weapon_id,weapon):
     """
@@ -224,23 +284,8 @@ def update_player_stats(weapon,armor,stats):
     stats = Stats(weapon,armor)
     
 
-def enter_arena(player):
-    """
-    Displays the list of enemies
-    """
 
-def show_stats(player,weapon,armor,stats):
-    """
-    Displays player's stats
-    """
-    new_line_spaces()
-    stats.view_stats()
-    print("1 - Go back to menu")
-    stats_input = input("Your input : ")
-    if stats_input == "1":
-        load_menu(player,weapon,armor,stats)
-    else:
-        print("Wrong Input")
+
 
     
 

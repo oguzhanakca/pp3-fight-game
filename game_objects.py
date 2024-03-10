@@ -1,3 +1,4 @@
+import random
 class Player:
     """
     The class that contains player data
@@ -58,19 +59,59 @@ class Enemy:
     """
     The class that contains enemy data
     """
-    def __init__(self,name,defense,health,gold_drop):
+    def __init__(self,name,damage,defense,health,gold_drop):
         self.name = name
+        self.damage = damage
         self.defense = defense
         self.health = health
         self.gold_drop = gold_drop
+
+class Player_Combat:
+    """
+    The class of player for combat
+    """
+    def __init__(self,name,damage,crit_rate,health,evasion,defence):
+        self.name = name
+        self.damage = damage
+        self.crit_rate = crit_rate
+        self.health = health
+        self.evasion = evasion
+        self.defence = defence
+        
+
+class Enemy_Combat:
+    """
+    The class of enemy for combat
+    """
+    def __init__(self,name,damage,defence,health,evasion,crit_rate,drop):
+        self.name = name
+        self.damage = damage
+        self.defence = defence
+        self.health = health
+        self.evasion = evasion
+        self.crit_rate = crit_rate
+        self.drop = drop
+        
 
 class Combat:
     """
     The class that handles combat
     """
 
-    def __init__(self,player,enemy):
-        self.player = player
-        self.enemy = enemy
+    def attack(attacker,defender):
+        evasion_roll = random.randint(0,100)<defender.evasion
+        if evasion_roll: print(f"{defender.name} dodged attack.")
+        else:
+            damage = attacker.damage-defender.defence
+            if damage <= 0:
+                print(f"{attacker.name} dealt no damage to {defender.name}. {defender.name} defence is too strong!")
+            else:
+                crit_roll = random.randint(0,100)<attacker.crit_rate
+                if crit_roll:
+                    damage *= 2
+                print(f"{attacker.name} dealt critical {damage} damage to {defender.name}!")
+            defender.health -= damage
 
+
+    
     
