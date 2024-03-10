@@ -1,6 +1,7 @@
 from sheets import *
 from validation import *
 from game_objects import *
+import random
 
 def new_line_spaces():
     print("----------------------------------------------------")
@@ -193,7 +194,7 @@ def enter_arena(player,weapon,armor,stats):
             if int(enemy_id) in range(1,8):
                 arena_process = True
                 # Create Enemy
-                enemy = Enemy(all_enemies[enemy_id][1],int(all_enemies[enemy_id][2]),int(all_enemies[enemy_id][3]),int(all_enemies[enemy_id][4]),int(all_enemies[enemy_id][5]),int(all_enemies[enemy_id][6]),int(all_enemies[enemy_id][7]))
+                enemy = Enemy(all_enemies[int(enemy_id)][1],int(all_enemies[int(enemy_id)][2]),int(all_enemies[int(enemy_id)][3]),int(all_enemies[int(enemy_id)][4]),int(all_enemies[int(enemy_id)][5]),int(all_enemies[int(enemy_id)][6]),int(all_enemies[int(enemy_id)][7]))
                 initiate_combat(player,weapon,armor,stats,enemy)
             elif enemy_id == "8": load_menu(player,weapon,armor,stats)
             else: print("Wrong Input")
@@ -219,13 +220,31 @@ def initiate_combat(player,weapon,armor,stats,enemy):
     """
     #Create player and enemy
     player_combat = Player_Combat(player.name,stats.damage(),stats.crit_rate(),stats.health(),stats.evasion(),stats.defence())
-    enemy_combat = Enemy_Combat(enemy.name,enemy.damage,enemy.defence,enemy.health,enemy.gold_drop)
+    enemy_combat = Enemy_Combat(enemy.name,enemy.damage,enemy.defence,enemy.health,enemy.evasion,enemy.crit_rate,enemy.gold_drop)
     #Create combat
-    combat = Combat(player_combat,enemy_combat)
-
-
-
-
+    combat = Combat()
+    #Start combat
+    while True:
+        print(f"{player_combat.name} Health : {player_combat.health}")
+        print(f"{enemy_combat.name} Health : {enemy_combat.health}")
+        print("Choose your action\n1 - Attack\n2 - Run away")
+        combat_input = input("Your input : ")
+        if combat_input == "1":
+            new_line_spaces()
+            combat.attack(player_combat,enemy_combat)
+            if combat.check_combat(player,player_combat,enemy_combat): break
+        elif combat_input == "2":
+            print("You are trying to run away...")
+            if random.randint(0,1)==1:
+                print("You escaped successfully")
+                break
+            else:
+                print("You couldn't run away.")
+        combat.attack(enemy_combat,player_combat)
+        if combat.check_combat(player,player_combat,enemy_combat): break
+    update_sheet_gold(player)
+    load_menu(player,weapon,armor,stats)
+    
 
 def display_shop_items(shop_items,shop_type):
     """
@@ -244,7 +263,7 @@ def display_enemies(all_enemies):
     """
     Prints all enemies
     """
-    for i in range(0,9):
+    for i in range(0,8):
         print(f"{all_enemies[i][0].capitalize()} - {all_enemies[i][1].capitalize()}")
     print("8 - Go back to menu")
                 

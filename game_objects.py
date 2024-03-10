@@ -59,11 +59,13 @@ class Enemy:
     """
     The class that contains enemy data
     """
-    def __init__(self,name,damage,defense,health,gold_drop):
+    def __init__(self,name,damage,defence,health,evasion,crit_rate,gold_drop):
         self.name = name
         self.damage = damage
-        self.defense = defense
+        self.defence = defence
         self.health = health
+        self.evasion = evasion
+        self.crit_rate = crit_rate
         self.gold_drop = gold_drop
 
 class Player_Combat:
@@ -83,22 +85,24 @@ class Enemy_Combat:
     """
     The class of enemy for combat
     """
-    def __init__(self,name,damage,defence,health,evasion,crit_rate,drop):
+    def __init__(self,name,damage,defence,health,evasion,crit_rate,gold_drop):
         self.name = name
         self.damage = damage
         self.defence = defence
         self.health = health
         self.evasion = evasion
         self.crit_rate = crit_rate
-        self.drop = drop
+        self.gold_drop = gold_drop
         
 
 class Combat:
     """
     The class that handles combat
     """
-
-    def attack(attacker,defender):
+    def attack(self,attacker,defender):
+        """
+        Handles attack action
+        """
         evasion_roll = random.randint(0,100)<defender.evasion
         if evasion_roll: print(f"{defender.name} dodged attack.")
         else:
@@ -109,8 +113,26 @@ class Combat:
                 crit_roll = random.randint(0,100)<attacker.crit_rate
                 if crit_roll:
                     damage *= 2
-                print(f"{attacker.name} dealt critical {damage} damage to {defender.name}!")
-            defender.health -= damage
+                    print(f"{attacker.name} dealt critical {damage} damage to {defender.name}!")
+                else:
+                    print(f"{attacker.name} dealt {damage} damage to {defender.name}!")
+                
+                defender.health -= damage
+    
+    def check_combat(self,player,player_combat,enemy_combat):
+        """
+        Checks if combat still continues
+        """
+        player_dead = player_combat.health <=0
+        enemy_dead = enemy_combat.health <=0
+        combat_end = player_dead or enemy_dead
+        if combat_end:
+            if player_dead: print(f"You have been killed by {enemy_combat.name}")
+            if enemy_dead:
+                player.gold += enemy_combat.gold_drop
+                print(f"You have killed {enemy_combat.name}")
+                print(f"You have earned {enemy_combat.gold_drop} gold.")
+        return combat_end
 
 
     
