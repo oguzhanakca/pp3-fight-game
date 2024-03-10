@@ -46,9 +46,9 @@ def register_check():
         if password == "x":
             return "x"
         elif len(password.split(" "))>1:
-            print("Password must not contain spaces")
+            print("Password must not contain spaces\n")
         elif len(password)>15 or len(password)<5:
-            print("Password length must be between 5 and 15 characters")
+            print("Password length must be between 5 and 15 characters\n")
         else:
             password_entry = True
             create_new_user(player_username,password)
@@ -73,7 +73,7 @@ def login_check():
             player_username = username
             username_entry = True
         else:
-            print("Wrong Username")
+            print("\nWrong Username\n")
     
     print("----------------------------------------------------")
 
@@ -87,7 +87,7 @@ def login_check():
             password_entry = True
             return player_username
         else:
-            print("Wrong Password!")
+            print("\nWrong Password!\n")
 
 def validate_balance(player,weapon_id,shop_type):
     """

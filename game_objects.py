@@ -28,7 +28,8 @@ class Stats:
         return 0 if self.armor == "None" else self.armor.defence
     
     def view_stats(self):
-        print(f"Your Maximum Health : {self.health()}\nYour Damage : {self.damage()}\nYour Defence : {self.defence()}\nYour Critical Rate : {self.crit_rate()}\n\nYour Evasion : {self.evasion()}")
+        print(f"Weapon : {self.weapon.name}\nArmor : {self.armor.name}")
+        print(f"Your Maximum Health : {self.health()}\nYour Damage : {self.damage()}\nYour Defence : {self.defence()}\nYour Critical Rate : {self.crit_rate()}%\nYour Evasion : {self.evasion()}%")
 
 
 

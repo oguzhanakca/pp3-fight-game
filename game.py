@@ -63,10 +63,11 @@ def load_character(username):
         armor_row = armors.find(equipped_armor).row
         equipped_armor = Armor(int(armors.cell(armor_row,1).value),armors.cell(armor_row,2).value,int(armors.cell(armor_row,3).value),int(armors.cell(armor_row,4).value),int(armors.cell(armor_row,5).value))
         print("Armor Loading completed.")
+    stats = Stats(equipped_weapon,equipped_armor)
     print("Character Loading completed.")
-    load_menu(player,equipped_weapon,equipped_armor)
+    load_menu(player,equipped_weapon,equipped_armor,stats)
 
-def load_menu(player,weapon,armor):
+def load_menu(player,weapon,armor,stats):
     """
     Displays navigation menu that players decide what to do
     """
@@ -79,20 +80,20 @@ def load_menu(player,weapon,armor):
         menu_input = input("Your Input : ")
         if menu_input == "1":
             valid_input = True
-            shop_menu(player,weapon,armor)
+            shop_menu(player,weapon,armor,stats)
         elif menu_input == "2":
             valid_input = True
-            load_hunt(player)
+            load_hunt(player,stats)
         elif menu_input == "3":
             valid_input = True
-            #load_stats(player)
+            show_stats(player,weapon,armor,stats)
         elif menu_input == "4":
             valid_input = True
             print("See you later !")
         else:
             print("Invalid Input")
 
-def shop_menu(player,weapon,armor):
+def shop_menu(player,weapon,armor,stats):
     """
     Asks players which shop they want to visit
     """
@@ -100,21 +101,21 @@ def shop_menu(player,weapon,armor):
     shop_process = False
     print("Which shop do you want to visit?\n")
     print("1 - Weapon Shop\n2 - Armor Shop\n3 - Leave Shop\n")
-    shop_input = input("Your input : ")
     while not shop_process:
+        shop_input = input("Your input : ")
         if shop_input == "1":
             shop_process = True
-            load_shop(player,weapon,armor,"weapon")
+            load_shop(player,weapon,armor,stats,"weapon")
         elif shop_input == "2":
             shop_process = True
-            load_shop(player,weapon,armor,"armor")
+            load_shop(player,weapon,armor,stats,"armor")
         elif shop_input == "3":
             shop_process = True
-            load_menu(player,weapon,armor)
+            load_menu(player,weapon,armor,stats)
         else:
             print("Wrong Input")
 
-def load_shop(player,weapon,armor,shop_type):
+def load_shop(player,weapon,armor,stats,shop_type):
     """
     Displays the items player can buy and applies their decisions
     """
@@ -145,27 +146,32 @@ def load_shop(player,weapon,armor,shop_type):
         input_range = item_id in range(1,7) if shop_type == "weapon" else item_id in range(1,5)
         # Check input
         if cancel_input:
-            load_menu(player,weapon,armor)
+            load_menu(player,weapon,armor,stats)
         elif input_range:
             if player_has_item:
                 compare_items = weapon.id >= item_id if shop_type == "weapon" else armor.id >= item_id
                 # Check if Player's weapon better than selected weapon
                 if compare_items:
-                    print(f"The {shop_type} you choose is worse or the same as the {shop_type} you have.\nDo you still want to change your weapon?\nY/N")
+                    print(f"The {shop_type} you choose is worse or the same as the {shop_type} you have.\nDo you still want to change your {shop_type}?\nY/N")
                     check_input = input("Your input : ").lower()
                     # Validate option
                     check_result = validate_shop_question(player,item_id,shop_type,check_input)
-                    if check_result: update_player_weapon(player,item_id,weapon) if shop_type == "weapon"else update_player_armor(player,item_id,armor)
+                    if check_result:
+                        update_player_weapon(player,item_id,weapon) if shop_type == "weapon" else update_player_armor(player,item_id,armor)
+                        update_player_stats(weapon,armor,stats)
                 else:
                     purchase_result = validate_balance(player,item_id,shop_type)
                     if purchase_result:
                         update_sheet_gold(player)
-                        update_player_weapon(player,item_id,weapon) if shop_type == "weapon"else update_player_armor(player,item_id,armor)
+                        update_player_weapon(player,item_id,weapon) if shop_type == "weapon" else update_player_armor(player,item_id,armor)
+                        update_player_stats(weapon,armor,stats)
             else:
                 purchase_result = validate_balance(player,item_id,shop_type)
                 if purchase_result:
                     update_sheet_gold(player)
-                    update_player_weapon(player,item_id,weapon) if shop_type == "weapon"else update_player_armor(player,item_id,armor)
+                    update_player_weapon(player,item_id,weapon) if shop_type == "weapon" else update_player_armor(player,item_id,armor)
+                    update_player_stats(weapon,armor,stats)
+
         else:
             print("Please enter a number matching the Id")
 
@@ -211,16 +217,30 @@ def update_player_armor(player,armor_id,armor):
     player.armor = armor.name
     update_player_sheet(player,"armor")
 
+def update_player_stats(weapon,armor,stats):
+    """
+    Updates player stats after changing weapon or armor
+    """
+    stats = Stats(weapon,armor)
+    
 
 def load_hunt(player):
     """
     Displays the list of enemies
     """
 
-def show_stats(player):
+def show_stats(player,weapon,armor,stats):
     """
     Displays player's stats
     """
+    new_line_spaces()
+    stats.view_stats()
+    print("1 - Go back to menu")
+    stats_input = input("Your input : ")
+    if stats_input == "1":
+        load_menu(player,weapon,armor,stats)
+    else:
+        print("Wrong Input")
 
     
 

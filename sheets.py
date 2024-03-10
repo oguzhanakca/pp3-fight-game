@@ -23,7 +23,7 @@ def create_new_user(username,password):
     """
     Add new data to account sheet
     """
-    new_user_row = [username.lower(),password,10,"None","None",0]
+    new_user_row = [username.lower(),password,"None","None",0]
     accounts.append_row(new_user_row)
 
 def update_player_sheet(player,shop_type):
