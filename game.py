@@ -46,9 +46,9 @@ def load_character(username):
     new_line_spaces()
     print("Loading Character ...")
     player_row = accounts.find(username).row
-    player_health,player_weapon,player_armor,player_gold = [int(accounts.cell(player_row,3).value),accounts.cell(player_row,4).value,accounts.cell(player_row,5).value,accounts.cell(player_row,6).value]
+    player_weapon,player_armor,player_gold = [accounts.cell(player_row,4).value,accounts.cell(player_row,5).value,accounts.cell(player_row,6).value]
     #Create Player
-    player = Player(username.capitalize(),int(player_health),player_weapon,player_armor,int(player_gold))
+    player = Player(username.capitalize(),player_weapon,player_armor,int(player_gold))
     #Create Player's Gear
     equipped_weapon = player_weapon
     equipped_armor = player_armor

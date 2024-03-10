@@ -2,9 +2,8 @@ class Player:
     """
     The class that contains player data
     """
-    def __init__(self,name, health, weapon, armor,gold):
+    def __init__(self,name, weapon, armor,gold):
         self.name = name
-        self.health = health
         self.weapon = weapon
         self.armor = armor
         self.gold = gold
