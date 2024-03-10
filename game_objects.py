@@ -58,12 +58,11 @@ class Enemy:
     """
     The class that contains enemy data
     """
-    def __init__(self,name,defense,evasion,health,price):
+    def __init__(self,name,defense,health,gold_drop):
         self.name = name
         self.defense = defense
-        self.evasion = evasion
         self.health = health
-        self.price = price
+        self.gold_drop = gold_drop
 
 class Combat:
     """
