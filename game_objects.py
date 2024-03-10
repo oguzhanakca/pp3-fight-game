@@ -68,7 +68,7 @@ class Enemy:
         self.crit_rate = crit_rate
         self.gold_drop = gold_drop
 
-class Player_Combat:
+class PlayerCombat:
     """
     The class of player for combat
     """
@@ -79,9 +79,10 @@ class Player_Combat:
         self.health = health
         self.evasion = evasion
         self.defence = defence
+        self.cooldown = False
         
 
-class Enemy_Combat:
+class EnemyCombat:
     """
     The class of enemy for combat
     """
@@ -93,6 +94,7 @@ class Enemy_Combat:
         self.evasion = evasion
         self.crit_rate = crit_rate
         self.gold_drop = gold_drop
+        self.stunned = False
         
 
 class Combat:
@@ -103,14 +105,14 @@ class Combat:
         """
         Handles attack action
         """
-        evasion_roll = random.randint(0,100)<defender.evasion
+        evasion_roll = random.randint(0,99)<defender.evasion
         if evasion_roll: print(f"{defender.name} dodged attack.")
         else:
             damage = attacker.damage-defender.defence
             if damage <= 0:
                 print(f"{attacker.name} dealt no damage to {defender.name}. {defender.name} defence is too strong!")
             else:
-                crit_roll = random.randint(0,100)<attacker.crit_rate
+                crit_roll = random.randint(0,99)<attacker.crit_rate
                 if crit_roll:
                     damage *= 2
                     print(f"{attacker.name} dealt critical {damage} damage to {defender.name}!")
@@ -118,6 +120,39 @@ class Combat:
                     print(f"{attacker.name} dealt {damage} damage to {defender.name}!")
                 
                 defender.health -= damage
+                if hasattr(attacker,"cooldown"):
+                    attacker.cooldown = True
+
+    def special_attack(self,attacker,defender):
+        """
+        Handles special attack action
+        """
+        if attacker.cooldown:
+            print("Your special attack is not ready!")
+        else:
+            evasion_roll = random.randint(0,99)<defender.evasion
+            if evasion_roll: print(f"{defender.name} dodged the special attack.")
+            else:
+                damage = attacker.damage-defender.defence
+                if damage <= 0:
+                    print(f"{attacker.name} dealt no damage to {defender.name}. {defender.name} defence is too strong!")
+                else:
+                    crit_roll = random.randint(0,99)<attacker.crit_rate
+                    if crit_roll:
+                        damage *= 4
+                        print(f"{attacker.name} dealt critical {damage} damage to {defender.name}!")
+                    else:
+                        print(f"{attacker.name} dealt {damage} damage to {defender.name}!")
+                    defender.health -= damage
+                    attacker.cooldown = True
+                    defender.stunned = True
+
+    def heal(self,enemy_combat,enemy):
+        max_health = enemy.health
+        heal_amount = enemy.damage*2
+        enemy_combat.health += heal_amount
+        if enemy_combat.health > max_health: enemy_combat.health = max_health
+        print(f"{enemy.name} healed by {heal_amount}")
     
     def check_combat(self,player,player_combat,enemy_combat):
         """

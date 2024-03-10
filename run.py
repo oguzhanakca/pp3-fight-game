@@ -1,5 +1,4 @@
 from game import start_option
-from sheets import *
 
 def welcome():
     """

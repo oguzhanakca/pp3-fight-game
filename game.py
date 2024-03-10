@@ -159,19 +159,19 @@ def load_shop(player,weapon,armor,stats,shop_type):
                     check_result = validate_shop_question(player,item_id,shop_type,check_input)
                     if check_result:
                         update_player_weapon(player,item_id,weapon) if shop_type == "weapon" else update_player_armor(player,item_id,armor)
-                        update_player_stats(weapon,armor,stats)
+                        stats = Stats(weapon,armor)
                 else:
                     purchase_result = validate_balance(player,item_id,shop_type)
                     if purchase_result:
                         update_sheet_gold(player)
                         update_player_weapon(player,item_id,weapon) if shop_type == "weapon" else update_player_armor(player,item_id,armor)
-                        update_player_stats(weapon,armor,stats)
+                        stats = Stats(weapon,armor)
             else:
                 purchase_result = validate_balance(player,item_id,shop_type)
                 if purchase_result:
                     update_sheet_gold(player)
                     update_player_weapon(player,item_id,weapon) if shop_type == "weapon" else update_player_armor(player,item_id,armor)
-                    update_player_stats(weapon,armor,stats)
+                    stats = Stats(weapon,armor)
 
         else:
             print("Please enter a number matching the Id")
@@ -216,38 +216,54 @@ def show_stats(player,weapon,armor,stats):
 
 def initiate_combat(player,weapon,armor,stats,enemy):
     """
-    Handles combat
+    Initiate Combats for both side
     """
     #Create player and enemy
-    player_combat = Player_Combat(player.name,stats.damage(),stats.crit_rate(),stats.health(),stats.evasion(),stats.defence())
-    enemy_combat = Enemy_Combat(enemy.name,enemy.damage,enemy.defence,enemy.health,enemy.evasion,enemy.crit_rate,enemy.gold_drop)
+    player_combat = PlayerCombat(player.name,stats.damage(),stats.crit_rate(),stats.health(),stats.evasion(),stats.defence())
+    enemy_combat = EnemyCombat(enemy.name,enemy.damage,enemy.defence,enemy.health,enemy.evasion,enemy.crit_rate,enemy.gold_drop)
+    player_max_health = player_combat.health
+    enemy_max_health = enemy_combat.health
     #Create combat
     combat = Combat()
     round = 1
     #Start combat
     while True:
-        print(f"{player_combat.name} Health : {player_combat.health}")
-        print(f"{enemy_combat.name} Health : {enemy_combat.health}")
-        print(f"Round : {round}")
-        print("Choose your action\n1 - Attack\n2 - Run away")
+        new_line_spaces()
+        print(f"{player_combat.name} Health : {player_combat.health} / {player_max_health}")
+        print(f"{enemy_combat.name} Health : {enemy_combat.health} / {enemy_max_health}")
+        print(f"Round : {round}\n")
+        print("Choose your action\n1 - Attack\n2 - Special Attack\n3 - Run away")
         combat_input = input("Your input : ")
         if combat_input == "1":
             new_line_spaces()
             combat.attack(player_combat,enemy_combat)
             if combat.check_combat(player,player_combat,enemy_combat): break
         elif combat_input == "2":
+            new_line_spaces()
+            combat.special_attack(player_combat,enemy_combat)
+        elif combat_input == "3":
             print("You are trying to run away...")
-            if random.randint(0,1)==1:
+            if random.randint(0,4)==1:
                 print("You escaped successfully")
                 break
             else:
                 print("You couldn't run away.")
-        combat.attack(enemy_combat,player_combat)
+        if not enemy_combat.stunned:
+            if round%3 == 2:
+                print(f"{enemy_combat.name} is preparing to heal!")
+                combat.attack(enemy_combat,player_combat)
+            elif round%3 == 0:
+                combat.heal(enemy_combat,enemy)
+            else:
+                combat.attack(enemy_combat,player_combat)
+            if combat.check_combat(player,player_combat,enemy_combat):
+                break
+        else:
+            print(f"{enemy_combat.name} is stunned!")
+            enemy_combat.stunned = False
         round += 1
-        if combat.check_combat(player,player_combat,enemy_combat): break
     update_sheet_gold(player)
     load_menu(player,weapon,armor,stats)
-    
 
 def display_shop_items(shop_items,shop_type):
     """
@@ -299,11 +315,7 @@ def update_player_armor(player,armor_id,armor):
     player.armor = armor.name
     update_player_sheet(player,"armor")
 
-def update_player_stats(weapon,armor,stats):
-    """
-    Updates player stats after changing weapon or armor
-    """
-    stats = Stats(weapon,armor)
+    
     
 
 
