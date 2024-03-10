@@ -8,6 +8,26 @@ class Player:
         self.armor = armor
         self.gold = gold
 
+class Stats:
+    """
+    Contains final player stats from weapon and armor
+    """
+    def __init__(self,weapon,armor):
+        self.weapon = weapon
+        self.armor = armor
+
+    def damage(self):
+        return 1 if self.weapon == "None" else 1+self.weapon.damage
+    def crit_rate(self):
+        return 0 if self.weapon == "None" else self.weapon.crit_rate
+    def health(self):
+        return 10 if self.armor == "None" else 10+self.armor.health
+    def evasion(self):
+        return 0 if self.armor == "None" else self.armor.evasion
+    def defence(self):
+        return 0 if self.armor == "None" else self.armor.defence
+
+
 
 class Weapon:
     """
