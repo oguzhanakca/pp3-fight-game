@@ -76,7 +76,7 @@ def load_menu(player,weapon,armor,stats):
         new_line_spaces()
         print(f"Welcome to Arena, {player.name}")
         print("\nWhat would you like to do?")
-        print("\n1 - Visit Shop\n2 - Hunt\n3 - Stats\n4 - Exit Game\n")
+        print("\n1 - Visit Shop\n2 - Enter Arena\n3 - Stats\n4 - Exit Game\n")
         menu_input = input("Your Input : ")
         if menu_input == "1":
             valid_input = True
@@ -224,7 +224,7 @@ def update_player_stats(weapon,armor,stats):
     stats = Stats(weapon,armor)
     
 
-def load_hunt(player):
+def enter_arena(player):
     """
     Displays the list of enemies
     """
