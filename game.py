@@ -223,10 +223,12 @@ def initiate_combat(player,weapon,armor,stats,enemy):
     enemy_combat = Enemy_Combat(enemy.name,enemy.damage,enemy.defence,enemy.health,enemy.evasion,enemy.crit_rate,enemy.gold_drop)
     #Create combat
     combat = Combat()
+    round = 1
     #Start combat
     while True:
         print(f"{player_combat.name} Health : {player_combat.health}")
         print(f"{enemy_combat.name} Health : {enemy_combat.health}")
+        print(f"Round : {round}")
         print("Choose your action\n1 - Attack\n2 - Run away")
         combat_input = input("Your input : ")
         if combat_input == "1":
@@ -241,6 +243,7 @@ def initiate_combat(player,weapon,armor,stats,enemy):
             else:
                 print("You couldn't run away.")
         combat.attack(enemy_combat,player_combat)
+        round += 1
         if combat.check_combat(player,player_combat,enemy_combat): break
     update_sheet_gold(player)
     load_menu(player,weapon,armor,stats)
