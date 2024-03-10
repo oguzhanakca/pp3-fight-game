@@ -8,6 +8,7 @@ class Player:
         self.armor = armor
         self.gold = gold
 
+
 class Weapon:
     """
     The class that shows player's current weapon
@@ -48,3 +49,5 @@ class Combat:
     def __init__(self,player,enemy):
         self.player = player
         self.enemy = enemy
+
+    

@@ -33,9 +33,9 @@ def update_player_sheet(player,shop_type):
     account_username = player.name.lower()
     account_row = accounts.find(account_username).row
     if shop_type == "weapon":
-        accounts.update_cell(account_row, 4, player.weapon)
+        accounts.update_cell(account_row, 3, player.weapon)
     else:
-        accounts.update_cell(account_row, 5, player.armor)
+        accounts.update_cell(account_row, 4, player.armor)
 
 def update_sheet_gold(player):
     """
@@ -43,4 +43,4 @@ def update_sheet_gold(player):
     """
     account_username = player.name.lower()
     account_row = accounts.find(account_username).row
-    accounts.update_cell(account_row, 6, player.gold)
+    accounts.update_cell(account_row, 5, player.gold)

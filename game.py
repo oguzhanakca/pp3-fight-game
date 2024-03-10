@@ -46,7 +46,7 @@ def load_character(username):
     new_line_spaces()
     print("Loading Character ...")
     player_row = accounts.find(username).row
-    player_weapon,player_armor,player_gold = [accounts.cell(player_row,4).value,accounts.cell(player_row,5).value,accounts.cell(player_row,6).value]
+    player_weapon,player_armor,player_gold = [accounts.cell(player_row,3).value,accounts.cell(player_row,4).value,accounts.cell(player_row,5).value]
     #Create Player
     player = Player(username.capitalize(),player_weapon,player_armor,int(player_gold))
     #Create Player's Gear
@@ -85,7 +85,7 @@ def load_menu(player,weapon,armor):
             load_hunt(player)
         elif menu_input == "3":
             valid_input = True
-            load_stats(player)
+            #load_stats(player)
         elif menu_input == "4":
             valid_input = True
             print("See you later !")
@@ -217,10 +217,11 @@ def load_hunt(player):
     Displays the list of enemies
     """
 
-def load_stats(player):
+def show_stats(player):
     """
     Displays player's stats
     """
+
     
 
 
