@@ -83,7 +83,7 @@ def load_menu(player,weapon,armor,stats):
             shop_menu(player,weapon,armor,stats)
         elif menu_input == "2":
             valid_input = True
-            load_hunt(player,stats)
+            enter_arena(player,stats)
         elif menu_input == "3":
             valid_input = True
             show_stats(player,weapon,armor,stats)
