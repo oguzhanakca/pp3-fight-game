@@ -29,8 +29,10 @@ class Stats:
         return 0 if self.armor == "None" else self.armor.defence
     
     def view_stats(self):
-        print(f"Weapon : {self.weapon.name}\nArmor : {self.armor.name}")
-        print(f"Your Maximum Health : {self.health()}\nYour Damage : {self.damage()} - {self.damage()+2}\nYour Defence : {self.defence()}\nYour Critical Rate : {self.crit_rate()}%\nYour Evasion : {self.evasion()}%")
+        weapon_name = "None" if self.weapon == "None" else self.weapon.name
+        armor_name = 'None' if self.armor == 'None' else self.armor.name
+        print(f"Weapon : {weapon_name}\nArmor : {armor_name}")
+        print(f"Your Maximum Health : {self.health()}\nYour Damage : {self.damage()} - {self.damage()+2}\nYour Defence : {self.defence()}\nYour Critical Rate : {self.crit_rate()} %\nYour Evasion : {self.evasion()} %")
 
 
 
@@ -121,7 +123,10 @@ class Combat:
                 
                 defender.health -= damage
                 if hasattr(attacker,"cooldown"):
-                    attacker.cooldown = True
+                    print("Class have cooldown attribute")
+                    attacker.cooldown = False
+                else:
+                    print("Class doesnt have cooldown attribute")
 
     def special_attack(self,attacker,defender):
         """
