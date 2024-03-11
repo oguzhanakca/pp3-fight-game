@@ -123,10 +123,7 @@ class Combat:
                 
                 defender.health -= damage
                 if hasattr(attacker,"cooldown"):
-                    print("Class have cooldown attribute")
                     attacker.cooldown = False
-                else:
-                    print("Class doesnt have cooldown attribute")
 
     def special_attack(self,attacker,defender):
         """

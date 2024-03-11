@@ -241,6 +241,7 @@ def initiate_combat(player,weapon,armor,stats,enemy):
         elif combat_input == "2":
             new_line_spaces()
             combat.special_attack(player_combat,enemy_combat)
+            if combat.check_combat(player,player_combat,enemy_combat): break
         elif combat_input == "3":
             print("You are trying to run away...")
             if random.randint(0,4)==1:
