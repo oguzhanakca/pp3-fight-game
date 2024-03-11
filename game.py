@@ -51,22 +51,30 @@ def load_character(username):
     #Create Player
     player = Player(username.capitalize(),player_weapon,player_armor,int(player_gold))
     #Create Player's Gear
-    equipped_weapon = player_weapon
-    equipped_armor = player_armor
+    weapon = player_weapon
+    armor = player_armor
     # Check equipped gear
-    if equipped_weapon != "None":
+    if weapon != "None":
         print("Loading Weapon ...")
-        weapon_row = weapons.find(equipped_weapon).row
-        equipped_weapon = Weapon(int(weapons.cell(weapon_row,1).value),weapons.cell(weapon_row,2).value,int(weapons.cell(weapon_row,3).value),int(weapons.cell(weapon_row,4).value))
+        weapon = load_weapon(weapon)
         print("Weapon Loading completed.")
-    if equipped_armor != "None":
+    if armor != "None":
         print("Loading Armor ...")
-        armor_row = armors.find(equipped_armor).row
-        equipped_armor = Armor(int(armors.cell(armor_row,1).value),armors.cell(armor_row,2).value,int(armors.cell(armor_row,3).value),int(armors.cell(armor_row,4).value),int(armors.cell(armor_row,5).value))
+        armor = load_armor(armor)
         print("Armor Loading completed.")
-    stats = Stats(equipped_weapon,equipped_armor)
+    stats = Stats(weapon,armor)
     print("Character Loading completed.")
-    load_menu(player,equipped_weapon,equipped_armor,stats)
+    load_menu(player,weapon,armor,stats)
+
+def load_weapon(weapon):
+    weapon_row = weapons.find(weapon).row
+    weapon = Weapon(int(weapons.cell(weapon_row,1).value),weapons.cell(weapon_row,2).value,int(weapons.cell(weapon_row,3).value),int(weapons.cell(weapon_row,4).value))
+    return weapon
+
+def load_armor(armor):
+    armor_row = armors.find(armor).row
+    armor = Armor(int(armors.cell(armor_row,1).value),armors.cell(armor_row,2).value,int(armors.cell(armor_row,3).value),int(armors.cell(armor_row,4).value),int(armors.cell(armor_row,5).value))
+    return armor
 
 def load_menu(player,weapon,armor,stats):
     """
@@ -159,19 +167,28 @@ def load_shop(player,weapon,armor,stats,shop_type):
                     # Validate option
                     check_result = validate_shop_question(player,item_id,shop_type,check_input)
                     if check_result:
-                        update_player_weapon(player,item_id,weapon) if shop_type == "weapon" else update_player_armor(player,item_id,armor)
+                        if shop_type == "weapon":
+                            weapon = update_player_weapon(player,item_id,weapon) 
+                        else:
+                            armor = update_player_armor(player,item_id,armor)
                         stats = Stats(weapon,armor)
                 else:
                     purchase_result = validate_balance(player,item_id,shop_type)
                     if purchase_result:
                         update_sheet_gold(player)
-                        update_player_weapon(player,item_id,weapon) if shop_type == "weapon" else update_player_armor(player,item_id,armor)
+                        if shop_type == "weapon":
+                            weapon = update_player_weapon(player,item_id,weapon) 
+                        else:
+                            armor = update_player_armor(player,item_id,armor)
                         stats = Stats(weapon,armor)
             else:
                 purchase_result = validate_balance(player,item_id,shop_type)
                 if purchase_result:
                     update_sheet_gold(player)
-                    update_player_weapon(player,item_id,weapon) if shop_type == "weapon" else update_player_armor(player,item_id,armor)
+                    if shop_type == "weapon":
+                        weapon = update_player_weapon(player,item_id,weapon) 
+                    else:
+                        armor = update_player_armor(player,item_id,armor)
                     stats = Stats(weapon,armor)
 
         else:
@@ -211,11 +228,14 @@ def show_stats(player,weapon,armor,stats):
     new_line_spaces()
     stats.view_stats()
     print("1 - Go back to menu")
+    stats_process = True
     stats_input = input("Your input : ")
-    if stats_input == "1":
-        load_menu(player,weapon,armor,stats)
-    else:
-        print("Wrong Input")
+    while stats_process:
+        if stats_input == "1":
+            stats_process = False
+            load_menu(player,weapon,armor,stats)
+        else:
+            print("Wrong Input")
 
 def initiate_combat(player,weapon,armor,stats,enemy):
     """
@@ -304,6 +324,7 @@ def update_player_weapon(player,weapon_id,weapon):
         weapon.crit_rate = int(weapons.cell(weapon_id+1,4).value)
     player.weapon = weapon.name
     update_player_sheet(player,"weapon")
+    return weapon
 
 def update_player_armor(player,armor_id,armor):
     """
@@ -317,9 +338,9 @@ def update_player_armor(player,armor_id,armor):
         armor.defense = int(armors.cell(armor_id+1,3).value)
         armor.evasion = int(armors.cell(armor_id+1,4).value)
         armor.health = int(armors.cell(armor_id+1,5).value)
-    print(armor)
     player.armor = armor.name
     update_player_sheet(player,"armor")
+    return armor
 
     
     
