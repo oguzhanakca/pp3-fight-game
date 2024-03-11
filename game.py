@@ -248,7 +248,10 @@ def initiate_combat(player,weapon,armor,stats,enemy):
                 break
             else:
                 print("You couldn't run away.")
-        if not enemy_combat.stunned:
+        if enemy_combat.stunned:
+            print(f"{enemy_combat.name} is stunned!")
+            enemy_combat.stunned = False
+        else:
             if round%3 == 2:
                 print(f"{enemy_combat.name} is preparing to heal!")
                 combat.attack(enemy_combat,player_combat)
@@ -258,9 +261,7 @@ def initiate_combat(player,weapon,armor,stats,enemy):
                 combat.attack(enemy_combat,player_combat)
             if combat.check_combat(player,player_combat,enemy_combat):
                 break
-        else:
-            print(f"{enemy_combat.name} is stunned!")
-            enemy_combat.stunned = False
+            
         round += 1
     update_sheet_gold(player)
     load_menu(player,weapon,armor,stats)
