@@ -147,6 +147,7 @@ def load_shop(player,weapon,armor,stats,shop_type):
         input_range = item_id in range(1,7) if shop_type == "weapon" else item_id in range(1,5)
         # Check input
         if cancel_input:
+            shop_process = True
             load_menu(player,weapon,armor,stats)
         elif input_range:
             if player_has_item:
@@ -196,7 +197,9 @@ def enter_arena(player,weapon,armor,stats):
                 # Create Enemy
                 enemy = Enemy(all_enemies[int(enemy_id)][1],int(all_enemies[int(enemy_id)][2]),int(all_enemies[int(enemy_id)][3]),int(all_enemies[int(enemy_id)][4]),int(all_enemies[int(enemy_id)][5]),int(all_enemies[int(enemy_id)][6]),int(all_enemies[int(enemy_id)][7]))
                 initiate_combat(player,weapon,armor,stats,enemy)
-            elif enemy_id == "8": load_menu(player,weapon,armor,stats)
+            elif enemy_id == "8":
+                arena_process = True
+                load_menu(player,weapon,armor,stats)
             else: print("Wrong Input")
         else:
             print("Wrong Input")
@@ -314,6 +317,7 @@ def update_player_armor(player,armor_id,armor):
         armor.defense = int(armors.cell(armor_id+1,3).value)
         armor.evasion = int(armors.cell(armor_id+1,4).value)
         armor.health = int(armors.cell(armor_id+1,5).value)
+    print(armor)
     player.armor = armor.name
     update_player_sheet(player,"armor")
 
