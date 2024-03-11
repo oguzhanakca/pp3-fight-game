@@ -34,8 +34,6 @@ class Stats:
         print(f"Weapon : {weapon_name}\nArmor : {armor_name}")
         print(f"Your Maximum Health : {self.health()}\nYour Damage : {self.damage()} - {self.damage()+2}\nYour Defence : {self.defence()}\nYour Critical Rate : {self.crit_rate()} %\nYour Evasion : {self.evasion()} %")
 
-
-
 class Weapon:
     """
     The class that shows player's current weapon
@@ -82,7 +80,6 @@ class PlayerCombat:
         self.evasion = evasion
         self.defence = defence
         self.cooldown = False
-        
 
 class EnemyCombat:
     """
@@ -98,7 +95,6 @@ class EnemyCombat:
         self.gold_drop = gold_drop
         self.stunned = False
         
-
 class Combat:
     """
     The class that handles combat
