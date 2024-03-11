@@ -98,6 +98,9 @@ def load_menu(player,weapon,armor,stats):
             show_stats(player,weapon,armor,stats)
         elif menu_input == "4":
             valid_input = True
+            how_to_play(player,weapon,armor,stats)
+        elif menu_input == "5":
+            valid_input = True
             print("See you later !")
         else:
             print("Invalid Input")
@@ -172,6 +175,7 @@ def load_shop(player,weapon,armor,stats,shop_type):
                         else:
                             armor = update_player_armor(player,item_id,armor)
                         stats = Stats(weapon,armor)
+
                 else:
                     purchase_result = validate_balance(player,item_id,shop_type)
                     if purchase_result:
@@ -181,6 +185,7 @@ def load_shop(player,weapon,armor,stats,shop_type):
                         else:
                             armor = update_player_armor(player,item_id,armor)
                         stats = Stats(weapon,armor)
+
             else:
                 purchase_result = validate_balance(player,item_id,shop_type)
                 if purchase_result:
@@ -190,10 +195,8 @@ def load_shop(player,weapon,armor,stats,shop_type):
                     else:
                         armor = update_player_armor(player,item_id,armor)
                     stats = Stats(weapon,armor)
-
         else:
             print("Please enter a number matching the Id")
-
 
 def enter_arena(player,weapon,armor,stats):
     """
@@ -342,7 +345,22 @@ def update_player_armor(player,armor_id,armor):
     update_player_sheet(player,"armor")
     return armor
 
-    
+def how_to_play(player,weapon,armor,stats):
+    """
+    Prints how to play
+    """
+    new_line_spaces()
+    print("Welcome to Arena.\nArena is a turn-based battle game that challenges players. You must advance against different enemies by making the right attacks at the right time.\n- Condition of beating game : To beat the game, you need to defeat the enemy called 'Boss'.\n- Progress : Improve your equipment with the gold you earn from defeating enemies.\n- Combat : You need to decide well which attack you should use or when you should run away. But be careful, escaping may not always be successful.\n- Combat Tips:\n1 - Be sure to have correct gear to face an enemy.\n2 - Think carefully before using your special attack. You need to use normal attack once before using your special attack. Escape attempt will not recover your special attack cooldown.\n3 - Enemies will try to recover every 3 turn. You can try to block it with your special attack.\nGood luck with your adventure.")
+    new_line_spaces()
+    button_pressed = False
+    while not button_pressed:
+        print("1 - Go back to menu")
+        player_input = input("Your input : ")
+        if player_input == "1":
+            button_pressed = True
+            load_menu(player,weapon,armor,stats)
+        else:
+            print("Wrong Input")
     
 
 
