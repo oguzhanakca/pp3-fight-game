@@ -26,23 +26,25 @@ def register_check():
     player_username = ""
     # Check Username - Register
     while not username_entry:
-        username = input("Please enter your username\nEnter 'x' to abort\n")
+        print("Please enter your username\nEnter 'x' to abort\n")
+        username = input("Your input : ")
         if username == "x":
             return "x"
         elif not username.isalpha():
-            print("Username must contain only alphabetic characters")
+            print("\nUsername must contain only alphabetic characters\n")
         elif len(username.split(" "))>1:
-            print("Username must not contain spaces")
+            print("\nUsername must not contain spaces\n")
         elif len(username)>15 or len(username)<5:
-            print("Username length must be between 5 and 15 characters")
+            print("\nUsername length must be between 5 and 15 characters\n")
         elif check_username(username):
-            print("Username already exists")
+            print("\nUsername already exists\n")
         else:
             username_entry = True
             player_username = username
     # Check Password - Register
     while username_entry and not password_entry:
-        password = input("Please enter your password\nEnter 'x' to abort\n")
+        print("\nPlease enter your password\nEnter 'x' to abort\n")
+        password = input("Your input : ")
         if password == "x":
             return "x"
         elif len(password.split(" "))>1:
@@ -52,7 +54,7 @@ def register_check():
         else:
             password_entry = True
             create_new_user(player_username,password)
-            print("Your account has created. Please log in.")
+            print("\nYour account has created. Please log in.\n")
             return "reg"
 
     
