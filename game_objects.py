@@ -22,7 +22,7 @@ class Stats:
     def crit_rate(self):
         return 0 if self.weapon == "None" else self.weapon.crit_rate
     def health(self):
-        return 10 if self.armor == "None" else 10+self.armor.health
+        return 15 if self.armor == "None" else 15+self.armor.health
     def evasion(self):
         return 0 if self.armor == "None" else self.armor.evasion
     def defence(self):
@@ -169,9 +169,10 @@ class Combat:
         if combat_end:
             if player_dead: print(f"You have been killed by {enemy_combat.name}")
             if enemy_dead:
-                player.gold += random.randint(enemy_combat.gold_drop-2,enemy_combat.gold_drop+2)
+                earned_gold = random.randint(enemy_combat.gold_drop-2,enemy_combat.gold_drop+2)
+                player.gold += earned_gold
                 print(f"You have killed {enemy_combat.name}")
-                print(f"You have earned {enemy_combat.gold_drop} gold.")
+                print(f"You have earned {earned_gold} gold.")
         return combat_end
 
 
