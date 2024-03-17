@@ -147,7 +147,7 @@ class Combat:
 
     def heal(self,enemy_combat,enemy):
         max_health = enemy.health
-        heal_amount = enemy.damage*2
+        heal_amount = max_health/2
         enemy_combat.health += heal_amount
         if enemy_combat.health > max_health: enemy_combat.health = max_health
         print(f"{enemy.name} healed by {heal_amount}")

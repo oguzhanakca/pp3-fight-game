@@ -28,7 +28,7 @@ def create_new_user(username,password):
 
 def update_player_sheet(player,shop_type):
     """
-    Updates player's weapon in the sheet after player purchases a weapon
+    Updates player's weapon or armor in the sheet after player purchases something
     """
     account_username = player.name.lower()
     account_row = accounts.find(account_username).row

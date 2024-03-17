@@ -362,11 +362,4 @@ def how_to_play(player,weapon,armor,stats):
         else:
             print("Wrong Input")
     
-
-
-
-
     
-
-
-
