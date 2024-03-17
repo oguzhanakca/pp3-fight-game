@@ -85,7 +85,7 @@ def load_menu(player,weapon,armor,stats):
         new_line_spaces()
         print(f"Welcome to Arena, {player.name}")
         print("\nWhat would you like to do?")
-        print("\n1 - Visit Shop\n2 - Enter Arena\n3 - Stats\n4 - Exit Game\n")
+        print("\n1 - Visit Shop\n2 - Enter Arena\n3 - Stats\n4 - How to play\n5 - Exit Game\n")
         menu_input = input("Your Input : ")
         if menu_input == "1":
             valid_input = True
