@@ -212,17 +212,17 @@ def enter_arena(player,weapon,armor,stats):
     while not arena_process:
         enemy_id = input("Your input : ")
         if enemy_id.isdigit():
-            if int(enemy_id) in range(1,8):
+            if int(enemy_id) in range(1,9):
                 arena_process = True
                 # Create Enemy
                 enemy = Enemy(all_enemies[int(enemy_id)][1],int(all_enemies[int(enemy_id)][2]),int(all_enemies[int(enemy_id)][3]),int(all_enemies[int(enemy_id)][4]),int(all_enemies[int(enemy_id)][5]),int(all_enemies[int(enemy_id)][6]),int(all_enemies[int(enemy_id)][7]))
                 initiate_combat(player,weapon,armor,stats,enemy)
-            elif enemy_id == "8":
+            elif enemy_id == "9":
                 arena_process = True
                 load_menu(player,weapon,armor,stats)
             else: print("Wrong Input")
         else:
-            print("Wrong Input")
+            print("You must enter a number!")
     
 def show_stats(player,weapon,armor,stats):
     """
@@ -310,9 +310,9 @@ def display_enemies(all_enemies):
     """
     Prints all enemies
     """
-    for i in range(0,8):
+    for i in range(0,9):
         print(f"{all_enemies[i][0].capitalize()} - {all_enemies[i][1].capitalize()}")
-    print("8 - Go back to menu")
+    print("9 - Go back to menu")
                 
 def update_player_weapon(player,weapon_id,weapon):
     """
