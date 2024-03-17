@@ -155,7 +155,7 @@ def load_shop(player,weapon,armor,stats,shop_type):
             print("Please enter a number")
             continue
         cancel_input = item_id == 7 if shop_type == "weapon" else item_id == 5
-        input_range = item_id in range(1,7) if shop_type == "weapon" else item_id in range(1,5)
+        input_range = item_id in range(1,8) if shop_type == "weapon" else item_id in range(1,5)
         # Check input
         if cancel_input:
             shop_process = True
@@ -298,9 +298,9 @@ def display_shop_items(shop_items,shop_type):
     Prints shop content
     """
     if shop_type == "weapon":
-        for i in range(0,7):
+        for i in range(0,8):
                 print(f"{shop_items[i][0].capitalize()} - {shop_items[i][1].capitalize()}\t{shop_items[i][2].capitalize()}\t{shop_items[i][3].capitalize()}\t{shop_items[i][4].capitalize()}")
-        print("7 - Leave shop")
+        print("8 - Leave shop")
     else:
         for i in range(0,5):
                 print(f"{shop_items[i][0].capitalize()} - {shop_items[i][1].capitalize()}\t{shop_items[i][2].capitalize()}\t{shop_items[i][3].capitalize()}\t{shop_items[i][4].capitalize()}\t{shop_items[i][5].capitalize()}")
