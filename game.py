@@ -154,7 +154,7 @@ def load_shop(player,weapon,armor,stats,shop_type):
         else:
             print("Please enter a number")
             continue
-        cancel_input = item_id == 7 if shop_type == "weapon" else item_id == 5
+        cancel_input = item_id == 8 if shop_type == "weapon" else item_id == 5
         input_range = item_id in range(1,8) if shop_type == "weapon" else item_id in range(1,5)
         # Check input
         if cancel_input:
@@ -242,7 +242,7 @@ def show_stats(player,weapon,armor,stats):
 
 def initiate_combat(player,weapon,armor,stats,enemy):
     """
-    Initiate Combats for both side
+    Combat Controller
     """
     #Create player and enemy
     player_combat = PlayerCombat(player.name,stats.damage(),stats.crit_rate(),stats.health(),stats.evasion(),stats.defence())
@@ -251,9 +251,10 @@ def initiate_combat(player,weapon,armor,stats,enemy):
     enemy_max_health = enemy_combat.health
     #Create combat
     combat = Combat()
+    combat_status = "ongoing"
     round = 1
     #Start combat
-    while True:
+    while combat_status == "ongoing":
         new_line_spaces()
         print(f"{player_combat.name} Health : {player_combat.health} / {player_max_health}")
         print(f"{enemy_combat.name} Health : {enemy_combat.health} / {enemy_max_health}")
@@ -263,14 +264,19 @@ def initiate_combat(player,weapon,armor,stats,enemy):
         if combat_input == "1":
             new_line_spaces()
             combat.attack(player_combat,enemy_combat)
-            if combat.check_combat(player,player_combat,enemy_combat): break
+            combat_status = combat.check_combat(player,player_combat,enemy_combat)
+            if combat_status != "ongoing":
+                break
         elif combat_input == "2":
             new_line_spaces()
             combat.special_attack(player_combat,enemy_combat)
-            if combat.check_combat(player,player_combat,enemy_combat): break
+            combat_status = combat.check_combat(player,player_combat,enemy_combat)
+            if combat_status != "ongoing":
+                break
         elif combat_input == "3":
             print("You are trying to run away...")
             if random.randint(0,4)==1:
+                combat_status = "escaped"
                 print("You escaped successfully")
                 break
             else:
@@ -286,12 +292,19 @@ def initiate_combat(player,weapon,armor,stats,enemy):
                 combat.heal(enemy_combat,enemy)
             else:
                 combat.attack(enemy_combat,player_combat)
-            if combat.check_combat(player,player_combat,enemy_combat):
+            combat_status = combat.check_combat(player,player_combat,enemy_combat)
+            if combat_status != "ongoing":
                 break
-            
         round += 1
-    update_sheet_gold(player)
-    load_menu(player,weapon,armor,stats)
+    if combat_status == "finished":
+        print("Congratulations !!!\nYou beat the final boss.")
+    elif combat_status == "killed" or combat_status == "defeated":
+        update_sheet_gold(player)
+        load_menu(player,weapon,armor,stats)
+    else:
+        load_menu(player,weapon,armor,stats)
+
+
 
 def display_shop_items(shop_items,shop_type):
     """
@@ -350,7 +363,7 @@ def how_to_play(player,weapon,armor,stats):
     Prints how to play
     """
     new_line_spaces()
-    print("Welcome to Arena.\nArena is a turn-based battle game that challenges players. You must advance against different enemies by making the right attacks at the right time.\n- Condition of beating game : To beat the game, you need to defeat the enemy called 'Boss'.\n- Progress : Improve your equipment with the gold you earn from defeating enemies.\n- Combat : You need to decide well which attack you should use or when you should run away. But be careful, escaping may not always be successful.\n- Combat Tips:\n1 - Be sure to have correct gear to face an enemy.\n2 - Think carefully before using your special attack. You need to use normal attack once before using your special attack. Escape attempt will not recover your special attack cooldown.\n3 - Enemies will try to recover every 3 turn. You can try to block it with your special attack.\nGood luck with your adventure.\nPS : Luck is also an important factor to win battles.")
+    print("Welcome to Arena.\nArena is a turn-based battle game that challenges players. You must advance against different enemies by making the right attacks at the right time.\n- Condition of beating game : To beat the game, you need to defeat the Demon King.\n- Progress : Improve your equipment with the gold you earn from defeating enemies.\n- Combat : You need to decide well which attack you should use or when you should run away. But be careful, escaping may not always be successful.\n- Combat Tips:\n1 - Be sure to have correct gear to face an enemy.\n2 - Think carefully before using your special attack. You need to use normal attack once before using your special attack. Escape attempt will not recover your special attack cooldown.\n3 - Enemies will try to recover their health every 3 turn. You can try to block it with your special attack.\nGood luck with your adventure.\nPS : Luck is also an important factor to win battles.")
     new_line_spaces()
     button_pressed = False
     while not button_pressed:

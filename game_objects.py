@@ -147,7 +147,7 @@ class Combat:
 
     def heal(self,enemy_combat,enemy):
         max_health = enemy.health
-        heal_amount = max_health/2
+        heal_amount = int(max_health/2)
         enemy_combat.health += heal_amount
         if enemy_combat.health > max_health: enemy_combat.health = max_health
         print(f"{enemy.name} healed by {heal_amount}")
@@ -160,13 +160,25 @@ class Combat:
         enemy_dead = enemy_combat.health <=0
         combat_end = player_dead or enemy_dead
         if combat_end:
-            if player_dead: print(f"You have been killed by {enemy_combat.name}")
+            if player_dead:
+                print(f"You have been killed by {enemy_combat.name}")
+                gold_lost = enemy_combat.gold_drop*10
+                player.gold -= gold_lost
+                if player.gold <0: player.gold = 0
+                print(f"You lost {gold_lost} gold.")
+                return "defeated"
             if enemy_dead:
-                earned_gold = random.randint(enemy_combat.gold_drop-2,enemy_combat.gold_drop+2)
-                player.gold += earned_gold
                 print(f"You have killed {enemy_combat.name}")
-                print(f"You have earned {earned_gold} gold.")
-        return combat_end
+                if enemy_combat.name == "Demon King":
+                    print("You beat the game.")
+                    return "finished"
+                else:
+                    earned_gold = random.randint(enemy_combat.gold_drop-2,enemy_combat.gold_drop+2)
+                    player.gold += earned_gold
+                    print(f"You have earned {earned_gold} gold.")
+                    return "killed"
+        else:
+            return "ongoing"
 
 
     
