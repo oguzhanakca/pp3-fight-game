@@ -162,7 +162,7 @@ class Combat:
         if combat_end:
             if player_dead:
                 print(f"You have been killed by {enemy_combat.name}")
-                gold_lost = enemy_combat.gold_drop*5
+                gold_lost = enemy_combat.gold_drop*4
                 player.gold -= gold_lost
                 if player.gold <0: player.gold = 0
                 print(f"You lost {gold_lost} gold.")
