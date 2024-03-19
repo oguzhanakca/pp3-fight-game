@@ -12,7 +12,7 @@ def welcome():
     Displays when users starts game.
     """
     message = "           _____  ______ _   _          \n     /\   |  __ \|  ____| \ | |   /\    \n    /  \  | |__) | |__  |  \| |  /  \   \n   / /\ \ |  _  /|  __| | . ` | / /\ \  \n  / ____ \| | \ \| |____| |\  |/ ____ \ \n /_/    \_\_|  \_\______|_| \_/_/    \_\\\n                                                                                "
-    print(message)
+    print(Fore.MAGENTA + message + Fore.RESET)
     start_option()
 
 def start_option():
