@@ -54,7 +54,7 @@ def load_character(username):
     """
     # Get player data from sheets
     new_line_spaces()
-    print("Loading Character ...")
+    print(Fore.LIGHTBLUE_EX + "Loading Character ..." + Fore.RESET)
     player_row = accounts.find(username).row
     player_weapon,player_armor,player_gold = [accounts.cell(player_row,3).value,accounts.cell(player_row,4).value,accounts.cell(player_row,5).value]
     #Create Player
@@ -64,15 +64,15 @@ def load_character(username):
     armor = player_armor
     # Check equipped gear
     if weapon != "None":
-        print("Loading Weapon ...")
+        print(Fore.LIGHTBLUE_EX + "Loading Weapon ..." + Fore.RESET)
         weapon = load_weapon(weapon)
-        print("Weapon Loading completed.")
+        print(Fore.LIGHTBLUE_EX + "Weapon Loading completed." + Fore.RESET)
     if armor != "None":
-        print("Loading Armor ...")
+        print(Fore.LIGHTBLUE_EX + "Loading Armor ..." + Fore.RESET)
         armor = load_armor(armor)
-        print("Armor Loading completed.")
+        print(Fore.LIGHTBLUE_EX + "Armor Loading completed." + Fore.RESET)
     stats = Stats(weapon,armor)
-    print("Character Loading completed.")
+    print(Fore.LIGHTBLUE_EX + "Character Loading completed." + Fore.RESET)
     load_menu(player,weapon,armor,stats)
 
 def load_weapon(weapon):
