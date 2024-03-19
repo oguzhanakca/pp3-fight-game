@@ -175,9 +175,8 @@ def load_shop(player,weapon,armor,stats,shop_type):
                 # Check if Player's weapon better than selected weapon
                 if compare_items:
                     print(f"The {shop_type} you choose is worse or the same as the {shop_type} you have.\nDo you still want to change your {shop_type}?\nY/N")
-                    check_input = input("Your input : ").lower()
                     # Validate option
-                    check_result = validate_shop_question(player,item_id,shop_type,check_input)
+                    check_result = validate_shop_question(player,item_id,shop_type)
                     if check_result:
                         if shop_type == "weapon":
                             weapon = update_player_weapon(player,item_id,weapon) 

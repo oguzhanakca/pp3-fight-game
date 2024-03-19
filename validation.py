@@ -32,13 +32,13 @@ def register_check():
         if username == "x":
             return "x"
         elif not username.isalpha():
-            print("\nUsername must contain only alphabetic characters\n")
+            print(Fore.RED + "\nUsername must contain only alphabetic characters\n" + Fore.RESET)
         elif len(username.split(" "))>1:
-            print("\nUsername must not contain spaces\n")
+            print(Fore.RED + "\nUsername must not contain spaces\n" + Fore.RESET)
         elif len(username)>15 or len(username)<5:
-            print("\nUsername length must be between 5 and 15 characters\n")
+            print(Fore.RED + "\nUsername length must be between 5 and 15 characters\n" + Fore.RESET)
         elif check_username(username):
-            print("\nUsername already exists\n")
+            print(Fore.RED + "\nUsername already exists\n" + Fore.RESET)
         else:
             username_entry = True
             player_username = username
@@ -49,13 +49,13 @@ def register_check():
         if password == "x":
             return "x"
         elif len(password.split(" "))>1:
-            print("Password must not contain spaces\n")
+            print(Fore.RED + "\nPassword must not contain spaces\n" + Fore.RESET)
         elif len(password)>15 or len(password)<5:
-            print("Password length must be between 5 and 15 characters\n")
+            print(Fore.RED + "\nPassword length must be between 5 and 15 characters\n" + Fore.RESET)
         else:
             password_entry = True
             create_new_user(player_username,password)
-            print("\nYour account has created. Please log in.\n")
+            print(Fore.LIGHTGREEN_EX + "\nYour account has created. Please log in.\n" + Fore.RESET)
             return "reg"
 
     
@@ -76,7 +76,7 @@ def login_check():
             player_username = username
             username_entry = True
         else:
-            print("\nWrong Username\n")
+            print(Fore.RED + "\nWrong Username\n" + Fore.RESET)
 
     # Check Password - Login
     while username_entry and not password_entry:
@@ -88,7 +88,7 @@ def login_check():
             password_entry = True
             return player_username
         else:
-            print("\nWrong Password!\n")
+            print(Fore.RED + "\nWrong Password!\n" + Fore.RESET)
 
 def validate_balance(player,weapon_id,shop_type):
     """
@@ -102,15 +102,16 @@ def validate_balance(player,weapon_id,shop_type):
     check_result = player.gold >= required_gold
     if check_result:
         player.gold -= required_gold
-        print("Purchase successful!")
+        print(Fore.LIGHTGREEN_EX + "Purchase successful!" + Fore.RESET)
     else:
-        print("Not enough gold!")
+        print(Fore.RED + "Not enough gold!" + Fore.RESET)
     return check_result
 
 
-def validate_shop_question(player,item_id,shop_type,check_input):
+def validate_shop_question(player,item_id,shop_type):
     check_process = False
     while not check_process:
+        check_input = input("Your input : ").lower()
         if check_input == "y" or check_input == "n":
             if check_input == "y":
                 check_process = True
@@ -120,6 +121,7 @@ def validate_shop_question(player,item_id,shop_type,check_input):
                     return True
             else:
                 check_process = True
-                print("Purchase cancelled!")
+                print(Fore.MAGENTA + "Purchase cancelled!" + Fore.RESET)
+                return False
         else:
-            print("Wrong Input")
+            print(Fore.RED + "Wrong Input" + Fore.RESET)
