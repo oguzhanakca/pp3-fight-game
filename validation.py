@@ -76,12 +76,10 @@ def login_check():
             username_entry = True
         else:
             print("\nWrong Username\n")
-    
-    print("----------------------------------------------------")
 
     # Check Password - Login
     while username_entry and not password_entry:
-        print("Please enter your password\nEnter 'x' to abort")
+        print("\nPlease enter your password\nEnter 'x' to abort")
         password = input("Your password : ")
         if password == "x":
             return "x"

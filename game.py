@@ -1,10 +1,19 @@
 from sheets import *
 from validation import *
 from game_objects import *
+from colorama import Fore
 import random
 
 def new_line_spaces():
-    print("----------------------------------------------------")
+    print(Fore.CYAN + "----------------------------------------------------" + Fore.RESET)
+
+def welcome():
+    """
+    Displays when users starts game.
+    """
+    message = "           _____  ______ _   _          \n     /\   |  __ \|  ____| \ | |   /\    \n    /  \  | |__) | |__  |  \| |  /  \   \n   / /\ \ |  _  /|  __| | . ` | / /\ \  \n  / ____ \| | \ \| |____| |\  |/ ____ \ \n /_/    \_\_|  \_\______|_| \_/_/    \_\\\n                                                                                "
+    print(message)
+    start_option()
 
 def start_option():
     """
