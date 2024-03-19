@@ -39,7 +39,7 @@ def start_option():
             break
         else:
             new_line_spaces()
-            print("Invalid Input")
+            print(Fore.RED + "\nInvalid Input\n" + Fore.RESET)
         
     if player_username:
         if player_username == "x" or player_username == "reg":
@@ -112,7 +112,7 @@ def load_menu(player,weapon,armor,stats):
             valid_input = True
             print("See you later !")
         else:
-            print("Invalid Input")
+            print(Fore.RED + "\nInvalid Input\n" + Fore.RESET)
 
 def shop_menu(player,weapon,armor,stats):
     """
@@ -134,7 +134,7 @@ def shop_menu(player,weapon,armor,stats):
             shop_process = True
             load_menu(player,weapon,armor,stats)
         else:
-            print("Wrong Input")
+            print(Fore.RED + "\nWrong Input\n" + Fore.RESET)
 
 def load_shop(player,weapon,armor,stats,shop_type):
     """
@@ -161,7 +161,7 @@ def load_shop(player,weapon,armor,stats,shop_type):
         if shop_input.isdigit():
             item_id = int(shop_input)
         else:
-            print("Please enter a number")
+            print(Fore.RED + "\nPlease enter a number\n" + Fore.RESET)
             continue
         cancel_input = item_id == 8 if shop_type == "weapon" else item_id == 5
         input_range = item_id in range(1,8) if shop_type == "weapon" else item_id in range(1,5)
@@ -205,7 +205,7 @@ def load_shop(player,weapon,armor,stats,shop_type):
                         armor = update_player_armor(player,item_id,armor)
                     stats = Stats(weapon,armor)
         else:
-            print("Please enter a number matching the Id")
+            print(Fore.RED + "\nPlease enter a number matching the Id\n" + Fore.RESET)
 
 def enter_arena(player,weapon,armor,stats):
     """
@@ -229,9 +229,9 @@ def enter_arena(player,weapon,armor,stats):
             elif enemy_id == "9":
                 arena_process = True
                 load_menu(player,weapon,armor,stats)
-            else: print("Wrong Input")
+            else: print(Fore.RED + "\nWrong Input\n" + Fore.RESET)
         else:
-            print("You must enter a number!")
+            print(Fore.RED + "\nYou must enter a number!\n" + Fore.RESET)
     
 def show_stats(player,weapon,armor,stats):
     """
@@ -247,7 +247,7 @@ def show_stats(player,weapon,armor,stats):
             stats_process = False
             load_menu(player,weapon,armor,stats)
         else:
-            print("Wrong Input")
+            print(Fore.RED + "\nWrong Input\n" + Fore.RESET)
 
 def initiate_combat(player,weapon,armor,stats,enemy):
     """
@@ -283,15 +283,15 @@ def initiate_combat(player,weapon,armor,stats,enemy):
             if combat_status != "ongoing":
                 break
         elif combat_input == "3":
-            print("You are trying to run away...")
+            print(Fore.LIGHTBLUE_EX + "You are trying to run away..." + Fore.RESET)
             if random.randint(0,4)==1:
                 combat_status = "escaped"
-                print("You escaped successfully")
+                print(Fore.GREEN + "You escaped successfully" + Fore.RESET)
                 break
             else:
-                print("You couldn't run away.")
+                print(Fore.RED + "\nYou couldn't run away.\n" + Fore.RESET)
         if enemy_combat.stunned:
-            print(f"{enemy_combat.name} is stunned!")
+            print(Fore.LIGHTGREEN_EX + f"{enemy_combat.name} is stunned!" + Fore.RESET)
             enemy_combat.stunned = False
         else:
             if round%3 == 2:
@@ -372,7 +372,7 @@ def how_to_play(player,weapon,armor,stats):
     Prints how to play
     """
     new_line_spaces()
-    print("Welcome to Arena.\nArena is a turn-based battle game that challenges players. You must advance against different enemies by making the right attacks at the right time.\n- Condition of beating game : To beat the game, you need to defeat the Demon King.\n- Progress : Improve your equipment with the gold you earn from defeating enemies.\n- Combat : You need to decide well which attack you should use or when you should run away. But be careful, escaping may not always be successful.\n- Combat Tips:\n1 - Be sure to have correct gear to face an enemy.\n2 - Think carefully before using your special attack. You need to use normal attack once before using your special attack. Escape attempt will not recover your special attack cooldown.\n3 - Enemies will try to recover their health every 3 turn. You can try to block it with your special attack.\nGood luck with your adventure.\nPS : Luck is also an important factor to win battles.")
+    print(Fore.MAGENTA + "Welcome to Arena.\nArena is a turn-based battle game that challenges players. You must advance against different enemies by making the right attacks at the right time.\n- Condition of beating game : To beat the game, you need to defeat the Demon King.\n- Progress : Improve your equipment with the gold you earn from defeating enemies.\n- Combat : You need to decide well which attack you should use or when you should run away. But be careful, escaping may not always be successful.\n- Combat Tips:\n1 - Be sure to have correct gear to face an enemy.\n2 - Think carefully before using your special attack. You need to use normal attack once before using your special attack. Escape attempt will not recover your special attack cooldown.\n3 - Enemies will try to recover their health every 3 turn. You can try to block it with your special attack.\nGood luck with your adventure.\nPS : Luck is also an important factor to win battles." + Fore.RESET)
     new_line_spaces()
     button_pressed = False
     while not button_pressed:
@@ -382,6 +382,6 @@ def how_to_play(player,weapon,armor,stats):
             button_pressed = True
             load_menu(player,weapon,armor,stats)
         else:
-            print("Wrong Input")
+            print(Fore.RED + "\nWrong Input\n" + Fore.RESET)
     
     
