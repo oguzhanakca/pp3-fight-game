@@ -110,7 +110,7 @@ def load_menu(player,weapon,armor,stats):
             how_to_play(player,weapon,armor,stats)
         elif menu_input == "5":
             valid_input = True
-            print("See you later !")
+            print(Fore.CYAN + "See you later !" + Fore.RESET)
         else:
             print(Fore.RED + "\nInvalid Input\n" + Fore.RESET)
 
@@ -147,13 +147,13 @@ def load_shop(player,weapon,armor,stats,shop_type):
     shop_process = False
     while not shop_process:
         new_line_spaces()
-        print(f"Your current gold : {player.gold}")
+        print(Fore.YELLOW + f"Your current gold : {player.gold}" + Fore.RESET)
         player_has_item = weapon != "None" if shop_type == "weapon" else armor != "None"
         # Display items
         if shop_type == "weapon":
-            print(f"Your current weapon : {player.weapon}\n")
+            print(Fore.MAGENTA + f"Your current weapon : {player.weapon}\n" + Fore.RESET)
         else:
-            print(f"Your current armor : {player.armor}\n")
+            print(Fore.MAGENTA + f"Your current armor : {player.armor}\n" + Fore.RESET)
         display_shop_items(all_items,shop_type)
         print("Enter the id number.")
         shop_input = input("Your input : ")
@@ -174,7 +174,7 @@ def load_shop(player,weapon,armor,stats,shop_type):
                 compare_items = weapon.id >= item_id if shop_type == "weapon" else armor.id >= item_id
                 # Check if Player's weapon better than selected weapon
                 if compare_items:
-                    print(f"The {shop_type} you choose is worse or the same as the {shop_type} you have.\nDo you still want to change your {shop_type}?\nY/N")
+                    print(Fore.LIGHTCYAN_EX + f"The {shop_type} you choose is worse or the same as the {shop_type} you have.\nDo you still want to change your {shop_type}?\nY/N" + Fore.RESET)
                     # Validate option
                     check_result = validate_shop_question(player,item_id,shop_type)
                     if check_result:
@@ -211,7 +211,7 @@ def enter_arena(player,weapon,armor,stats):
     Displays the list of enemies
     """
 
-    print("Welcome to the Arena")
+    print(Fore.LIGHTRED_EX + "Welcome to the Arena" + Fore.RESET)
     all_enemies = enemies.get_all_values()
     # Print enemy names
     display_enemies(all_enemies)
@@ -266,7 +266,7 @@ def initiate_combat(player,weapon,armor,stats,enemy):
         new_line_spaces()
         print(f"{player_combat.name} Health : {player_combat.health} / {player_max_health}")
         print(f"{enemy_combat.name} Health : {enemy_combat.health} / {enemy_max_health}")
-        print(f"Round : {round}\n")
+        print(Fore.LIGHTYELLOW_EX + f"Round : {round}\n" + Fore.RESET)
         print("Choose your action\n1 - Attack\n2 - Special Attack\n3 - Run away")
         combat_input = input("Your input : ")
         if combat_input == "1":
@@ -305,6 +305,7 @@ def initiate_combat(player,weapon,armor,stats,enemy):
                 break
         round += 1
     if combat_status == "finished":
+        #END GAME
         print("Congratulations !!!\nYou beat the final boss.")
     elif combat_status == "killed" or combat_status == "defeated":
         update_sheet_gold(player)

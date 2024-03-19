@@ -1,4 +1,5 @@
 import random
+from colorama import Fore
 class Player:
     """
     The class that contains player data
@@ -31,8 +32,8 @@ class Stats:
     def view_stats(self):
         weapon_name = "None" if self.weapon == "None" else self.weapon.name
         armor_name = 'None' if self.armor == 'None' else self.armor.name
-        print(f"Weapon : {weapon_name}\nArmor : {armor_name}")
-        print(f"Your Maximum Health : {self.health()}\nYour Damage : {self.damage()} - {self.damage()+2}\nYour Defence : {self.defence()}\nYour Critical Rate : {self.crit_rate()} %\nYour Evasion : {self.evasion()} %")
+        print(Fore.MAGENTA + f"Weapon : {weapon_name}\nArmor : {armor_name}" + Fore.RESET)
+        print(Fore.YELLOW + f"Your Maximum Health : {self.health()}\nYour Damage : {self.damage()} - {self.damage()+2}\nYour Defence : {self.defence()}\nYour Critical Rate : {self.crit_rate()} %\nYour Evasion : {self.evasion()} %" + Fore.RESET)
 
 class Weapon:
     """
@@ -104,18 +105,18 @@ class Combat:
         Handles attack action
         """
         evasion_roll = random.randint(0,99)<defender.evasion
-        if evasion_roll: print(f"{defender.name} dodged attack.")
+        if evasion_roll: print(Fore.LIGHTGREEN_EX + f"{defender.name} dodged attack." + Fore.RESET)
         else:
             damage = random.randint(attacker.damage,attacker.damage+2)-defender.defence
             if damage <= 0:
-                print(f"{attacker.name} dealt no damage to {defender.name}. {defender.name} defence is too strong!")
+                print(Fore.LIGHTYELLOW_EX + f"{attacker.name} dealt no damage to {defender.name}. {defender.name} defence is too strong!" + Fore.RESET)
             else:
                 crit_roll = random.randint(0,99)<attacker.crit_rate
                 if crit_roll:
                     damage *= 2
-                    print(f"{attacker.name} dealt critical {damage} damage to {defender.name}!")
+                    print(Fore.RED + f"{attacker.name} dealt critical {damage} damage to {defender.name}!" + Fore.RESET)
                 else:
-                    print(f"{attacker.name} dealt {damage} damage to {defender.name}!")
+                    print(Fore.RED + f"{attacker.name} dealt {damage} damage to {defender.name}!" + Fore.RESET)
                 
                 defender.health -= damage
                 if hasattr(attacker,"cooldown"):
@@ -126,21 +127,21 @@ class Combat:
         Handles special attack action
         """
         if attacker.cooldown:
-            print("Your special attack is not ready!")
+            print(Fore.MAGENTA + "Your special attack is not ready!" + Fore.RESET)
         else:
             evasion_roll = random.randint(0,99)<defender.evasion
-            if evasion_roll: print(f"{defender.name} dodged the special attack.")
+            if evasion_roll: print(Fore.LIGHTGREEN_EX + f"{defender.name} dodged the special attack." + Fore.RESET)
             else:
                 damage = random.randint(attacker.damage,attacker.damage+2)-defender.defence
                 if damage <= 0:
-                    print(f"{attacker.name} dealt no damage to {defender.name}. {defender.name} defence is too strong!")
+                    print(Fore.LIGHTYELLOW_EX + f"{attacker.name} dealt no damage to {defender.name}. {defender.name} defence is too strong!" + Fore.RESET)
                 else:
                     crit_roll = random.randint(0,99)<attacker.crit_rate
                     if crit_roll:
                         damage *= 4
-                        print(f"{attacker.name} dealt critical {damage} damage to {defender.name}!")
+                        print(Fore.RED + f"{attacker.name} dealt critical {damage} damage to {defender.name}!" + Fore.RESET)
                     else:
-                        print(f"{attacker.name} dealt {damage} damage to {defender.name}!")
+                        print(Fore.LIGHTRED_EX + f"{attacker.name} dealt {damage} damage to {defender.name}!" + Fore.RESET)
                     defender.health -= damage
                     attacker.cooldown = True
                     defender.stunned = True
@@ -150,7 +151,7 @@ class Combat:
         heal_amount = int(max_health/2)
         enemy_combat.health += heal_amount
         if enemy_combat.health > max_health: enemy_combat.health = max_health
-        print(f"{enemy.name} healed by {heal_amount}")
+        print(Fore.GREEN + f"{enemy.name} healed by {heal_amount}" + Fore.RESET)
     
     def check_combat(self,player,player_combat,enemy_combat):
         """
@@ -161,11 +162,11 @@ class Combat:
         combat_end = player_dead or enemy_dead
         if combat_end:
             if player_dead:
-                print(f"You have been killed by {enemy_combat.name}")
+                print(Fore.MAGENTA + f"You have been killed by {enemy_combat.name}" + Fore.RESET)
                 gold_lost = enemy_combat.gold_drop*4
                 player.gold -= gold_lost
                 if player.gold <0: player.gold = 0
-                print(f"You lost {gold_lost} gold.")
+                print(Fore.YELLOW + f"You lost {gold_lost} gold." + Fore.RESET)
                 return "defeated"
             if enemy_dead:
                 print(f"You have killed {enemy_combat.name}")
@@ -175,7 +176,7 @@ class Combat:
                 else:
                     earned_gold = random.randint(enemy_combat.gold_drop-2,enemy_combat.gold_drop+2)
                     player.gold += earned_gold
-                    print(f"You have earned {earned_gold} gold.")
+                    print(Fore.YELLOW + f"You have earned {earned_gold} gold." + Fore.RESET)
                     return "killed"
         else:
             return "ongoing"
