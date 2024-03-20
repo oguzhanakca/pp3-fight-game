@@ -315,6 +315,7 @@ def initiate_combat(player,weapon,armor,stats,enemy):
             elif feedback_question == "y":
                 if player.feedback_sent == "TRUE":
                     print(Fore.YELLOW + "You already provided a feedback."+Fore.RESET)
+                    print(Fore.CYAN + "See you later."+Fore.RESET)
                 else:
                     print(Fore.CYAN+"Enter your feedback"+Fore.RESET)
                     feedback_proceed = False
@@ -327,6 +328,7 @@ def initiate_combat(player,weapon,armor,stats,enemy):
                             send_feedback(player.name,message)
                             update_sheet_feedback(player)
                             print(Fore.GREEN + "Thank you for your feedback."+Fore.RESET)
+                            print(Fore.CYAN + "See you later."+Fore.RESET)
                 proceed = True
             else:
                 print(Fore.RED + "Wrong Input!"+Fore.RESET)  
