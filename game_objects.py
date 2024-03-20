@@ -4,11 +4,12 @@ class Player:
     """
     The class that contains player data
     """
-    def __init__(self,name, weapon, armor,gold):
+    def __init__(self,name, weapon, armor,gold,feedback_sent):
         self.name = name
         self.weapon = weapon
         self.armor = armor
         self.gold = gold
+        self.feedback_sent = feedback_sent
 
 class Stats:
     """
@@ -171,7 +172,7 @@ class Combat:
             if enemy_dead:
                 print(f"You have killed {enemy_combat.name}")
                 if enemy_combat.name == "Demon King":
-                    print("You beat the game.")
+                    print(Fore.GREEN + "Congratulations !\nYou beat the game." + Fore.RESET)
                     return "finished"
                 else:
                     earned_gold = random.randint(enemy_combat.gold_drop-2,enemy_combat.gold_drop+2)

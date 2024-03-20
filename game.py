@@ -56,9 +56,9 @@ def load_character(username):
     new_line_spaces()
     print(Fore.LIGHTBLUE_EX + "Loading Character ..." + Fore.RESET)
     player_row = accounts.find(username).row
-    player_weapon,player_armor,player_gold = [accounts.cell(player_row,3).value,accounts.cell(player_row,4).value,accounts.cell(player_row,5).value]
+    player_weapon,player_armor,player_gold,player_feedback = [accounts.cell(player_row,3).value,accounts.cell(player_row,4).value,accounts.cell(player_row,5).value,accounts.cell(player_row,6).value]
     #Create Player
-    player = Player(username.capitalize(),player_weapon,player_armor,int(player_gold))
+    player = Player(username.capitalize(),player_weapon,player_armor,int(player_gold),player_feedback)
     #Create Player's Gear
     weapon = player_weapon
     armor = player_armor
@@ -305,8 +305,32 @@ def initiate_combat(player,weapon,armor,stats,enemy):
                 break
         round += 1
     if combat_status == "finished":
-        #END GAME
-        print("Congratulations !!!\nYou beat the final boss.")
+        proceed = False
+        print(Fore.MAGENTA+"Would you like to give a feedback?\nY/N"+Fore.RESET)
+        while not proceed:
+            feedback_question = input("Your Input : ").lower()
+            if feedback_question == "n":
+                proceed = True
+                print(Fore.CYAN + "See you later."+Fore.RESET)
+            elif feedback_question == "y":
+                if player.feedback_sent == "TRUE":
+                    print(Fore.YELLOW + "You already provided a feedback."+Fore.RESET)
+                else:
+                    print(Fore.CYAN+"Enter your feedback"+Fore.RESET)
+                    feedback_proceed = False
+                    while not feedback_proceed:
+                        message = input("Your Message : ")
+                        if message.isspace() or len(message) == 0:
+                            print(Fore.RED+"Please do not enter an empty message"+Fore.RESET)
+                        else:    
+                            feedback_proceed = True
+                            send_feedback(player.name,message)
+                            update_sheet_feedback(player)
+                            print(Fore.GREEN + "Thank you for your feedback."+Fore.RESET)
+                proceed = True
+            else:
+                print(Fore.RED + "Wrong Input!"+Fore.RESET)  
+            
     elif combat_status == "killed" or combat_status == "defeated":
         update_sheet_gold(player)
         load_menu(player,weapon,armor,stats)
@@ -383,5 +407,4 @@ def how_to_play(player,weapon,armor,stats):
             load_menu(player,weapon,armor,stats)
         else:
             print(Fore.RED + "\nWrong Input\n" + Fore.RESET)
-    
     
