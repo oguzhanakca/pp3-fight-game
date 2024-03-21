@@ -5,7 +5,7 @@ from colorama import Fore
 import random
 
 def new_line_spaces():
-    print(Fore.CYAN + "----------------------------------------------------" + Fore.RESET)
+    print(Fore.CYAN + "------------------------------------------" + Fore.RESET)
 
 def welcome():
     """
