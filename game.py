@@ -72,10 +72,10 @@ def load_character(username):
     new_line_spaces()
     print(Fore.LIGHTBLUE_EX + "Loading Character ..." + Fore.RESET)
     row = accounts.find(username).row
-    weapon = accounts.cell(player_row, 3).value
-    armor = accounts.cell(player_row, 4).value
-    gold = accounts.cell(player_row, 5).value
-    feedback = accounts.cell(player_row, 6).value
+    weapon = accounts.cell(row, 3).value
+    armor = accounts.cell(row, 4).value
+    gold = accounts.cell(row, 5).value
+    feedback = accounts.cell(row, 6).value
     name = username.capitalize()
     # Create Player
     player = Player(name, weapon, armor, int(gold), feedback)
