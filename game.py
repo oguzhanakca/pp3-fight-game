@@ -4,16 +4,31 @@ from game_objects import *
 from colorama import Fore
 import random
 
+
 def new_line_spaces():
-    print(Fore.CYAN + "------------------------------------------" + Fore.RESET)
+    print(Fore.CYAN + "-----------------------------------------" + Fore.RESET)
+
 
 def welcome():
     """
     Displays when users starts game.
     """
-    message = "           _____  ______ _   _          \n     /\   |  __ \|  ____| \ | |   /\    \n    /  \  | |__) | |__  |  \| |  /  \   \n   / /\ \ |  _  /|  __| | . ` | / /\ \  \n  / ____ \| | \ \| |____| |\  |/ ____ \ \n /_/    \_\_|  \_\______|_| \_/_/    \_\\\n                                                                                "
-    print(Fore.MAGENTA + message + Fore.RESET)
+    message_1 = "           _____  ______ _   _          "
+    message_2 = r"     /\   |  __ \|  ____| \ | |   /\    "
+    message_3 = r"    /  \  | |__) | |__  |  \| |  /  \   "
+    message_4 = r"   / /\ \ |  _  /|  __| | . ` | / /\ \  "
+    message_5 = r"  / ____ \| | \ \| |____| |\  |/ ____ \ "
+    message_6 = r" /_/    \_\_|  \_\______|_| \_/_/    \_\ "
+    message_7 = ""
+    print(Fore.MAGENTA + message_1)
+    print(message_2)
+    print(message_3)
+    print(message_4)
+    print(message_5)
+    print(message_6)
+    print(message_7 + Fore.RESET)
     start_option()
+
 
 def start_option():
     """
@@ -25,7 +40,8 @@ def start_option():
     player_username = ""
     while not proceed:
         new_line_spaces()
-        account_option = input("1 - Login\n2 - Register\n3 - Exit Game\nYour Input : ")
+        print("1 - Login\n2 - Register\n3 - Exit Game")
+        account_option = input("Your Input : ")
         if account_option == "1":
             proceed = True
             new_line_spaces()
@@ -40,13 +56,13 @@ def start_option():
         else:
             new_line_spaces()
             print(Fore.RED + "\nInvalid Input\n" + Fore.RESET)
-        
+
     if player_username:
         if player_username == "x" or player_username == "reg":
             start_option()
         else:
             load_character(player_username)
-    
+
 
 def load_character(username):
     """
@@ -55,13 +71,14 @@ def load_character(username):
     # Get player data from sheets
     new_line_spaces()
     print(Fore.LIGHTBLUE_EX + "Loading Character ..." + Fore.RESET)
-    player_row = accounts.find(username).row
-    player_weapon,player_armor,player_gold,player_feedback = [accounts.cell(player_row,3).value,accounts.cell(player_row,4).value,accounts.cell(player_row,5).value,accounts.cell(player_row,6).value]
-    #Create Player
-    player = Player(username.capitalize(),player_weapon,player_armor,int(player_gold),player_feedback)
-    #Create Player's Gear
-    weapon = player_weapon
-    armor = player_armor
+    row = accounts.find(username).row
+    weapon = accounts.cell(player_row, 3).value
+    armor = accounts.cell(player_row, 4).value
+    gold = accounts.cell(player_row, 5).value
+    feedback = accounts.cell(player_row, 6).value
+    name = username.capitalize()
+    # Create Player
+    player = Player(name, weapon, armor, int(gold), feedback)
     # Check equipped gear
     if weapon != "None":
         print(Fore.LIGHTBLUE_EX + "Loading Weapon ..." + Fore.RESET)
@@ -71,21 +88,33 @@ def load_character(username):
         print(Fore.LIGHTBLUE_EX + "Loading Armor ..." + Fore.RESET)
         armor = load_armor(armor)
         print(Fore.LIGHTBLUE_EX + "Armor Loading completed." + Fore.RESET)
-    stats = Stats(weapon,armor)
+    stats = Stats(weapon, armor)
     print(Fore.LIGHTBLUE_EX + "Character Loading completed." + Fore.RESET)
-    load_menu(player,weapon,armor,stats)
+    load_menu(player, weapon, armor, stats)
+
 
 def load_weapon(weapon):
     weapon_row = weapons.find(weapon).row
-    weapon = Weapon(int(weapons.cell(weapon_row,1).value),weapons.cell(weapon_row,2).value,int(weapons.cell(weapon_row,3).value),int(weapons.cell(weapon_row,4).value))
+    num = int(weapons.cell(weapon_row, 1).value)
+    name = weapons.cell(weapon_row, 2).value
+    damage = int(weapons.cell(weapon_row, 3).value)
+    rate = int(weapons.cell(weapon_row, 4).value)
+    weapon = Weapon(num, name, damage, rate)
     return weapon
+
 
 def load_armor(armor):
     armor_row = armors.find(armor).row
-    armor = Armor(int(armors.cell(armor_row,1).value),armors.cell(armor_row,2).value,int(armors.cell(armor_row,3).value),int(armors.cell(armor_row,4).value),int(armors.cell(armor_row,5).value))
+    num = int(armors.cell(armor_row, 1).value)
+    name = armors.cell(armor_row, 2).value
+    defence = int(armors.cell(armor_row, 3).value)
+    evasion = int(armors.cell(armor_row, 4).value)
+    health = int(armors.cell(armor_row, 5).value)
+    armor = Armor(num, name, defence, evasion, health)
     return armor
 
-def load_menu(player,weapon,armor,stats):
+
+def load_menu(player, weapon, armor, stats):
     """
     Displays navigation menu that players decide what to do
     """
@@ -94,27 +123,29 @@ def load_menu(player,weapon,armor,stats):
         new_line_spaces()
         print(f"Welcome to Arena, {player.name}")
         print("\nWhat would you like to do?")
-        print("\n1 - Visit Shop\n2 - Enter Arena\n3 - Stats\n4 - How to play\n5 - Exit Game\n")
+        print("\n1 - Visit Shop\n2 - Enter Arena\n3 - Stats\n4 - How to play")
+        print("5 - Exit Game")
         menu_input = input("Your Input : ")
         if menu_input == "1":
             valid_input = True
-            shop_menu(player,weapon,armor,stats)
+            shop_menu(player, weapon, armor, stats)
         elif menu_input == "2":
             valid_input = True
-            enter_arena(player,weapon,armor,stats)
+            enter_arena(player, weapon, armor, stats)
         elif menu_input == "3":
             valid_input = True
-            show_stats(player,weapon,armor,stats)
+            show_stats(player, weapon, armor, stats)
         elif menu_input == "4":
             valid_input = True
-            how_to_play(player,weapon,armor,stats)
+            how_to_play(player, weapon, armor, stats)
         elif menu_input == "5":
             valid_input = True
             print(Fore.CYAN + "See you later !" + Fore.RESET)
         else:
             print(Fore.RED + "\nInvalid Input\n" + Fore.RESET)
 
-def shop_menu(player,weapon,armor,stats):
+
+def shop_menu(player, weapon, armor, stats):
     """
     Asks players which shop they want to visit
     """
@@ -126,17 +157,18 @@ def shop_menu(player,weapon,armor,stats):
         shop_input = input("Your input : ")
         if shop_input == "1":
             shop_process = True
-            load_shop(player,weapon,armor,stats,"weapon")
+            load_shop(player, weapon, armor, stats, "weapon")
         elif shop_input == "2":
             shop_process = True
-            load_shop(player,weapon,armor,stats,"armor")
+            load_shop(player, weapon, armor, stats, "armor")
         elif shop_input == "3":
             shop_process = True
-            load_menu(player,weapon,armor,stats)
+            load_menu(player, weapon, armor, stats)
         else:
             print(Fore.RED + "\nWrong Input\n" + Fore.RESET)
 
-def load_shop(player,weapon,armor,stats,shop_type):
+
+def load_shop(player, weapon, armor, stats, shop_type):
     """
     Displays the items player can buy and applies their decisions
     """
@@ -148,13 +180,21 @@ def load_shop(player,weapon,armor,stats,shop_type):
     while not shop_process:
         new_line_spaces()
         print(Fore.YELLOW + f"Your current gold : {player.gold}" + Fore.RESET)
-        player_has_item = weapon != "None" if shop_type == "weapon" else armor != "None"
+        has_item = True
+        if shop_type == "weapon":
+            has_item = weapon != "None"
+        else:
+            has_item = armor != "None"
         # Display items
         if shop_type == "weapon":
-            print(Fore.MAGENTA + f"Your current weapon : {player.weapon}\n" + Fore.RESET)
+            print(Fore.MAGENTA)
+            print(f"Your current weapon : {player.weapon}\n")
+            print(Fore.RESET)
         else:
-            print(Fore.MAGENTA + f"Your current armor : {player.armor}\n" + Fore.RESET)
-        display_shop_items(all_items,shop_type)
+            print(Fore.MAGENTA)
+            print(f"Your current armor : {player.armor}\n")
+            print(Fore.RESET)
+        display_shop_items(all_items, shop_type)
         print("Enter the id number.")
         shop_input = input("Your input : ")
         # Check if user entered a numeric value
@@ -164,49 +204,62 @@ def load_shop(player,weapon,armor,stats,shop_type):
             print(Fore.RED + "\nPlease enter a number\n" + Fore.RESET)
             continue
         cancel_input = item_id == 8 if shop_type == "weapon" else item_id == 5
-        input_range = item_id in range(1,8) if shop_type == "weapon" else item_id in range(1,5)
+        input_range = False
+        if shop_type == "weapon":
+            input_range = item_id in range(1, 8)
+        else:
+            input_range = item_id in range(1, 5)
         # Check input
         if cancel_input:
             shop_process = True
-            load_menu(player,weapon,armor,stats)
+            load_menu(player, weapon, armor, stats)
         elif input_range:
-            if player_has_item:
-                compare_items = weapon.id >= item_id if shop_type == "weapon" else armor.id >= item_id
+            if has_item:
+                compare_items = False
+                if shop_type == "weapon":
+                    compare_items = weapon.id >= item_id
+                else:
+                    compare_items = armor.id >= item_id
                 # Check if Player's weapon better than selected weapon
                 if compare_items:
-                    print(Fore.LIGHTCYAN_EX + f"The {shop_type} you choose is worse or the same as the {shop_type} you have.\nDo you still want to change your {shop_type}?\nY/N" + Fore.RESET)
+                    print(Fore.LIGHTCYAN_EX)
+                    print(f"Your {shop_type} is better.Are you sure?\nY/N")
+                    print(Fore.RESET)
                     # Validate option
-                    check_result = validate_shop_question(player,item_id,shop_type)
+                    check_result = shop_question(player, item_id, shop_type)
                     if check_result:
                         if shop_type == "weapon":
-                            weapon = update_player_weapon(player,item_id,weapon) 
+                            weapon = update_weapon(player, item_id, weapon)
                         else:
-                            armor = update_player_armor(player,item_id,armor)
-                        stats = Stats(weapon,armor)
+                            armor = update_armor(player, item_id, armor)
+                        stats = Stats(weapon, armor)
 
                 else:
-                    purchase_result = validate_balance(player,item_id,shop_type)
+                    purchase_result = purchase(player, item_id, shop_type)
                     if purchase_result:
-                        update_sheet_gold(player)
+                        sheet_gold(player)
                         if shop_type == "weapon":
-                            weapon = update_player_weapon(player,item_id,weapon) 
+                            weapon = update_weapon(player, item_id, weapon)
                         else:
-                            armor = update_player_armor(player,item_id,armor)
-                        stats = Stats(weapon,armor)
+                            armor = update_armor(player, item_id, armor)
+                        stats = Stats(weapon, armor)
 
             else:
-                purchase_result = validate_balance(player,item_id,shop_type)
+                purchase_result = purchase(player, item_id, shop_type)
                 if purchase_result:
-                    update_sheet_gold(player)
+                    sheet_gold(player)
                     if shop_type == "weapon":
-                        weapon = update_player_weapon(player,item_id,weapon) 
+                        weapon = update_weapon(player, item_id, weapon)
                     else:
-                        armor = update_player_armor(player,item_id,armor)
-                    stats = Stats(weapon,armor)
+                        armor = update_armor(player, item_id, armor)
+                    stats = Stats(weapon, armor)
         else:
-            print(Fore.RED + "\nPlease enter a number matching the Id\n" + Fore.RESET)
+            print(Fore.RED)
+            print("\nPlease enter a number matching the Id\n")
+            print(Fore.RESET)
 
-def enter_arena(player,weapon,armor,stats):
+
+def enter_arena(player, weapon, armor, stats):
     """
     Displays the list of enemies
     """
@@ -220,19 +273,28 @@ def enter_arena(player,weapon,armor,stats):
     while not arena_process:
         enemy_id = input("Your input : ")
         if enemy_id.isdigit():
-            if int(enemy_id) in range(1,9):
+            if int(enemy_id) in range(1, 9):
                 arena_process = True
                 # Create Enemy
-                enemy = Enemy(all_enemies[int(enemy_id)][1],int(all_enemies[int(enemy_id)][2]),int(all_enemies[int(enemy_id)][3]),int(all_enemies[int(enemy_id)][4]),int(all_enemies[int(enemy_id)][5]),int(all_enemies[int(enemy_id)][6]),int(all_enemies[int(enemy_id)][7]))
-                initiate_combat(player,weapon,armor,stats,enemy)
+                name = all_enemies[int(enemy_id)][1]
+                damage = int(all_enemies[int(enemy_id)][2])
+                defence = int(all_enemies[int(enemy_id)][3])
+                health = int(all_enemies[int(enemy_id)][4])
+                eva = int(all_enemies[int(enemy_id)][5])
+                rate = int(all_enemies[int(enemy_id)][6])
+                drop = int(all_enemies[int(enemy_id)][7])
+                enemy = Enemy(name, damage, defence, health, eva, rate, drop)
+                initiate_combat(player, weapon, armor, stats, enemy)
             elif enemy_id == "9":
                 arena_process = True
-                load_menu(player,weapon,armor,stats)
-            else: print(Fore.RED + "\nWrong Input\n" + Fore.RESET)
+                load_menu(player, weapon, armor, stats)
+            else:
+                print(Fore.RED + "\nWrong Input\n" + Fore.RESET)
         else:
             print(Fore.RED + "\nYou must enter a number!\n" + Fore.RESET)
-    
-def show_stats(player,weapon,armor,stats):
+
+
+def show_stats(player, weapon, armor, stats):
     """
     Displays player's stats
     """
@@ -244,69 +306,91 @@ def show_stats(player,weapon,armor,stats):
     while stats_process:
         if stats_input == "1":
             stats_process = False
-            load_menu(player,weapon,armor,stats)
+            load_menu(player, weapon, armor, stats)
         else:
             print(Fore.RED + "\nWrong Input\n" + Fore.RESET)
 
-def initiate_combat(player,weapon,armor,stats,enemy):
+
+def initiate_combat(player, weapon, armor, stats, enemy):
     """
     Combat Controller
     """
-    #Create player and enemy
-    player_combat = PlayerCombat(player.name,stats.damage(),stats.crit_rate(),stats.health(),stats.evasion(),stats.defence())
-    enemy_combat = EnemyCombat(enemy.name,enemy.damage,enemy.defence,enemy.health,enemy.evasion,enemy.crit_rate,enemy.gold_drop)
-    player_max_health = player_combat.health
-    enemy_max_health = enemy_combat.health
-    #Create combat
+    # Create player combat object
+    p_name = player.name
+    p_dmg = stats.damage()
+    p_rate = stats.crit_rate()
+    p_hp = stats.health()
+    p_eva = stats.evasion()
+    p_def = stats.defence()
+    p_combat = PlayerCombat(p_name, p_dmg, p_rate, p_hp, p_eva, p_def)
+    # Create enemy combat object
+    e_name = enemy.name
+    e_dmg = enemy.dmg
+    e_def = enemy.defence
+    e_hp = enemy.hp
+    e_eva = enemy.eva
+    e_rate = enemy.crit_rate
+    drop = enemy.drop
+    e_combat = EnemyCombat(e_name, e_dmg, e_def, e_hp, e_eva, e_rate, drop)
+    p_max_hp = p_combat.health
+    e_max_hp = e_combat.health
+    # Create combat object
     combat = Combat()
     combat_status = "ongoing"
     round = 1
-    #Start combat
+    # Start combat
     while combat_status == "ongoing":
         new_line_spaces()
-        print(f"{player_combat.name} Health : {player_combat.health} / {player_max_health}")
-        print(f"{enemy_combat.name} Health : {enemy_combat.health} / {enemy_max_health}")
+        print(f"{p_combat.name} Health : {p_combat.health} / {p_max_hp}")
+        print(f"{e_combat.name} Health : {e_combat.health} / {e_max_hp}")
         print(Fore.LIGHTYELLOW_EX + f"Round : {round}\n" + Fore.RESET)
-        print("Choose your action\n1 - Attack\n2 - Special Attack\n3 - Run away")
+        print("Choose your action")
+        print("1 - Attack\n2 - Special Attack\n3 - Run away")
         combat_input = input("Your input : ")
         if combat_input == "1":
             new_line_spaces()
-            combat.attack(player_combat,enemy_combat)
-            combat_status = combat.check_combat(player,player_combat,enemy_combat)
+            combat.attack(p_combat, e_combat)
+            combat_status = combat.check_combat(player, p_combat, e_combat)
             if combat_status != "ongoing":
                 break
         elif combat_input == "2":
             new_line_spaces()
-            combat.special_attack(player_combat,enemy_combat)
-            combat_status = combat.check_combat(player,player_combat,enemy_combat)
+            combat.special_attack(p_combat, e_combat)
+            combat_status = combat.check_combat(player, p_combat, e_combat)
             if combat_status != "ongoing":
                 break
         elif combat_input == "3":
-            print(Fore.LIGHTBLUE_EX + "You are trying to run away..." + Fore.RESET)
-            if random.randint(0,4)==1:
+            print(Fore.LIGHTBLUE_EX)
+            print("You are trying to run away...")
+            print(Fore.RESET)
+            if random.randint(0, 4) == 1:
                 combat_status = "escaped"
                 print(Fore.GREEN + "You escaped successfully" + Fore.RESET)
                 break
             else:
                 print(Fore.RED + "\nYou couldn't run away.\n" + Fore.RESET)
-        if enemy_combat.stunned:
-            print(Fore.LIGHTGREEN_EX + f"{enemy_combat.name} is stunned!" + Fore.RESET)
-            enemy_combat.stunned = False
+        if e_combat.stunned:
+            print(Fore.LIGHTGREEN_EX)
+            print(f"{e_combat.name} is stunned!")
+            print(Fore.RESET)
+            e_combat.stunned = False
         else:
-            if round%3 == 2:
-                print(f"{enemy_combat.name} is preparing to heal!")
-                combat.attack(enemy_combat,player_combat)
-            elif round%3 == 0:
-                combat.heal(enemy_combat,enemy)
+            if round % 3 == 2:
+                print(f"{e_combat.name} is preparing to heal!")
+                combat.attack(e_combat, p_combat)
+            elif round % 3 == 0:
+                combat.heal(e_combat, enemy)
             else:
-                combat.attack(enemy_combat,player_combat)
-            combat_status = combat.check_combat(player,player_combat,enemy_combat)
+                combat.attack(e_combat, p_combat)
+            combat_status = combat.check_combat(player, p_combat, e_combat)
             if combat_status != "ongoing":
                 break
         round += 1
     if combat_status == "finished":
         proceed = False
-        print(Fore.MAGENTA+"Would you like to give a feedback?\nY/N"+Fore.RESET)
+        print(Fore.MAGENTA)
+        print("Would you like to give a feedback?\nY/N")
+        print(Fore.RESET)
         while not proceed:
             feedback_question = input("Your Input : ").lower()
             if feedback_question == "n":
@@ -314,91 +398,137 @@ def initiate_combat(player,weapon,armor,stats,enemy):
                 print(Fore.CYAN + "See you later."+Fore.RESET)
             elif feedback_question == "y":
                 if player.feedback_sent == "TRUE":
-                    print(Fore.YELLOW + "You already provided a feedback."+Fore.RESET)
-                    print(Fore.CYAN + "See you later."+Fore.RESET)
+                    print(Fore.YELLOW)
+                    print("You already provided a feedback.")
+                    print(Fore.RESET)
+                    print(Fore.CYAN)
+                    print("See you later.")
+                    print(Fore.RESET)
                 else:
                     print(Fore.CYAN+"Enter your feedback"+Fore.RESET)
                     feedback_proceed = False
                     while not feedback_proceed:
                         message = input("Your Message : ")
                         if message.isspace() or len(message) == 0:
-                            print(Fore.RED+"Please do not enter an empty message"+Fore.RESET)
-                        else:    
+                            print(Fore.RED)
+                            print("Please do not enter an empty message")
+                            print(Fore.RESET)
+                        else:
                             feedback_proceed = True
-                            send_feedback(player.name,message)
+                            send_feedback(player.name, message)
                             update_sheet_feedback(player)
-                            print(Fore.GREEN + "Thank you for your feedback."+Fore.RESET)
+                            print(Fore.GREEN)
+                            print("Thank you for your feedback.")
+                            print(Fore.RESET)
                             print(Fore.CYAN + "See you later."+Fore.RESET)
                 proceed = True
             else:
-                print(Fore.RED + "Wrong Input!"+Fore.RESET)  
-            
+                print(Fore.RED + "Wrong Input!"+Fore.RESET)
     elif combat_status == "killed" or combat_status == "defeated":
-        update_sheet_gold(player)
-        load_menu(player,weapon,armor,stats)
+        sheet_gold(player)
+        load_menu(player, weapon, armor, stats)
     else:
-        load_menu(player,weapon,armor,stats)
+        load_menu(player, weapon, armor, stats)
 
 
-
-def display_shop_items(shop_items,shop_type):
+def display_shop_items(shop_items, shop_type):
     """
     Prints shop content
     """
     if shop_type == "weapon":
-        for i in range(0,8):
-                print(f"{shop_items[i][0].capitalize()} - {shop_items[i][1].capitalize()}\t{shop_items[i][2].capitalize()}\t{shop_items[i][3].capitalize()}\t{shop_items[i][4].capitalize()}")
+        for i in range(0, 8):
+            w_id = shop_items[i][0].capitalize()
+            w_name = shop_items[i][1].capitalize()
+            w_dmg = shop_items[i][2].capitalize()
+            w_rate = shop_items[i][3].capitalize()
+            w_price = shop_items[i][4].capitalize()
+            print(f"{w_id} - {w_name}\t{w_dmg}\t{w_rate}\t{w_price}")
         print("8 - Leave shop")
     else:
-        for i in range(0,5):
-                print(f"{shop_items[i][0].capitalize()} - {shop_items[i][1].capitalize()}\t{shop_items[i][2].capitalize()}\t{shop_items[i][3].capitalize()}\t{shop_items[i][4].capitalize()}\t{shop_items[i][5].capitalize()}")
+        for i in range(0, 5):
+            a_id = shop_items[i][0].capitalize()
+            a_name = shop_items[i][1].capitalize()
+            a_def = shop_items[i][2].capitalize()
+            a_eva = shop_items[i][3].capitalize()
+            a_hp = shop_items[i][4].capitalize()
+            a_price = shop_items[i][5].capitalize()
+            print(f"{a_id} - {a_name}\t{a_def}\t{a_eva}\t{a_hp}\t{a_price}")
         print("5 - Leave shop")
+
 
 def display_enemies(all_enemies):
     """
     Prints all enemies
     """
-    for i in range(0,9):
-        print(f"{all_enemies[i][0].capitalize()} - {all_enemies[i][1].capitalize()}")
+    for i in range(0, 9):
+        e_id = all_enemies[i][0].capitalize()
+        e_name = all_enemies[i][1].capitalize()
+        print(f"{e_id} - {e_name}")
     print("9 - Go back to menu")
-                
-def update_player_weapon(player,weapon_id,weapon):
+
+
+def update_weapon(player, weapon_id, weapon):
     """
     Updates the weapon of player and its stats
     """
     if weapon == "None":
-        weapon = Weapon(int(weapons.cell(weapon_id+1,1).value),weapons.cell(weapon_id+1,2).value,int(weapons.cell(weapon_id+1,3).value),int(weapons.cell(weapon_id+1,4).value))
+        w_id = int(weapons.cell(weapon_id+1, 1).value)
+        w_name = weapons.cell(weapon_id+1, 2).value
+        w_dmg = int(weapons.cell(weapon_id+1, 3).value)
+        w_rate = int(weapons.cell(weapon_id+1, 4).value)
+        weapon = Weapon(w_id, w_name, w_dmg, w_rate)
     else:
-        weapon.id = int(weapons.cell(weapon_id+1,1).value)
-        weapon.name = weapons.cell(weapon_id+1,2).value
-        weapon.damage = int(weapons.cell(weapon_id+1,3).value)
-        weapon.crit_rate = int(weapons.cell(weapon_id+1,4).value)
+        weapon.id = int(weapons.cell(weapon_id+1, 1).value)
+        weapon.name = weapons.cell(weapon_id+1, 2).value
+        weapon.damage = int(weapons.cell(weapon_id+1, 3).value)
+        weapon.crit_rate = int(weapons.cell(weapon_id+1, 4).value)
     player.weapon = weapon.name
-    update_player_sheet(player,"weapon")
+    update_sheet(player, "weapon")
     return weapon
 
-def update_player_armor(player,armor_id,armor):
+
+def update_armor(player, armor_id, armor):
     """
     Updates the armor of player and its stats
     """
     if armor == "None":
-        armor = Armor(int(armors.cell(armor_id+1,1).value),armors.cell(armor_id+1,2).value,int(armors.cell(armor_id+1,3).value),int(armors.cell(armor_id+1,4).value),int(armors.cell(armor_id+1,5).value))
+        a_id = int(armors.cell(armor_id+1, 1).value)
+        a_name = armors.cell(armor_id+1, 2).value
+        a_def = int(armors.cell(armor_id+1, 3).value)
+        a_eva = int(armors.cell(armor_id+1, 4).value)
+        a_hp = int(armors.cell(armor_id+1, 5).value)
+        armor = Armor(a_id, a_name, a_def, a_eva, a_hp)
     else:
-        armor.id = int(armors.cell(armor_id+1,1).value)
-        armor.name = armors.cell(armor_id+1,2).value
-        armor.defense = int(armors.cell(armor_id+1,3).value)
-        armor.evasion = int(armors.cell(armor_id+1,4).value)
-        armor.health = int(armors.cell(armor_id+1,5).value)
+        armor.id = int(armors.cell(armor_id+1, 1).value)
+        armor.name = armors.cell(armor_id+1, 2).value
+        armor.defense = int(armors.cell(armor_id+1, 3).value)
+        armor.evasion = int(armors.cell(armor_id+1, 4).value)
+        armor.health = int(armors.cell(armor_id+1, 5).value)
     player.armor = armor.name
-    update_player_sheet(player,"armor")
+    update_sheet(player, "armor")
     return armor
 
-def how_to_play(player,weapon,armor,stats):
+
+def how_to_play(player, weapon, armor, stats):
     """
     Prints how to play
     """
     new_line_spaces()
-    print(Fore.MAGENTA + "Welcome to Arena.\nArena is a turn-based battle game that challenges players. You must advance against different enemies by making the right attacks at the right time.\n- Condition of beating game : To beat the game, you need to defeat the Demon King.\n- Progress : Improve your equipment with the gold you earn from defeating enemies.\n- Combat : You need to decide well which attack you should use or when you should run away. But be careful, escaping may not always be successful.\n- Combat Tips:\n1 - Be sure to have correct gear to face an enemy.\n2 - Think carefully before using your special attack. You need to use normal attack once before using your special attack. Escape attempt will not recover your special attack cooldown.\n3 - Enemies will try to recover their health every 3 turn. You can try to block it with your special attack.\nGood luck with your adventure.\nPS : Luck is also an important factor to win battles." + Fore.RESET)
+    print(Fore.YELLOW)
+    print("Welcome to Arena.")
+    print("Arena is a turn-based battle game that challenges players.")
+    print("To beat the game, you need to defeat the Demon King.")
+    print("You will earn gold when you beat enemies.")
+    print("Improve your equipment with the gold you earn.")
+    print("- If you die, you will lose decent amount of gold.")
+    print("You can either attack or attempt to run away.")
+    print("But be careful, escape attempt may fail.")
+    print("Tips:\n1 - Be sure to have correct gear to face an enemy.")
+    print("2 - You must land an attack to activate special attack again.")
+    print("3 - Block enemies recover with your special attack.")
+    print("Good luck with your adventure.")
+    print("PS : Luck is also an important factor to win battles.")
+    print(Fore.RESET)
     new_line_spaces()
     button_pressed = False
     while not button_pressed:
@@ -406,7 +536,6 @@ def how_to_play(player,weapon,armor,stats):
         player_input = input("Your input : ")
         if player_input == "1":
             button_pressed = True
-            load_menu(player,weapon,armor,stats)
+            load_menu(player, weapon, armor, stats)
         else:
             print(Fore.RED + "\nWrong Input\n" + Fore.RESET)
-    
