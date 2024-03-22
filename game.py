@@ -3,10 +3,17 @@ from validation import *
 from game_objects import *
 from colorama import Fore
 import random
+import os
 
 
 def new_line_spaces():
     print(Fore.CYAN + "-----------------------------------------" + Fore.RESET)
+
+def clear_screen():
+    if os.name == 'nt':
+        os.system('cls') 
+    else:
+        os.system('clear')
 
 
 def welcome():
@@ -61,6 +68,7 @@ def start_option():
         if player_username == "x" or player_username == "reg":
             start_option()
         else:
+            clear_screen()
             load_character(player_username)
 
 
@@ -179,6 +187,7 @@ def load_shop(player, weapon, armor, stats, shop_type):
     shop_process = False
     while not shop_process:
         new_line_spaces()
+        clear_screen()
         print(Fore.YELLOW + f"Your current gold : {player.gold}" + Fore.RESET)
         has_item = True
         if shop_type == "weapon":
@@ -315,6 +324,7 @@ def initiate_combat(player, weapon, armor, stats, enemy):
     """
     Combat Controller
     """
+    clear_screen()
     # Create player combat object
     p_name = player.name
     p_dmg = stats.damage()
