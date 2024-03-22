@@ -93,11 +93,11 @@ class PlayerCombat:
     """
     The class of player for combat
     """
-    def __init__(self, name, damage, crit_rate, health, evasion, defence):
+    def __init__(self, name, damage, crit_rate, hp, evasion, defence):
         self.name = name
         self.damage = damage
         self.crit_rate = crit_rate
-        self.health = health
+        self.hp = hp
         self.evasion = evasion
         self.defence = defence
         self.cooldown = False
@@ -150,7 +150,7 @@ class Combat:
                     print(Fore.RED)
                     print(f"{a.name} dealt {damage} damage.")
                     print(Fore.RESET)
-                d.health -= damage
+                d.hp -= damage
                 if hasattr(a, "cooldown"):
                     a.cooldown = False
 
@@ -185,16 +185,16 @@ class Combat:
                         print(Fore.LIGHTRED_EX)
                         print(f"{a.name} dealt {damage} damage.")
                         print(Fore.RESET)
-                    d.health -= damage
+                    d.hp -= damage
                     a.cooldown = True
                     d.stunned = True
 
     def heal(self, enemy_combat, enemy):
-        max_health = enemy.health
+        max_health = enemy.hp
         heal_amount = int(max_health/2)
-        enemy_combat.health += heal_amount
-        if enemy_combat.health > max_health:
-            enemy_combat.health = max_health
+        enemy_combat.hp += heal_amount
+        if enemy_combat.hp > max_health:
+            enemy_combat.hp = max_health
         print(Fore.GREEN)
         print(f"{enemy.name} healed by {heal_amount}")
         print(Fore.RESET)
@@ -203,15 +203,15 @@ class Combat:
         """
         Checks if combat still continues
         """
-        player_dead = player_combat.health <= 0
-        enemy_dead = enemy_combat.health <= 0
+        player_dead = player_combat.hp <= 0
+        enemy_dead = enemy_combat.hp <= 0
         combat_end = player_dead or enemy_dead
         if combat_end:
             if player_dead:
                 print(Fore.MAGENTA)
                 print(f"You have been killed by {enemy_combat.name}")
                 print(Fore.RESET)
-                gold_lost = enemy_combat.gold_drop*4
+                gold_lost = enemy_combat.drop*4
                 player.gold -= gold_lost
                 if player.gold < 0:
                     player.gold = 0
@@ -225,7 +225,7 @@ class Combat:
                     print(Fore.RESET)
                     return "finished"
                 else:
-                    drop = enemy_combat.gold_drop
+                    drop = enemy_combat.drop
                     earned_gold = random.randint(drop-2, drop+2)
                     player.gold += earned_gold
                     print(Fore.YELLOW)

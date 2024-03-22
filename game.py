@@ -279,11 +279,11 @@ def enter_arena(player, weapon, armor, stats):
                 name = all_enemies[int(enemy_id)][1]
                 damage = int(all_enemies[int(enemy_id)][2])
                 defence = int(all_enemies[int(enemy_id)][3])
-                health = int(all_enemies[int(enemy_id)][4])
+                hp = int(all_enemies[int(enemy_id)][4])
                 eva = int(all_enemies[int(enemy_id)][5])
                 rate = int(all_enemies[int(enemy_id)][6])
                 drop = int(all_enemies[int(enemy_id)][7])
-                enemy = Enemy(name, damage, defence, health, eva, rate, drop)
+                enemy = Enemy(name, damage, defence, hp, eva, rate, drop)
                 initiate_combat(player, weapon, armor, stats, enemy)
             elif enemy_id == "9":
                 arena_process = True
@@ -332,8 +332,8 @@ def initiate_combat(player, weapon, armor, stats, enemy):
     e_rate = enemy.crit_rate
     drop = enemy.drop
     e_combat = EnemyCombat(e_name, e_dmg, e_def, e_hp, e_eva, e_rate, drop)
-    p_max_hp = p_combat.health
-    e_max_hp = e_combat.health
+    p_max_hp = p_combat.hp
+    e_max_hp = e_combat.hp
     # Create combat object
     combat = Combat()
     combat_status = "ongoing"
@@ -341,8 +341,8 @@ def initiate_combat(player, weapon, armor, stats, enemy):
     # Start combat
     while combat_status == "ongoing":
         new_line_spaces()
-        print(f"{p_combat.name} Health : {p_combat.health} / {p_max_hp}")
-        print(f"{e_combat.name} Health : {e_combat.health} / {e_max_hp}")
+        print(f"{p_combat.name} Health : {p_combat.hp} / {p_max_hp}")
+        print(f"{e_combat.name} Health : {e_combat.hp} / {e_max_hp}")
         print(Fore.LIGHTYELLOW_EX + f"Round : {round}\n" + Fore.RESET)
         print("Choose your action")
         print("1 - Attack\n2 - Special Attack\n3 - Run away")
