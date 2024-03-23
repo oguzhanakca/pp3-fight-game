@@ -272,7 +272,7 @@ def enter_arena(player, weapon, armor, stats):
     """
     Displays the list of enemies
     """
-
+    new_line_spaces()
     print(Fore.LIGHTRED_EX + "Welcome to the Arena" + Fore.RESET)
     all_enemies = enemies.get_all_values()
     # Print enemy names
