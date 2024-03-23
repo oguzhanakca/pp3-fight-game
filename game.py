@@ -180,6 +180,7 @@ def load_shop(player, weapon, armor, stats, shop_type):
     """
     Displays the items player can buy and applies their decisions
     """
+    clear_screen()
     if shop_type == "weapon":
         all_items = weapons.get_all_values()
     else:
@@ -187,7 +188,6 @@ def load_shop(player, weapon, armor, stats, shop_type):
     shop_process = False
     while not shop_process:
         new_line_spaces()
-        clear_screen()
         print(Fore.YELLOW + f"Your current gold : {player.gold}" + Fore.RESET)
         has_item = True
         if shop_type == "weapon":
