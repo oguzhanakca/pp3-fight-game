@@ -260,7 +260,7 @@ Shown when the user selects the login option
 - Validates if username exists and password is correct.
 - User stories covered:
 
-![Start Screen](docs/features/login.jpg)
+![Login](docs/features/login.jpg)
 
 ### Register
 
@@ -273,7 +273,7 @@ Shown when the user selects the register option
 - Validates if password is in correct format.
 - User stories covered:
 
-![Start Screen](docs/features/register.jpg)
+![Register](docs/features/register.jpg)
 
 ### Main Menu
 
@@ -284,7 +284,7 @@ Shown after successful login. The main navigation menu of the game.
 - Validates against wrong input.
 - User stories covered:
 
-![Start Screen](docs/features/main-menu.jpg)
+![Main Menu](docs/features/main-menu.jpg)
 
 ### Shops
 
@@ -298,7 +298,8 @@ Shown after the user selects Visit Shop option
 - Validates against wrong input.
 - User stories covered:
 
-![Start Screen](docs/features/start-screen.jpg)
+![Shop Menu](docs/features/shop-menu.jpg)
+![Shops](docs/features/shops.jpg)
 
 ### Arena
 
@@ -309,7 +310,7 @@ Shown after the user selects Enter Arena option
 - Validates against wrong input.
 - User stories covered:
 
-![Start Screen](docs/features/start-screen.jpg)
+![Arena Menu](docs/features/arena-menu.jpg)
 
 ### Stats
 
@@ -321,7 +322,7 @@ Shown after the user selects Stats option
 - Validates against wrong input.
 - User stories covered:
 
-![Start Screen](docs/features/start-screen.jpg)
+![Stats](docs/features/stats.jpg)
 
 ### How to Play
 
@@ -333,7 +334,7 @@ Shown after the user selects How to Play option.
 - Validates against wrong input.
 - User stories covered:
 
-![Start Screen](docs/features/start-screen.jpg)
+![Guide](docs/features/guide.jpg)
 
 ### Combat
 
@@ -348,7 +349,7 @@ Shown after the user selects an enemy from Arena.
 - Validates against wrong input.
 - User stories covered:
 
-![Start Screen](docs/features/start-screen.jpg)
+![Combat](docs/features/start-screen.jpg)
 
 ### Feedback
 
