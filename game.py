@@ -379,6 +379,10 @@ def initiate_combat(player, weapon, armor, stats, enemy):
                 break
             else:
                 print(Fore.RED + "\nYou couldn't run away.\n" + Fore.RESET)
+        else:
+            print(Fore.LIGHTRED_EX)
+            print("\nWrong Input!")
+            print(Fore.RESET)
         if e_combat.stunned:
             print(Fore.LIGHTGREEN_EX)
             print(f"{e_combat.name} is stunned!")
