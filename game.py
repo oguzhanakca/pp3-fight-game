@@ -277,7 +277,7 @@ def enter_arena(player, weapon, armor, stats):
     all_enemies = enemies.get_all_values()
     # Print enemy names
     display_enemies(all_enemies)
-    print("Please enter the enemy id you want to face.")
+    print("\nPlease enter the enemy id you want to face.\n")
     arena_process = False
     while not arena_process:
         enemy_id = input("Your input : ")
