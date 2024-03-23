@@ -169,7 +169,7 @@ class Combat:
                 print(f"{d.name} dodged the special attack.")
                 print(Fore.RESET)
             else:
-                damage = random.randint(a.damage, a.damage+2)-d.defence
+                damage = random.randint(a.dmg, a.dmg+2)-d.defence
                 if damage <= 0:
                     print(Fore.LIGHTYELLOW_EX)
                     print(f"{d.name} blocked all damage.")
