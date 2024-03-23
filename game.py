@@ -311,8 +311,8 @@ def show_stats(player, weapon, armor, stats):
     stats.view_stats()
     print("1 - Go back to menu")
     stats_process = True
-    stats_input = input("Your input : ")
     while stats_process:
+        stats_input = input("Your input : ")
         if stats_input == "1":
             stats_process = False
             load_menu(player, weapon, armor, stats)
