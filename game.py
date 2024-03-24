@@ -402,7 +402,7 @@ def initiate_combat(player, weapon, armor, stats, enemy):
         round += 1
     if combat_status == "finished":
         proceed = False
-        print(Fore.MAGENTA)
+        print(Fore.YELLOW)
         print("Would you like to give a feedback?\nY/N")
         print(Fore.RESET)
         while not proceed:
