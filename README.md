@@ -349,7 +349,7 @@ Shown after the user selects an enemy from Arena.
 - Validates against wrong input.
 - User stories covered:
 
-![Combat](docs/features/start-screen.jpg)
+![Combat](docs/features/combat.jpg)
 
 ### Feedback
 
@@ -357,11 +357,11 @@ Shown after the user finished the game.
 
 - Asks users if they want to give a feedback.
 - Each account can only provide one feedback.
-- No matter what the choice is, it exists the game after the selection.
+- No matter what the choice is, it exists game after the selection.
 - Validates against empty input.
 - User stories covered:
 
-![Start Screen](docs/features/start-screen.jpg)
+![Start Screen](docs/features/feedback.jpg)
 
 ### Feature ideas for future development
 
@@ -378,17 +378,17 @@ Python
 
 ### Other Tools
 
-- [Lucidchart](https://lucid.app/) was used to create flowchart.
-- [Git](https://git-scm.com/) was used for version control.
-- [GitHub](https://github.com/) was used for saving and storing files.
-- [Heroku](https://id.heroku.com/) was used as the hosting platform for this site.
-- [Ascii art generator](http://patorjk.com/software/taag/#p=display&f=Varsity&t=Dungeon%0AEscape) was used to generate title text.
-- [amiresponsive](https://ui.dev/amiresponsive?url=https://jeremyhsimons.github.io/CI_PP2_SavvySaver/) was used to test the website across different screens.
+- [Lucidchart](https://www.lucidchart.com/)
+- [Git](https://git-scm.com/)
+- [GitHub](https://github.com/)
+- [Heroku](https://www.heroku.com/)
+- [Ascii art generator](https://patorjk.com/software/taag/#p=display&f=Big&t=ARENA)
+- [amiresponsive](https://ui.dev/amiresponsive)
 
 #### 3rd party Python Libraries used
 
 - [Gspread / Google Sheets API](https://github.com/burnash/gspread)
-- [Google OAuth 2.0](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html)
+- [Google OAuth](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html)
 - [Colorama](https://pypi.org/project/colorama/)
 - [OS](https://docs.python.org/3/library/os.html)
 
