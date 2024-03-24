@@ -93,10 +93,10 @@ class PlayerCombat:
     """
     The class of player for combat
     """
-    def __init__(self, name, dmg, crit_rate, hp, evasion, defence):
+    def __init__(self, name, dmg, rate, hp, evasion, defence):
         self.name = name
         self.dmg = dmg
-        self.crit_rate = crit_rate
+        self.rate = rate
         self.hp = hp
         self.evasion = evasion
         self.defence = defence
@@ -140,7 +140,7 @@ class Combat:
                 print(f"{d.name} blocked all damage.")
                 print(Fore.RESET)
             else:
-                crit_roll = random.randint(0, 99) < a.crit_rate
+                crit_roll = random.randint(0, 99) < a.rate
                 if crit_roll:
                     damage *= 2
                     print(Fore.RED)
@@ -175,7 +175,7 @@ class Combat:
                     print(f"{d.name} blocked all damage.")
                     print(Fore.RESET)
                 else:
-                    crit_roll = random.randint(0, 99) < a.crit_rate
+                    crit_roll = random.randint(0, 99) < a.rate
                     if crit_roll:
                         damage *= 4
                         print(Fore.RED)
