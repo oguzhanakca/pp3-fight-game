@@ -404,34 +404,53 @@ Python
 The website was deployed to [Heroku](https://www.heroku.com/) using the following process:
 
 1. Login or create an account at [Heroku](https://www.heroku.com/)
-   <img src="docs/heroku/heroku-1.jpg">
+
+<img src="docs/heroku/heroku-1.jpg">
+
 2. Click on New > Create new app in the top right of the screen.
-   <img src="docs/heroku/heroku-2.jpg">
+
+<img src="docs/heroku/heroku-2.jpg">
+
 3. Decide an app name and select location, then click 'create app'.
-   <img src="docs/heroku/heroku-3.jpg">
+
+<img src="docs/heroku/heroku-3.jpg">
+
 4. Move to the deploy tab and select GitHub Connect.
-   <img src="docs/heroku/heroku-4.jpg">
+
+<img src="docs/heroku/heroku-4.jpg">
+
 5. Log in to your GitHub account when prompted and give permission for it.
+
 6. Under the Deployment Method, select the repository that you want to be connected to the Heroku app.
-   <img src="docs/heroku/heroku-5.jpg">
+
+<img src="docs/heroku/heroku-5.jpg">
+
 7. Move to the Settings tab.
-   <img src="docs/heroku/heroku-6.jpg">
+
+<img src="docs/heroku/heroku-6.jpg">
+
 8. Scroll down to the config vars section, and add 2 config vars:
    _ The first key is CREDS and the value here is the creds.json file that was generated for the google sheets API to work properly.
    _ The second key is PORT and the Value is 8000
-   <img src="docs/heroku/heroku-7.jpg">
-9. Once you have set up the config vars, scroll down to buildpacks (still under the settings tab)
-10. Add the Python and Node.js buildpacks to your app and make sure that when they are displayed, they appear in the order:
-    _ Python
-    _ Node.JS
-    <img src="docs/heroku/heroku-8.jpg">
-11. Navigate back to the Deploy tab.
-12. In the 'manual deploy' section beneath this, make sure the branch selected is 'main' and click deploy branch.
-    <img src="docs/heroku/heroku-9.jpg">
-13. Select automatic deploys to allow Heroku to build the site with new changes each time changes are pushed to GitHub.
-    <img src="docs/heroku/heroku-10.jpg">
 
-14. The site should now be built and Heroku should provide a url for the built site.
+<img src="docs/heroku/heroku-7.jpg">
+
+9. Once you have set up the config vars, scroll down to buildpacks and add the Python and Node.js buildpacks to your app and make sure that when they are displayed, they appear in the order:
+   _ Python
+   _ Node.JS
+
+<img src="docs/heroku/heroku-8.jpg">
+
+10. Navigate back to the Deploy tab.
+11. In the 'manual deploy' section beneath this, make sure the branch selected is 'main' and click deploy branch.
+
+<img src="docs/heroku/heroku-9.jpg">
+
+12. Select automatic deploys to allow Heroku to build the site with new changes each time changes are pushed to GitHub.
+
+<img src="docs/heroku/heroku-10.jpg">
+
+13. The site should now be built and Heroku should provide a url for the built site.
 
 This repository can be forked using the following process:
 
