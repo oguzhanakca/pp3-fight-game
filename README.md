@@ -76,26 +76,35 @@ Users should create an account to be able to play. They can also use the account
 3. I want to leave feedback.
 4. I want to see my stats.
 5. I want to see how much gold i have.
-6. I want to easily navigate within the game.
+6. I want to change my equipment.
+7. I want to easily navigate within the game.
+8. I want to see enemy list.
+9. I want to choose different actions in combat.
 
 #### As a returning user,
 
-7. I want to login to my account.
-8. I want to remember how to play.
-9. I want to leave feedback.
-10. I want ot see my stats.
-11. I want to see how much gold i have.
-12. I want to easily navigate within the game.
+10. I want to login to my account.
+11. I want to remember how to play.
+12. I want to leave feedback.
+13. I want to see my stats.
+14. I want to see how much gold i have.
+15. I want to change my equipment.
+16. I want to easily navigate within the game.
+17. I want to see enemy list.
+18. I want to choose different actions in combat.
 
 #### As the site owner,
 
-13. I want users to create an account.
-14. I want users to log in the existing account.
-15. I want users to learn how to play.
-16. I want users to easily navigate within the game.
-17. I want users to see their current stats.
-18. I want users to see the current gold they have.
-19. I want users to be able to give feedback.
+19. I want users to create account.
+20. I want users to log in the existing account.
+21. I want users to learn how to play.
+22. I want users to easily navigate within the game.
+23. I want users to see their current stats.
+24. I want users to see the current gold they have.
+25. I want users to change their equipment.
+26. I want users to be able to give feedback.
+27. I want users to see enemy list.
+28. I want users to have different actions in combat.
 
 ### User Manual
 
@@ -246,7 +255,7 @@ It will be shown when user start the program.
 
 - Displays the name of program
 - Asks users whether they want to register or login
-- User stories covered:
+- User stories covered: 1, 10, 19, 20
 
 ![Start Screen](docs/features/start-screen.jpg)
 
@@ -258,7 +267,7 @@ Shown when the user selects the login option
 - Usernames are not case sensitive.
 - Passwords are case sensitive.
 - Validates if username exists and password is correct.
-- User stories covered:
+- User stories covered: 10, 20
 
 ![Login](docs/features/login.jpg)
 
@@ -271,7 +280,7 @@ Shown when the user selects the register option
 - Passwords are case sensitive.
 - Validates if username exists or in correct format.
 - Validates if password is in correct format.
-- User stories covered:
+- User stories covered: 1, 19
 
 ![Register](docs/features/register.jpg)
 
@@ -282,7 +291,7 @@ Shown after successful login. The main navigation menu of the game.
 - Displays user's name.
 - Asks users what they want to do.
 - Validates against wrong input.
-- User stories covered:
+- User stories covered: 7, 16, 22
 
 ![Main Menu](docs/features/main-menu.jpg)
 
@@ -296,7 +305,7 @@ Shown after the user selects Visit Shop option
 - Each shop validates whether the desired equipment is equal or better than current equipment.
 - Users can navigate back to main menu.
 - Validates against wrong input.
-- User stories covered:
+- User stories covered: 5, 6, 14, 15, 24, 25
 
 ![Shop Menu](docs/features/shop-menu.jpg)
 ![Shops](docs/features/shops.jpg)
@@ -308,7 +317,7 @@ Shown after the user selects Enter Arena option
 - Allows users to choose which enemy they want to face.
 - Users can navigate back to main menu.
 - Validates against wrong input.
-- User stories covered:
+- User stories covered: 8, 17, 27
 
 ![Arena Menu](docs/features/arena-menu.jpg)
 
@@ -320,7 +329,7 @@ Shown after the user selects Stats option
 - Displays user's current stats.
 - Users can navigate back to main menu.
 - Validates against wrong input.
-- User stories covered:
+- User stories covered: 4, 13, 23
 
 ![Stats](docs/features/stats.jpg)
 
@@ -332,7 +341,7 @@ Shown after the user selects How to Play option.
 - Users can also find some tips about the game.
 - Users can navigate back to main menu.
 - Validates against wrong input.
-- User stories covered:
+- User stories covered: 2, 11, 21
 
 ![Guide](docs/features/guide.jpg)
 
@@ -347,7 +356,7 @@ Shown after the user selects an enemy from Arena.
 - If users choose "run away" option, they can navigate back to main menu.(This option has 25% chance to success.)
 - Automatically navigates to main menu after the fight ends.
 - Validates against wrong input.
-- User stories covered:
+- User stories covered: 9, 18, 28
 
 ![Combat](docs/features/combat.jpg)
 
@@ -359,9 +368,9 @@ Shown after the user finished the game.
 - Each account can only provide one feedback.
 - No matter what the choice is, it exists game after the selection.
 - Validates against empty input.
-- User stories covered:
+- User stories covered: 3, 12, 26
 
-![Start Screen](docs/features/feedback.jpg)
+![Feedback](docs/features/feedback.jpg)
 
 ### Feature ideas for future development
 
