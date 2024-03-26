@@ -27,18 +27,16 @@ Users should create an account to be able to play. They can also use the account
   - [User Stories](#user-stories)
   - [User Manual](#user-manual)
 - [Technical Design](#technical-design)
-  - [Data Models](#data-models)
   - [Flowchart](#flowchart)
+  - [Data Models](#data-models)
 - [Features](#features)
-  - [App Features](#app-features)
-  - [Feature Ideas for future development](#feature-ideas-for-future-development)
+- [Feature Ideas for future development](#feature-ideas-for-future-development)
 - [Technologies Used](#technologies-used)
 - [Deployment & Local Development](#deployment--local-development)
+- [Validation](#validation)
 - [Testing](#testing)
-  - [Validation](#validation)
-  - [Manual Testing](#manual-testing)
-  - [Automated Testing](#automated-testing)
-  - [Bugs](#bugs)
+  - [User Story Test](#manual-testing)
+- [Bugs](#bugs)
 - [Credits](#credits)
 
 ## Project Goals
@@ -452,22 +450,7 @@ This repository can be cloned using the following process:
 1. Paste the URL of the repository after this.
 1. Hit enter on your keyboard and the project will be cloned.
 
-## Testing
-
-### Debugging
-
-The site was tested using the following browsers:
-
-- Google Chrome
-- Opera
-- Microsoft Edge
-
-The site was tested on the following devices:
-
-- Iphone 6S
-- Huawei PSmart 2019 (EMUI version 12.0.0)
-
-### Validation
+## Validation
 
 #### PEP8 Python Validator (from Code Institute)
 
@@ -482,38 +465,21 @@ Errors found by the validator:
 
 All errors found by the validator have been fixed.
 
-<details>
 <summary>instructions.py</summary>
 <img src="docs/validation/instructions-v.png" alt="A screenshot of pep8 validator confirming instructions code.">
 </details>
 
-<details>
-<summary>run_game.py</summary>
-<img src="docs/validation/run_game-v" alt="A screenshot of pep8 validator confirming game code.">
-</details>
+## Testing
 
-<details>
-<summary>run.py</summary>
-<img src="docs/validation/run-v.png" alt="A screenshot of pep8 validator confirming main program code.">
-</details>
+### Debugging
 
-<details>
-<summary>sheet_data.py</summary>
-<img src="docs/validation/sheet_data-v.png" alt="A screenshot of pep8 validator confirming sheet API code.">
-</details>
+The site was tested using the following browsers:
 
-<details>
-<summary>test_validation.py</summary>
-<img src="docs/validation/test_validation-v.png" alt="A screenshot of pep8 validator confirming testing code.">
-</details>
+- Google Chrome
+- Opera
+- Microsoft Edge
 
-<details>
-<summary>validation.py</summary>
-<img src="docs/validation/validation-v.png" alt="A screenshot of pep8 validator confirming validation code.">
-</details>
-<br>
-
-### Manual Testing
+### User Story Test
 
 | User story                 | Feature        | Test                                                                                          | Expected Result                | Actual Result      |
 | -------------------------- | -------------- | --------------------------------------------------------------------------------------------- | ------------------------------ | ------------------ |
@@ -639,38 +605,6 @@ All errors found by the validator have been fixed.
 | User story                                   | Feature     | Test                                           | Expected Result                                | Actual Result                                  |
 | -------------------------------------------- | ----------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
 | 14. (Site owner) To get feedback from users. | Quit screen | Same test as user story 10. See details above. | Same test as user story 10. See details above. | Same test as user story 10. See details above. |
-
-### Automated Testing
-
-Seven unit tests were written for this project. The test check that the validation functions (used to check user inputs) return the expected results.
-
-Most tests originally failed because error handling to catch invalid data types had not been included. Once this had been addressed, all tests passed OK.
-
-For each unit test, the assertions test:
-
-- Valid data
-- Invalid data and edge cases.
-
-<details>
-    <summary>Screenshots</summary>
-    <p>All tests passed OK.</p>
-    <img src="docs/unittests/tests-passed.png" alt="A screenshot of the Gitpod terminal stating that all tests have passed.">
-    <p>1. Test validate_yes_no</p>
-    <img src="docs/unittests/test1.png" alt="A screenshot of the first test">
-    <p>2. Test validate_details</p>
-    <img src="docs/unittests/test2.png" alt="A screenshot of the second test">
-    <p>3. Test validate_main_menu</p>
-    <img src="docs/unittests/test3.png" alt="A screenshot of the third test">
-    <p>4. Test validate_math</p>
-    <img src="docs/unittests/test4.png" alt="A screenshot of the fourth test">
-    <p>5. Test validate_navigation</p>
-    <img src="docs/unittests/test5.png" alt="A screenshot of the fifth test">
-    <p>6. Test validate_string</p>
-    <img src="docs/unittests/test6.png" alt="A screenshot of the sixth test">
-    <p>7. Test validate_message</p>
-    <p>This test originally failed because checks for empty strings or spaces had been omitted. Once this had been added to the validation function, the test passed.</p>
-    <img src="docs/unittests/test7.png" alt="A screenshot of the seventh test">
-</details><br>
 
 ### Bugs
 
