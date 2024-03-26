@@ -758,15 +758,13 @@ The site was tested using the following browsers:
 
 ### Bugs
 
-| Bug Description                                                                                                                                                   | Action Taken to Fix                                                                                                                                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The user could sign up with empty username/password fields                                                                                                        | I added condition to the validation function that catches empty strings.                                                                                                                                              |
-| Submitting user’s feedback would throw an error in the terminal                                                                                                   | I had forgotten to format the feedback data as a list, and I was trying to update the sheet with a string. Making a single element list out of the feedback before sending it to the update function fixed the issue. |
-| Index error each time the levels were generated.                                                                                                                  | The list used to randomly order layouts was numbered 1-10 where layouts are indexed 0-9. Changing random order list to integers between 0 and 9 fixed this.                                                           |
-| When player makes a mistake and navigates into a wall, the notification gets printed twice to the terminal.                                                       | Change each check direction function so that it only calls the check route function once.                                                                                                                             |
-| When player makes invalid menu choice, “start” selection doesn’t work on second try and script stops.                                                             | I put the menu in a while loop rather than re-calling the function with the same parameters in an if-else statement.                                                                                                  |
-| When player moved out of bounds, the level would not reset to the original layout, and the updated level with all progress so far was re-printed to the terminal. | A separate reset function was created to loop through the level elements and reset the “A” character to the start.                                                                                                    |
-| If player selected “no” to whether they wanted to quit, the game still quit.                                                                                      | I added the missing if else statement that I’d forgotten to include to handle that choice.                                                                                                                            |
+| Bug Description                                                                                          | Action Taken to Fix                                                                                                |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| The user could register with empty username/password or with usernames/passwords that contains space     | Added a validation function to check if inputs are empty                                                           |
+| After purchasing any item, stats were not updating                                                       | After purchase, Stat class will be created again with current user items                                           |
+| When user enters a value other than "1" in how to play section, program crashes because of infinite loop | A validation for different input added to prevent infinite loops                                                   |
+| Enemies were trying to use special attack even its just a feature for players                            | A validation added to check if attacker has "stunned" attribute, which only enemies have.                          |
+| Users can spam feedback                                                                                  | Added a bool value for every account that shows if a player sent feedback. Also added a validation that checks it. |
 
 ## Credits
 
@@ -776,17 +774,13 @@ The site was tested using the following browsers:
 
 - [Gspread / Google Sheets API](https://github.com/burnash/gspread) was used to handle getting/sending data to the google sheet used in the project.
 - [Google OAuth 2.0](https://google-auth.readthedocs.io/en/stable/reference/google.oauth2.credentials.html) was used to set up the connection between the project and the developers personal google account.
-- [Colorama](https://pypi.org/project/colorama/) was used to add colour to the game for increased visual appeal.
-- [Ascii art generator](http://patorjk.com/software/taag/#p=display&f=Varsity&t=Dungeon%0AEscape) was used to generate title text. Varsity font was used.
+- [Colorama](https://pypi.org/project/colorama/) was used to add colour to increase visual appeal for users.
+- [Ascii art generator](http://patorjk.com/software/taag/#p=display&f=Varsity&t=Dungeon%0AEscape) was used to generate title text.
 
-#### Code found online when solving bugs in own code.
+#### Codes.
 
-- How to clear screen in python: [www.scaler.com](https://www.scaler.com/topics/how-to-clear-screen-in-python/)
-
-- How to create unit tests in Python [Corey Schafer](https://www.youtube.com/watch?v=6tNS--WetLI)
+- Clear Terminal with Python: [Stackoverflow](https://stackoverflow.com/questions/2084508/clear-the-terminal-in-python)
 
 ### Acknowledgements
 
-- Thanks to my Mentor Mo Shami for his <strong>immensely valuable</strong> feedback, advice and encouragement throughout this project. Thanks for pushing me to do the best I can!
-- Thanks to the wonderful CI London Community for all the moral support!
-- Thanks to my friends: Thommy, Lars, Matt, Nesu, Nathan, Rob, and Oli for testing the game and for their feedback.
+I would like to take the opportunity to thank my mentor Mo Shami for his guidance and support.
