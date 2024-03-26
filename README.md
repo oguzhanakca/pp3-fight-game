@@ -465,8 +465,25 @@ Errors found by the validator:
 
 All errors found by the validator have been fixed.
 
-<summary>instructions.py</summary>
-<img src="docs/validation/instructions-v.png" alt="A screenshot of pep8 validator confirming instructions code.">
+<details>
+<summary>game_objects.py</summary>
+<img src="docs/validation/pep8-game_objects.jpg" alt="game_objects.py pep8 validation">
+</details>
+<details>
+<summary>game.py</summary>
+<img src="docs/validation/pep8-game.jpg" alt="game.py pep8 validation">
+</details>
+<details>
+<summary>run</summary>
+<img src="docs/validation/pep8-run.jpg" alt="run.py pep8 validation">
+</details>
+<details>
+<summary>sheets</summary>
+<img src="docs/validation/pep8-sheets.jpg" alt="sheets.py pep8 validation">
+</details>
+<details>
+<summary>validation</summary>
+<img src="docs/validation/pep8-validation.jpg" alt="validation.py pep8 validation">
 </details>
 
 ## Testing
@@ -481,130 +498,263 @@ The site was tested using the following browsers:
 
 ### User Story Test
 
-| User story                 | Feature        | Test                                                                                          | Expected Result                | Actual Result      |
-| -------------------------- | -------------- | --------------------------------------------------------------------------------------------- | ------------------------------ | ------------------ |
-| 1. Sign up as a new player | Sign-up prompt | When prompted by the opening view of the game, answer 'n', enter new details and type 'enter' | Program accepts/signs user up. | Works as expected. |
+#### As a new user,
+
+| User story                      | Feature  | Test                                                                                                  | Expected Result                                                 | Actual Result      |
+| ------------------------------- | -------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------ |
+| 1. I want to create an account. | Register | When game starts, enter "2" as input. Then user will be asked for their desired username and password | Program validates username and password then signs the user up. | Works as expected. |
+
+<details>
+    <summary>Screenshot</summary>
+    <img src="docs/user-story-test/user-story-register.jpg" alt="Register user story test">
+</details>
+
+| User story                   | Feature     | Test                                         | Expected Result                                                      | Actual Result      |
+| ---------------------------- | ----------- | -------------------------------------------- | -------------------------------------------------------------------- | ------------------ |
+| 2. I want to read the guide. | How to play | In the main menu, enter '4' to access guide. | Program prints instructions, tips and a way to get back to the menu. | Works as expected. |
+
+<details>
+    <summary>Screenshot</summary>
+    <img src="docs/user-story-test/user-story-guide.jpg" alt="Guide user story test">
+</details>
+
+| User story                   | Feature  | Test                                                                                | Expected Result                                                                                                                             | Actual Result      |
+| ---------------------------- | -------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| 3. I want to leave feedback. | Feedback | When the user finishes the game, they will be asked whether give a feedback or not. | If user enters "y", program will validate if they gave a feedback with their current account. If no, user will be asked for their feedback. | Works as expected. |
 
 <details>
     <summary>Screenshots</summary>
-    <img src="docs/manualtest/us1-1.png" alt="A screenshot of the sign up prompt."><br>
-    <img src="docs/manualtest/us1-2.png" alt="A screenshot of the sign up prompt."><br>
-    <img src="docs/manualtest/us1-3.png" alt="A screenshot of the new users details."><br>
-    <img src="docs/manualtest/us1-4.png" alt="A screenshot of the success notification."><br>
-    <img src="docs/manualtest/us1-5.png" alt="A screenshot of the new user stored in google sheets."><br>
-</details><br>
+    <img src="docs/user-story-test/user-story-feedback.jpg" alt="Feedback user story test">
+</details>
 
-| User story                            | Feature   | Test                                                     | Expected Result                                                  | Actual Result      |
-| ------------------------------------- | --------- | -------------------------------------------------------- | ---------------------------------------------------------------- | ------------------ |
-| 2. Instructions before starting game. | Main menu | When in the main menu, enter 'i' to access instructions. | Program displays instructions and a way to get back to the menu. | Works as expected. |
+| User story                 | Feature | Test                                              | Expected Result                                                         | Actual Result      |
+| -------------------------- | ------- | ------------------------------------------------- | ----------------------------------------------------------------------- | ------------------ |
+| 4. I want to see my stats. | Stats   | In the main menu, enter "3" to access user stats. | Program prints user's current stats including current weapon and armor. | Works as expected. |
 
 <details>
     <summary>Screenshots</summary>
-    <img src="docs/manualtest/us2-1.png" alt="A screenshot of the main menu."><br>
-    <img src="docs/manualtest/us2-2.png" alt="A screenshot of the instructions."><br>
-</details><br>
+    <img src="docs/user-story-test/user-story-stats.jpg" alt="Stats user story test">
+</details>
 
-| User story                           | Feature    | Test                                                            | Expected Result                                                                     | Actual Result      |
-| ------------------------------------ | ---------- | --------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------ |
-| 3. Visual representation of the game | Level view | When user starts the game, a view of the level appears clearly. | Program displays level, which is updated with each successful move the player makes | Works as expected. |
-
-<details>
-    <summary>Screenshots</summary>
-    <img src="readme-docs/testing-user-stories/us3-1.png" alt="A screenshot of the main menu with s selected."><br>
-    <img src="readme-docs/testing-user-stories/us3-2.png" alt="A screenshot of a new game"><br>
-</details><br>
-
-| User story                                           | Feature        | Test                                                            | Expected Result                              | Actual Result      |
-| ---------------------------------------------------- | -------------- | --------------------------------------------------------------- | -------------------------------------------- | ------------------ |
-| 4. Erroneous data entry to be caught by the program. | Sign up prompt | When at the starting view, enter a response that is not y or n. | Program flags this as an incorrect response. | Works as expected. |
+| User story                             | Feature | Test                                                                                                                  | Expected Result                                                                   | Actual Result      |
+| -------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------ |
+| 5. I want to see how much gold i have. | Shops   | In the main menu, enter "1" to visit a shop. Then enter any shop input to see their items and how much gold you have. | Program prints current equipment and gold, with the items they can buy from shop. | Works as expected. |
 
 <details>
     <summary>Screenshots</summary>
-    <img src="docs/manualtest/us4-1.png" alt="A screenshot of the sign up prompt with invalid entry."><br>
-    <img src="docs/manualtest/us4-2.png" alt="A screenshot of the error message."><br>
-</details><br>
+    <img src="docs/user-story-test/user-story-gold.jpg" alt="Gold user story test">
+</details>
 
-| User story                                            | Feature        | Test                                                                       | Expected Result                                                                          | Actual Result      |
-| ----------------------------------------------------- | -------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------ |
-| 5. Player mistakes/wrong answers to receive feedback. | Maths question | When presented with a maths question, deliberately enter the wrong answer. | Program flags this as an incorrect answer and tells the user that they have lost a life. | Works as expected. |
-
-<details>
-    <summary>Screenshots</summary>
-    <img src="docs/manualtest/us5.png" alt="A screenshot of a maths question with wrong answer and program's feedback."><br>
-</details><br>
-
-| User story                                 | Feature       | Test              | Expected Result                                                        | Actual Result      |
-| ------------------------------------------ | ------------- | ----------------- | ---------------------------------------------------------------------- | ------------------ |
-| 6. Receive a score at the end of the game. | End game view | Complete the game | Program notifies user of their score and saves it to the google sheet. | Works as expected. |
+| User story                        | Feature | Test                                                                                                                                                                     | Expected Result                                                                                                                              | Actual Result      |
+| --------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| 6. I want to change my equipment. | Shops   | In the main menu, enter "1" to visit a shop. Then enter any shop input to see their items and how much gold you have. The user need to enter the id of the desired item. | Program will check if user has better or same gear as desired weapon. If yes, user will be asked to be sure. Then purchase will be completed | Works as expected. |
 
 <details>
     <summary>Screenshots</summary>
-    <img src="docs/manualtest/us6.png" alt="A screenshot of the end game page."><br>
-</details><br>
+    <img src="docs/user-story-test/user-story-shop.jpg" alt="Shops user story test">
+</details>
 
-| User story                    | Feature        | Test                                                                           | Expected Result                                         | Actual Result      |
-| ----------------------------- | -------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------- | ------------------ |
-| 7. Log into existing account. | Sign up prompt | When prompted, answer yes to existing account and log in with existing details | Program checks user and lets them access the game menu. | Works as expected. |
-
-<details>
-    <summary>Screenshots</summary>
-    <img src="docs/manualtest/us7-1.png" alt="A screenshot of existing user logging in."><br>
-    <img src="docs/manualtest/us7-2.png" alt="A screenshot of welcome message"><br>
-</details><br>
-
-| User story            | Feature   | Test                                                       | Expected Result                                         | Actual Result      |
-| --------------------- | --------- | ---------------------------------------------------------- | ------------------------------------------------------- | ------------------ |
-| 8. Skip instructions. | Main menu | When in main menu, enter 's' to start the game immediately | Program loads the game when this response is submitted. | Works as expected. |
+| User story                                    | Feature   | Test                                                         | Expected Result                                     | Actual Result      |
+| --------------------------------------------- | --------- | ------------------------------------------------------------ | --------------------------------------------------- | ------------------ |
+| 7. I want to easily navigate within the game. | Main Menu | In the main menu, user can enter desired number to navigate. | Program checks if user input is valid, then proceed | Works as expected. |
 
 <details>
     <summary>Screenshots</summary>
-    <img src="docs/manualtest/us8-1.png" alt="A screenshot of the main menu"><br>
-    <img src="docs/manualtest/us8-2.png" alt="A screenshot of a new game."><br>
-</details><br>
+    <img src="docs/user-story-test/user-story-main-menu.jpg" alt="Main Menu user story test">
+</details>
 
-| User story                            | Feature    | Test                                      | Expected Result                                                                                        | Actual Result      |
-| ------------------------------------- | ---------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------ |
-| 9. Play a different game than before. | Level view | Start the game and complete a few levels. | Program has re-organised levels into a different order than before, and maths questions are different. | Works as expected. |
-
-<details>
-    <summary>Screenshots</summary>
-    <img src="docs/manualtest/us9-1.png" alt="A screenshot of a new level 1."><br>
-    <img src="docs/manualtest/us9-2.png" alt="A screenshot of a different randomised level 1."><br>
-</details><br>
-
-| User story         | Feature     | Test                                                                                         | Expected Result                            | Actual Result      |
-| ------------------ | ----------- | -------------------------------------------------------------------------------------------- | ------------------------------------------ | ------------------ |
-| 10. Send feedback. | Quit screen | When prompted, answer yes to giving feedback and type a message. Then press enter to submit. | Program sends message to the google sheet. | Works as expected. |
+| User story                   | Feature    | Test                                       | Expected Result                                        | Actual Result      |
+| ---------------------------- | ---------- | ------------------------------------------ | ------------------------------------------------------ | ------------------ |
+| 8. I want to see enemy list. | Enemy List | In the main menu, enter '2' to enter arena | Program will print all the enemies user can challenge. | Works as expected. |
 
 <details>
     <summary>Screenshots</summary>
-    <img src="docs/manualtest/us10-1.png" alt="A screenshot of a new feedback message from user."><br>
-    <img src="docs/manualtest/us10-2.png" alt="A screenshot of program's response."><br>
-    <img src="docs/manualtest/us10-3.png" alt="A screenshot of the feedback saved in google sheets."><br>
-</details><br>
+    <img src="docs/user-story-test/user-story-enemy-list.jpg" alt="Enemy List user story test">
+</details>
 
-| User story                                 | Feature        | Test                                          | Expected Result                               | Actual Result                                 |
-| ------------------------------------------ | -------------- | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| 11. (Site owner) Ensure data is validated. | Sign up prompt | Same test as user story 4. See details above. | Same test as user story 4. See details above. | Same test as user story 4. See details above. |
-
-| User story                                               | Feature        | Test                                          | Expected Result                               | Actual Result                                 |
-| -------------------------------------------------------- | -------------- | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| 12. (Site owner) Ensure user actions are given feedback. | Maths question | Same test as user story 5. See details above. | Same test as user story 5. See details above. | Same test as user story 5. See details above. |
-
-| User story                                       | Feature        | Test                         | Expected Result                                                                        | Actual Result      |
-| ------------------------------------------------ | -------------- | ---------------------------- | -------------------------------------------------------------------------------------- | ------------------ |
-| 13. (Site owner) Test user's arithmetic ability. | Maths question | Complete a level in the game | To be presented with a multiplication question with 2 random numbers between 5 and 20. | Works as expected. |
+| User story                                       | Feature | Test                                                  | Expected Result                                 | Actual Result      |
+| ------------------------------------------------ | ------- | ----------------------------------------------------- | ----------------------------------------------- | ------------------ |
+| 9. I want to choose different actions in combat. | Combat  | Choose the enemy you want to face, then combat starts | User will be asked for their actions in combat. | Works as expected. |
 
 <details>
     <summary>Screenshots</summary>
-    <img src="docs/manualtest/us13-1.png" alt="A screenshot of level 1 being completed"><br>
-    <img src="docs/manualtest/us13-2.png" alt="A screenshot of level complete screen."><br>
-    <img src="docs/manualtest/us13-3.png" alt="A screenshot of a new maths question after level complete."><br>
-</details><br>
+    <img src="docs/user-story-test/user-story-combat.jpg" alt="Combat user story test">
+</details>
 
-| User story                                   | Feature     | Test                                           | Expected Result                                | Actual Result                                  |
-| -------------------------------------------- | ----------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| 14. (Site owner) To get feedback from users. | Quit screen | Same test as user story 10. See details above. | Same test as user story 10. See details above. | Same test as user story 10. See details above. |
+#### As a returning user,
+
+| User story                         | Feature | Test                                                        | Expected Result                            | Actual Result      |
+| ---------------------------------- | ------- | ----------------------------------------------------------- | ------------------------------------------ | ------------------ |
+| 10. I want to login to my account. | Login   | Enter login in the start screen Then press enter to submit. | Program sends message to the google sheet. | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-login.jpg" alt="Login user story test">
+</details>
+
+| User story                          | Feature     | Test                                         | Expected Result                                                      | Actual Result      |
+| ----------------------------------- | ----------- | -------------------------------------------- | -------------------------------------------------------------------- | ------------------ |
+| 11. I want to remember how to play. | How to play | In the main menu, enter '4' to access guide. | Program prints instructions, tips and a way to get back to the menu. | Works as expected. |
+
+<details>
+    <summary>Screenshot</summary>
+    <img src="docs/user-story-test/user-story-guide.jpg" alt="Guide user story test">
+</details>
+
+| User story                    | Feature  | Test                                                                                | Expected Result                                                                                                                             | Actual Result      |
+| ----------------------------- | -------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| 12. I want to leave feedback. | Feedback | When the user finishes the game, they will be asked whether give a feedback or not. | If user enters "y", program will validate if they gave a feedback with their current account. If no, user will be asked for their feedback. | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-feedback.jpg" alt="Feedback user story test">
+</details>
+
+| User story                  | Feature | Test                                              | Expected Result                                                         | Actual Result      |
+| --------------------------- | ------- | ------------------------------------------------- | ----------------------------------------------------------------------- | ------------------ |
+| 13. I want to see my stats. | Stats   | In the main menu, enter "3" to access user stats. | Program prints user's current stats including current weapon and armor. | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-stats.jpg" alt="Stats user story test">
+</details>
+
+| User story                              | Feature | Test                                                                                                                  | Expected Result                                                                   | Actual Result      |
+| --------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------ |
+| 14. I want to see how much gold i have. | Shops   | In the main menu, enter "1" to visit a shop. Then enter any shop input to see their items and how much gold you have. | Program prints current equipment and gold, with the items they can buy from shop. | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-gold.jpg" alt="Gold user story test">
+</details>
+
+| User story                         | Feature | Test                                                                                                                                                                     | Expected Result                                                                                                                              | Actual Result      |
+| ---------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| 15. I want to change my equipment. | Shops   | In the main menu, enter "1" to visit a shop. Then enter any shop input to see their items and how much gold you have. The user need to enter the id of the desired item. | Program will check if user has better or same gear as desired weapon. If yes, user will be asked to be sure. Then purchase will be completed | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-shop.jpg" alt="Shops user story test">
+</details>
+
+| User story                                     | Feature   | Test                                                         | Expected Result                                     | Actual Result      |
+| ---------------------------------------------- | --------- | ------------------------------------------------------------ | --------------------------------------------------- | ------------------ |
+| 16. I want to easily navigate within the game. | Main Menu | In the main menu, user can enter desired number to navigate. | Program checks if user input is valid, then proceed | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-main-menu.jpg" alt="Main Menu user story test">
+</details>
+
+| User story                    | Feature    | Test                                       | Expected Result                                        | Actual Result      |
+| ----------------------------- | ---------- | ------------------------------------------ | ------------------------------------------------------ | ------------------ |
+| 17. I want to see enemy list. | Enemy List | In the main menu, enter '2' to enter arena | Program will print all the enemies user can challenge. | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-enemy-list.jpg" alt="Enemy List user story test">
+</details>
+
+| User story                                        | Feature | Test                                                  | Expected Result                                 | Actual Result      |
+| ------------------------------------------------- | ------- | ----------------------------------------------------- | ----------------------------------------------- | ------------------ |
+| 18. I want to choose different actions in combat. | Combat  | Choose the enemy you want to face, then combat starts | User will be asked for their actions in combat. | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-combat.jpg" alt="Combat user story test">
+</details>
+
+#### As the site owner,
+
+| User story                          | Feature  | Test                                                                                                  | Expected Result                                                 | Actual Result      |
+| ----------------------------------- | -------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------ |
+| 19. I want users to create account. | Register | When game starts, enter "2" as input. Then user will be asked for their desired username and password | Program validates username and password then signs the user up. | Works as expected. |
+
+<details>
+    <summary>Screenshot</summary>
+    <img src="docs/user-story-test/user-story-register.jpg" alt="Register user story test">
+</details>
+
+| User story                                       | Feature | Test                                                        | Expected Result                            | Actual Result      |
+| ------------------------------------------------ | ------- | ----------------------------------------------------------- | ------------------------------------------ | ------------------ |
+| 20. I want users to log in the existing account. | Login   | Enter login in the start screen Then press enter to submit. | Program sends message to the google sheet. | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-login.jpg" alt="Login user story test">
+</details>
+
+| User story                             | Feature     | Test                                         | Expected Result                                                      | Actual Result      |
+| -------------------------------------- | ----------- | -------------------------------------------- | -------------------------------------------------------------------- | ------------------ |
+| 21. I want users to learn how to play. | How to play | In the main menu, enter '4' to access guide. | Program prints instructions, tips and a way to get back to the menu. | Works as expected. |
+
+<details>
+    <summary>Screenshot</summary>
+    <img src="docs/user-story-test/user-story-guide.jpg" alt="Guide user story test">
+</details>
+
+| User story                                           | Feature   | Test                                                         | Expected Result                                     | Actual Result      |
+| ---------------------------------------------------- | --------- | ------------------------------------------------------------ | --------------------------------------------------- | ------------------ |
+| 22. I want users to easily navigate within the game. | Main Menu | In the main menu, user can enter desired number to navigate. | Program checks if user input is valid, then proceed | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-main-menu.jpg" alt="Main Menu user story test">
+</details>
+
+| User story                                   | Feature | Test                                              | Expected Result                                                         | Actual Result      |
+| -------------------------------------------- | ------- | ------------------------------------------------- | ----------------------------------------------------------------------- | ------------------ |
+| 23. I want users to see their current stats. | Stats   | In the main menu, enter "3" to access user stats. | Program prints user's current stats including current weapon and armor. | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-stats.jpg" alt="Stats user story test">
+</details>
+
+| User story                                          | Feature | Test                                                                                                                  | Expected Result                                                                   | Actual Result      |
+| --------------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------------ |
+| 24. I want users to see the current gold they have. | Shops   | In the main menu, enter "1" to visit a shop. Then enter any shop input to see their items and how much gold you have. | Program prints current equipment and gold, with the items they can buy from shop. | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-gold.jpg" alt="Gold user story test">
+</details>
+
+| User story                                  | Feature | Test                                                                                                                                                                     | Expected Result                                                                                                                              | Actual Result      |
+| ------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| 25. I want users to change their equipment. | Shops   | In the main menu, enter "1" to visit a shop. Then enter any shop input to see their items and how much gold you have. The user need to enter the id of the desired item. | Program will check if user has better or same gear as desired weapon. If yes, user will be asked to be sure. Then purchase will be completed | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-shop.jpg" alt="Shops user story test">
+</details>
+
+| User story                                    | Feature  | Test                                                                                | Expected Result                                                                                                                             | Actual Result      |
+| --------------------------------------------- | -------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| 26. I want users to be able to give feedback. | Feedback | When the user finishes the game, they will be asked whether give a feedback or not. | If user enters "y", program will validate if they gave a feedback with their current account. If no, user will be asked for their feedback. | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-feedback.jpg" alt="Feedback user story test">
+</details>
+
+| User story                          | Feature    | Test                                       | Expected Result                                        | Actual Result      |
+| ----------------------------------- | ---------- | ------------------------------------------ | ------------------------------------------------------ | ------------------ |
+| 27. I want users to see enemy list. | Enemy List | In the main menu, enter '2' to enter arena | Program will print all the enemies user can challenge. | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-enemy-list.jpg" alt="Enemy List user story test">
+</details>
+
+| User story                                            | Feature | Test                                                  | Expected Result                                 | Actual Result      |
+| ----------------------------------------------------- | ------- | ----------------------------------------------------- | ----------------------------------------------- | ------------------ |
+| 28. I want users to have different actions in combat. | Combat  | Choose the enemy you want to face, then combat starts | User will be asked for their actions in combat. | Works as expected. |
+
+<details>
+    <summary>Screenshots</summary>
+    <img src="docs/user-story-test/user-story-combat.jpg" alt="Combat user story test">
+</details>
 
 ### Bugs
 

@@ -9,9 +9,10 @@ import os
 def new_line_spaces():
     print(Fore.CYAN + "-----------------------------------------" + Fore.RESET)
 
+
 def clear_screen():
     if os.name == 'nt':
-        os.system('cls') 
+        os.system('cls')
     else:
         os.system('clear')
 
