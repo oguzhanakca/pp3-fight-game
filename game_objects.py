@@ -163,32 +163,26 @@ class Combat:
             print("Your special attack is not ready!")
             print(Fore.RESET)
         else:
-            evasion_roll = random.randint(0, 99) < d.evasion
-            if evasion_roll:
-                print(Fore.LIGHTGREEN_EX)
-                print(f"{d.name} dodged the special attack.")
+            damage = random.randint(a.dmg, a.dmg+2)-d.defence
+            if damage <= 0:
+                print(Fore.LIGHTYELLOW_EX)
+                print(f"{d.name} blocked all damage.")
                 print(Fore.RESET)
             else:
-                damage = random.randint(a.dmg, a.dmg+2)-d.defence
-                if damage <= 0:
-                    print(Fore.LIGHTYELLOW_EX)
-                    print(f"{d.name} blocked all damage.")
+                crit_roll = random.randint(0, 99) < a.rate
+                if crit_roll:
+                    damage *= 4
+                    print(Fore.RED)
+                    print(f"{a.name} dealt critical {damage} damage.")
                     print(Fore.RESET)
                 else:
-                    crit_roll = random.randint(0, 99) < a.rate
-                    if crit_roll:
-                        damage *= 4
-                        print(Fore.RED)
-                        print(f"{a.name} dealt critical {damage} damage.")
-                        print(Fore.RESET)
-                    else:
-                        damage *= 2
-                        print(Fore.LIGHTRED_EX)
-                        print(f"{a.name} dealt {damage} damage.")
-                        print(Fore.RESET)
-                    d.hp -= damage
-                    a.cooldown = True
-                    d.stunned = True
+                    damage *= 2
+                print(Fore.LIGHTRED_EX)
+                print(f"{a.name} dealt {damage} damage.")
+                print(Fore.RESET)
+                d.hp -= damage
+                a.cooldown = True
+                d.stunned = True
 
     def heal(self, enemy_combat, enemy):
         max_health = enemy.hp

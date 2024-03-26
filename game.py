@@ -545,6 +545,8 @@ def how_to_play(player, weapon, armor, stats):
     print("3 - Block enemies recover with your special attack.")
     print("Good luck with your adventure.")
     print("PS : Luck is also an important factor to win battles.")
+    print("It effects evasion and critical stats.")
+    print("Special attack never miss.")
     print(Fore.RESET)
     new_line_spaces()
     button_pressed = False
