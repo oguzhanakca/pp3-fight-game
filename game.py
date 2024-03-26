@@ -417,7 +417,7 @@ def initiate_combat(player, weapon, armor, stats, enemy):
                     print("You already provided a feedback.")
                     print(Fore.RESET)
                     print(Fore.CYAN)
-                    print("See you later.")
+                    print("Thanks for playing. See you later.")
                     print(Fore.RESET)
                 else:
                     print(Fore.CYAN+"Enter your feedback"+Fore.RESET)
@@ -435,7 +435,9 @@ def initiate_combat(player, weapon, armor, stats, enemy):
                             print(Fore.GREEN)
                             print("Thank you for your feedback.")
                             print(Fore.RESET)
-                            print(Fore.CYAN + "See you later."+Fore.RESET)
+                            print(Fore.CYAN)
+                            print("Thanks for playing. See you later.")
+                            print(Fore.RESET)
                 proceed = True
             else:
                 print(Fore.RED + "Wrong Input!"+Fore.RESET)
