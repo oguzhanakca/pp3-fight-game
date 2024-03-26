@@ -182,6 +182,7 @@ class Combat:
                         print(f"{a.name} dealt critical {damage} damage.")
                         print(Fore.RESET)
                     else:
+                        damage *= 2
                         print(Fore.LIGHTRED_EX)
                         print(f"{a.name} dealt {damage} damage.")
                         print(Fore.RESET)
