@@ -4,7 +4,7 @@ Developed by Oğuzhan Akça
 
 <img src="docs/am-i-responsive.jpg" alt="The screenshot of Am I Responsive">
 
-[Live Site](https://arena-fight-977683a914a6.herokuapp.com/)
+[Live Site](https://arena-app-e9bfad9656d3.herokuapp.com/)
 
 ## Introduction
 
